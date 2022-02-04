@@ -1,23 +1,5 @@
 {
-  "name": "my_first_server",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/dongeun-i/myFirstServer.git"
-  },
-  "author": "",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/dongeun-i/myFirstServer/issues"
-  },
-  "homepage": "https://github.com/dongeun-i/myFirstServer#readme",
-  "dependencies": {
-    "express": "^4.17.2",
-    "vue": "^2.6.14"
+  "devDependencies": {
+    "bootstrap": "^5.1.3"
   }
 }
