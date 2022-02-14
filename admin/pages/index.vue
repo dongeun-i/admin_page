@@ -22,6 +22,18 @@
 
 <script>
 export default {
+    // async asyndata({$axios,param}){
+    //     try {
+    //         let responseData = await $axios.get('/api/user');
+    //         return{
+    //             resData:responseData
+    //         }
+    //     } catch (error) {
+    //         console.error(error)
+    //         return
+    //     }
+        
+    // },
     name: 'IndexPage',
         data(){
             return{

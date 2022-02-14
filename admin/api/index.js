@@ -1,37 +1,48 @@
-import express from 'express'
-
-// Create express router
-const router = express.Router()
+const express = require('express');
+// const { json } = require('express/lib/response');
 const app = express();
+// app.use(express)
+const db = require('./db');
+const dirname = __dirname;
+// const path = require('path');
 
-// db 모듈 연결
-var mysqlDB = require('./db');
+// 미들웨어이기 때문에 port는 따로 지정하지 않아도 되는 것 같다.
 
-
-// router 연결준비
-router.use((req, res, next) => {
-  Object.setPrototypeOf(req, app.request);
-  Object.setPrototypeOf(res, app.response);
-  req.res = res;
-  res.req = req;
-  next();
+// route를 직접 작성할 경우
+app.get('/', function (req, res) {
+  console.log('요청은 들엉뢌나',req);
+  res.send('Hello World!');
 });
 
-app.get('/',(req,res,next)=>{
-  res.send('root');
-})
+// route 설정을 분리할 경우
+// 물론 여럿 추가할 수 있음
+// const user = require('./users/user');
+// app.use('/user',user);
+app.get(dirname+'/user', (req,res)=>{
+  let resData ;
+  db.query('select * from customer',(err,rows)=>{
+    if(!err){
+			console.log(rows);
+			res.send(rows);
+		}else{
+			console.err('err!',err);
+			throw err
+		}
+  })
+});
+// app.next();
 
-export default {
-  path: '/api',
-  handler: router
-};
+module.exports={
+  path:'/api',
+  handler:app
+}
 
-app.use(express.json());
-app.use(express.urlencoded({ extended: true}));
+// app.use(express.json());
+// app.use(express.urlencoded({ extended: true}));
 
 //CORS 해결
-app.use(function(req, res, next) {
-  res.header("Access-Control-Allow-Origin", "*");
-  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-  next();
-});
+// app.use(function(req, res, next) {
+//   res.header("Access-Control-Allow-Origin", "*");
+//   res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+// });
+// next();
