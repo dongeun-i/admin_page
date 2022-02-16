@@ -1,8 +1,22 @@
 <template>
-    <v-app app>
-        <router-view>
-
-        </router-view>
+    <v-app>
+         <v-card light elevation-0 class="col-12 mw-100 mh-100 vh-100 d-flex align-center justify-center flex-column">
+            <v-form class="w-50 d-flex mb-12 flex-column">
+                <v-text-field
+                    outlined 
+                    placeholder="ID"
+                    v-model="id"
+                    type="text"
+                ></v-text-field>
+                <v-text-field
+                    outlined
+                    v-model="password"
+                    placeholder="PASSWORD"
+                    type="password"
+                ></v-text-field>
+            </v-form>
+            <v-btn class="w-50" @click="login">로그인</v-btn>
+        </v-card>
     </v-app>
 </template>
 

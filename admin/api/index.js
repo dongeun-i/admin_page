@@ -2,7 +2,7 @@ const express = require('express');
 // const { json } = require('express/lib/response');
 const app = express();
 // app.use(express)
-const db = require('./db');
+// const db = require('./db');
 const dirname = __dirname;
 // const path = require('path');
 
@@ -23,10 +23,9 @@ app.get(dirname+'/user', (req,res)=>{
   db.query('select * from customer',(err,rows)=>{
     if(!err){
 			console.log(rows);
-			res.send(rows);
+			res.json(rows);
 		}else{
 			console.err('err!',err);
-			throw err
 		}
   })
 });
@@ -37,12 +36,11 @@ module.exports={
   handler:app
 }
 
-// app.use(express.json());
-// app.use(express.urlencoded({ extended: true}));
+app.use(express.json());
+app.use(express.urlencoded({ extended: true}));
 
 //CORS 해결
-// app.use(function(req, res, next) {
-//   res.header("Access-Control-Allow-Origin", "*");
-//   res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-// });
-// next();
+app.use(function(req, res, next) {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+});

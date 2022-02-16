@@ -1,6 +1,12 @@
 {
+  "Drawers": {
+    "description": "Auto imported from components/drawers.vue"
+  },
   "NuxtLogo": {
     "description": "Auto imported from components/NuxtLogo.vue"
+  },
+  "Section": {
+    "description": "Auto imported from components/section.vue"
   },
   "Tutorial": {
     "description": "Auto imported from components/Tutorial.vue"
