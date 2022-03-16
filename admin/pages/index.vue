@@ -1,25 +1,12 @@
 <template>
     <v-app app>
         <router-view>
-
         </router-view>
     </v-app>
 </template>
 
 <script>
 export default {
-    // async asyndata({$axios,param}){
-    //     try {
-    //         let responseData = await $axios.get('/api/user');
-    //         return{
-    //             resData:responseData
-    //         }
-    //     } catch (error) {
-    //         console.error(error)
-    //         return
-    //     }
-        
-    // },
     name: 'IndexPage',
         data(){
             return{
@@ -38,6 +25,9 @@ export default {
                 alert('아이디 또는 비밀번호를 확인해주세요.');
             }
         }
+    },
+    mounted(){
+        this.$router.push('/login');
     }
 }
 </script>

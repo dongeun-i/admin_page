@@ -3,8 +3,13 @@
 		<!-- menus -->
 		<Drawer/>
 		<!-- headers -->
-		<v-app-bar app>
-
+		<v-app-bar dark class="d-flex justify-end align-center">
+			<span>
+				이동은 님
+			</span>
+			<v-btn text>
+				로그아웃
+			</v-btn>
 		</v-app-bar>
 		<!-- content -->
         <v-main>

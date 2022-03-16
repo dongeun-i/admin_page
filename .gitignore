@@ -1,0 +1,5 @@
+admin/nuxt.config.js
+admin/.nuxt/router.js
+admin/.nuxt/routes.json
+admin/.nuxt/components/readme.md
+admin/.nuxt/vetur/tags.json
