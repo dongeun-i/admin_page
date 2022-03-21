@@ -3,7 +3,7 @@
 		<!-- menus -->
 		<Drawer/>
 		<!-- headers -->
-		<v-app-bar dark class="d-flex justify-end align-center">
+		<v-app-bar dark class="d-flex justify-end align-center" max-height="65px">
 			<span>
 				이동은 님
 			</span>

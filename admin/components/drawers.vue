@@ -4,17 +4,12 @@
 		class="px-2"
 		dark
 	>
-		<v-list-item>
-			<v-list-item-content>
-			<v-list-item-title class="text-h6">
+		<v-list-item class="py-2">
+			<v-list-item-title class="text-h6 ">
 				ModuMoa
 			</v-list-item-title>
-			<!-- <v-list-item-subtitle>
-				admin page
-			</v-list-item-subtitle> -->
-			</v-list-item-content>
 		</v-list-item>
-		<v-divider></v-divider>
+		<v-divider class="my-0"></v-divider>
 		<!-- aside 상단부 -->
 		<v-expansion-panels elevation="0">
 			<v-expansion-panel v-for="menu in menus" :key="menu.title" color="#363636" class="rounded-0 border-bottom" elevation="0" >
@@ -148,6 +143,9 @@ export default {
 	}
 	.border-bottom{
 		border-bottom:1px solid rgba(255,255,255,0.12)!important
+	}
+	.v-expansion-panel--active:not(:first-child){
+		margin: 0;
 	}
 </style>
  

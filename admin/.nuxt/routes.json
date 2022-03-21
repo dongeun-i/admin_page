@@ -2,29 +2,25 @@
   {
     "name": "inspire",
     "path": "/inspire",
-    "component": "C:\\\\Users\\\\82102\\\\Desktop\\\\동은\\\\포트폴리오\\\\관리자\\\\admin\\\\pages\\\\inspire.vue",
-    "chunkName": "pages/inspire",
-    "_name": "_2bedb0b4"
+    "component": "C:\\\\Users\\\\donge\\\\OneDrive\\\\바탕 화면\\\\개발\\\\admin_page\\\\admin\\\\pages\\\\inspire.vue",
+    "chunkName": "pages/inspire"
   },
   {
     "name": "login",
     "path": "/login",
-    "component": "C:\\\\Users\\\\82102\\\\Desktop\\\\동은\\\\포트폴리오\\\\관리자\\\\admin\\\\pages\\\\login.vue",
-    "chunkName": "pages/login",
-    "_name": "_eedd137a"
+    "component": "C:\\\\Users\\\\donge\\\\OneDrive\\\\바탕 화면\\\\개발\\\\admin_page\\\\admin\\\\pages\\\\login.vue",
+    "chunkName": "pages/login"
   },
   {
     "name": "main",
     "path": "/main",
-    "component": "C:\\\\Users\\\\82102\\\\Desktop\\\\동은\\\\포트폴리오\\\\관리자\\\\admin\\\\pages\\\\main.vue",
-    "chunkName": "pages/main",
-    "_name": "_517762cf"
+    "component": "C:\\\\Users\\\\donge\\\\OneDrive\\\\바탕 화면\\\\개발\\\\admin_page\\\\admin\\\\pages\\\\main.vue",
+    "chunkName": "pages/main"
   },
   {
     "name": "index",
     "path": "/",
-    "component": "C:\\\\Users\\\\82102\\\\Desktop\\\\동은\\\\포트폴리오\\\\관리자\\\\admin\\\\pages\\\\index.vue",
-    "chunkName": "pages/index",
-    "_name": "_822c59a8"
+    "component": "C:\\\\Users\\\\donge\\\\OneDrive\\\\바탕 화면\\\\개발\\\\admin_page\\\\admin\\\\pages\\\\index.vue",
+    "chunkName": "pages/index"
   }
 ]
