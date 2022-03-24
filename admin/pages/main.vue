@@ -18,7 +18,7 @@ export default({
 				title:'주문/배송',
 				counts:[{
 					title:'결제대기',
-					count:3
+					count:3,
 				},{
 					title:'신규주문',
 					count:5

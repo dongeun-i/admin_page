@@ -4,10 +4,10 @@ import { normalizeURL, decode } from 'ufo'
 import { interopDefault } from './utils'
 import scrollBehavior from './router.scrollBehavior.js'
 
-const _5db7d349 = () => interopDefault(import('..\\pages\\inspire.vue' /* webpackChunkName: "pages/inspire" */))
-const _763d3a18 = () => interopDefault(import('..\\pages\\login.vue' /* webpackChunkName: "pages/login" */))
-const _13ed5f4c = () => interopDefault(import('..\\pages\\main.vue' /* webpackChunkName: "pages/main" */))
-const _a6d4d1fe = () => interopDefault(import('..\\pages\\index.vue' /* webpackChunkName: "pages/index" */))
+const _2bedb0b4 = () => interopDefault(import('..\\pages\\inspire.vue' /* webpackChunkName: "pages/inspire" */))
+const _eedd137a = () => interopDefault(import('..\\pages\\login.vue' /* webpackChunkName: "pages/login" */))
+const _517762cf = () => interopDefault(import('..\\pages\\main.vue' /* webpackChunkName: "pages/main" */))
+const _822c59a8 = () => interopDefault(import('..\\pages\\index.vue' /* webpackChunkName: "pages/index" */))
 
 const emptyFn = () => {}
 
@@ -22,19 +22,19 @@ export const routerOptions = {
 
   routes: [{
     path: "/inspire",
-    component: _5db7d349,
+    component: _2bedb0b4,
     name: "inspire"
   }, {
     path: "/login",
-    component: _763d3a18,
+    component: _eedd137a,
     name: "login"
   }, {
     path: "/main",
-    component: _13ed5f4c,
+    component: _517762cf,
     name: "main"
   }, {
     path: "/",
-    component: _a6d4d1fe,
+    component: _822c59a8,
     name: "index"
   }],
 
