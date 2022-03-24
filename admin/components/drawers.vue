@@ -52,33 +52,33 @@ export default {
 				title:'판매자 정보',
 				subMenus:[{
 						title:'기본정보',
-						url:''
+						url:'/user/info'
 					},{
 						title:'배송/반품/교환 정보',
-						url:''
+						url:'/user/delivery'
 					},{
 						title:'A/S 및 특이사항',
-						url:''
+						url:'/user/as'
 					},]
 			},{
 				icon:'mdi-hanger',
 				title:'상품 관리',
-				url:'/product'
+				url:'/product/list'
 			},{
 				icon:'mdi-truck-fast',
 				title:'판매 관리',
 				subMenus:[{
 					title:'주문 관리',
-					url:''
+					url:'/order/list'
 				},{
 					title:'교환 관리',
-					url:''
+					url:'/order/exchange'
 				},{
 					title:'반품 관리',
-					url:''
+					url:'/order/return'
 				},{
 					title:'배송 관리',
-					url:''
+					url:'/order/delivery'
 				}
 				]
 			},{
@@ -86,40 +86,40 @@ export default {
 				title:'문의/리뷰관리',
 				subMenus:[{
 					title:'자주묻는 질문',
-					url:''
+					url:'/faq/list'
 				},{
 					title:'리뷰 리스트',
-					url:''
+					url:'/review/list'
 				},{
 					title:'문의 리스트',
-					url:''
+					url:'/qa/list'
 				}]
 			},{
 				icon:'mdi-sale',
 				title:'기획전',
-				url:'',
+				url:'/exhibition/list',
 			},{
 				icon:'mdi-poll',
 				title:'이벤트',
-				url:'',
+				url:'event/list',
 			},{
 				icon:'mdi-ticket-percent',
 				title:'쿠폰',
-				url:'',
+				url:'coupon/list',
 			},{
 				icon:'mdi-poll',
 				title:'통계',
 				subMenus:[{
 					title:'방문율',
-					url:''
+					url:'/rate/visitation'
 				},{
 					title:'판매율',
-					url:''
+					url:'/rate/sales'
 				}]
 			},{
 				icon:'mdi-calculator',
 				title:'정산 관리',
-				url:'',
+				url:'/calc/list',
 			}]
 		}
 	}
