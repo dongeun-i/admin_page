@@ -1,4 +1,7 @@
 {
+  "DataTable": {
+    "description": "Auto imported from components/DataTable.vue"
+  },
   "Drawers": {
     "description": "Auto imported from components/drawers.vue"
   },
@@ -6,7 +9,7 @@
     "description": "Auto imported from components/NuxtLogo.vue"
   },
   "Section": {
-    "description": "Auto imported from components/section.vue"
+    "description": "Auto imported from components/Section.vue"
   },
   "Tutorial": {
     "description": "Auto imported from components/Tutorial.vue"

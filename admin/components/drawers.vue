@@ -6,15 +6,17 @@
 	>
 		<v-list-item class="py-2">
 			<v-list-item-title class="text-h6 ">
-				ModuMoa
+				<nuxt-link to="/main">
+					ModuMoa
+				</nuxt-link>
 			</v-list-item-title>
 		</v-list-item>
 		<v-divider class="my-0"></v-divider>
 		<!-- aside 상단부 -->
 		<v-expansion-panels elevation="0">
 			<v-expansion-panel v-for="menu in menus" :key="menu.title" color="#363636" class="rounded-0 border-bottom" elevation="0" >
-				<v-list v-if="!menu.subMenus">
-					<v-list-item class="title-text">
+				<v-list v-if="!menu.subMenus" >
+					<v-list-item class="title-text" nuxt link :to="menu.url">
 						<v-icon class="mr-4">
 							{{ menu.icon }}
 						</v-icon>
@@ -32,8 +34,10 @@
 					</v-list>
 				</v-expansion-panel-header>
 				<template v-if="menu.subMenus">
-					<v-expansion-panel-content class="sub-text" v-for="submenu in menu.subMenus" :key="submenu.title" nuxt :link-to="submenu.url">
+					<v-expansion-panel-content class="sub-text" v-for="submenu in menu.subMenus" :key="submenu.title">
+					<nuxt-link :to="submenu.url">
 						{{submenu.title}}
+					</nuxt-link>
 					</v-expansion-panel-content>
 				</template>
 				
@@ -146,6 +150,9 @@ export default {
 	}
 	.v-expansion-panel--active:not(:first-child){
 		margin: 0;
+	}
+	.v-application a{
+		text-decoration: none; color: #fff;
 	}
 </style>
  

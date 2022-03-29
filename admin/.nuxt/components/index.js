@@ -1,6 +1,7 @@
+export { default as DataTable } from '../..\\components\\DataTable.vue'
 export { default as Drawers } from '../..\\components\\drawers.vue'
 export { default as NuxtLogo } from '../..\\components\\NuxtLogo.vue'
-export { default as Section } from '../..\\components\\section.vue'
+export { default as Section } from '../..\\components\\Section.vue'
 export { default as Tutorial } from '../..\\components\\Tutorial.vue'
 export { default as VuetifyLogo } from '../..\\components\\VuetifyLogo.vue'
 

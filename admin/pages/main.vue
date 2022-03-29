@@ -4,7 +4,7 @@
 	</div>
 </template>
 <script>
-import Section from '@/components/section.vue'
+import Section from '@/components/Section.vue'
 export default({
 	layout:'layout',
 	comments:{

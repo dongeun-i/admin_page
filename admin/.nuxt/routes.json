@@ -2,25 +2,115 @@
   {
     "name": "inspire",
     "path": "/inspire",
-    "component": "C:\\\\Users\\\\82102\\\\Desktop\\\\동은\\\\포트폴리오\\\\관리자\\\\admin\\\\pages\\\\inspire.vue",
+    "component": "C:\\\\Users\\\\donge\\\\OneDrive\\\\바탕 화면\\\\개발\\\\admin_page\\\\admin\\\\pages\\\\inspire.vue",
     "chunkName": "pages/inspire"
   },
   {
     "name": "login",
     "path": "/login",
-    "component": "C:\\\\Users\\\\82102\\\\Desktop\\\\동은\\\\포트폴리오\\\\관리자\\\\admin\\\\pages\\\\login.vue",
+    "component": "C:\\\\Users\\\\donge\\\\OneDrive\\\\바탕 화면\\\\개발\\\\admin_page\\\\admin\\\\pages\\\\login.vue",
     "chunkName": "pages/login"
   },
   {
     "name": "main",
     "path": "/main",
-    "component": "C:\\\\Users\\\\82102\\\\Desktop\\\\동은\\\\포트폴리오\\\\관리자\\\\admin\\\\pages\\\\main.vue",
+    "component": "C:\\\\Users\\\\donge\\\\OneDrive\\\\바탕 화면\\\\개발\\\\admin_page\\\\admin\\\\pages\\\\main.vue",
     "chunkName": "pages/main"
+  },
+  {
+    "name": "calc-list",
+    "path": "/calc/list",
+    "component": "C:\\\\Users\\\\donge\\\\OneDrive\\\\바탕 화면\\\\개발\\\\admin_page\\\\admin\\\\pages\\\\calc\\\\list.vue",
+    "chunkName": "pages/calc/list"
+  },
+  {
+    "name": "coupon-list",
+    "path": "/coupon/list",
+    "component": "C:\\\\Users\\\\donge\\\\OneDrive\\\\바탕 화면\\\\개발\\\\admin_page\\\\admin\\\\pages\\\\coupon\\\\list.vue",
+    "chunkName": "pages/coupon/list"
+  },
+  {
+    "name": "event-list",
+    "path": "/event/list",
+    "component": "C:\\\\Users\\\\donge\\\\OneDrive\\\\바탕 화면\\\\개발\\\\admin_page\\\\admin\\\\pages\\\\event\\\\list.vue",
+    "chunkName": "pages/event/list"
+  },
+  {
+    "name": "exhibition-list",
+    "path": "/exhibition/list",
+    "component": "C:\\\\Users\\\\donge\\\\OneDrive\\\\바탕 화면\\\\개발\\\\admin_page\\\\admin\\\\pages\\\\exhibition\\\\list.vue",
+    "chunkName": "pages/exhibition/list"
+  },
+  {
+    "name": "faq-list",
+    "path": "/faq/list",
+    "component": "C:\\\\Users\\\\donge\\\\OneDrive\\\\바탕 화면\\\\개발\\\\admin_page\\\\admin\\\\pages\\\\faq\\\\list.vue",
+    "chunkName": "pages/faq/list"
+  },
+  {
+    "name": "order-delivery",
+    "path": "/order/delivery",
+    "component": "C:\\\\Users\\\\donge\\\\OneDrive\\\\바탕 화면\\\\개발\\\\admin_page\\\\admin\\\\pages\\\\order\\\\delivery.vue",
+    "chunkName": "pages/order/delivery"
+  },
+  {
+    "name": "order-exchange",
+    "path": "/order/exchange",
+    "component": "C:\\\\Users\\\\donge\\\\OneDrive\\\\바탕 화면\\\\개발\\\\admin_page\\\\admin\\\\pages\\\\order\\\\exchange.vue",
+    "chunkName": "pages/order/exchange"
+  },
+  {
+    "name": "order-list",
+    "path": "/order/list",
+    "component": "C:\\\\Users\\\\donge\\\\OneDrive\\\\바탕 화면\\\\개발\\\\admin_page\\\\admin\\\\pages\\\\order\\\\list.vue",
+    "chunkName": "pages/order/list"
+  },
+  {
+    "name": "order-return",
+    "path": "/order/return",
+    "component": "C:\\\\Users\\\\donge\\\\OneDrive\\\\바탕 화면\\\\개발\\\\admin_page\\\\admin\\\\pages\\\\order\\\\return.vue",
+    "chunkName": "pages/order/return"
+  },
+  {
+    "name": "product-list",
+    "path": "/product/list",
+    "component": "C:\\\\Users\\\\donge\\\\OneDrive\\\\바탕 화면\\\\개발\\\\admin_page\\\\admin\\\\pages\\\\product\\\\list.vue",
+    "chunkName": "pages/product/list"
+  },
+  {
+    "name": "rate-sales",
+    "path": "/rate/sales",
+    "component": "C:\\\\Users\\\\donge\\\\OneDrive\\\\바탕 화면\\\\개발\\\\admin_page\\\\admin\\\\pages\\\\rate\\\\sales.vue",
+    "chunkName": "pages/rate/sales"
+  },
+  {
+    "name": "rate-visitation",
+    "path": "/rate/visitation",
+    "component": "C:\\\\Users\\\\donge\\\\OneDrive\\\\바탕 화면\\\\개발\\\\admin_page\\\\admin\\\\pages\\\\rate\\\\visitation.vue",
+    "chunkName": "pages/rate/visitation"
+  },
+  {
+    "name": "user-as",
+    "path": "/user/as",
+    "component": "C:\\\\Users\\\\donge\\\\OneDrive\\\\바탕 화면\\\\개발\\\\admin_page\\\\admin\\\\pages\\\\user\\\\as.vue",
+    "chunkName": "pages/user/as"
+  },
+  {
+    "name": "user-delivery",
+    "path": "/user/delivery",
+    "component": "C:\\\\Users\\\\donge\\\\OneDrive\\\\바탕 화면\\\\개발\\\\admin_page\\\\admin\\\\pages\\\\user\\\\delivery.vue",
+    "chunkName": "pages/user/delivery"
+  },
+  {
+    "name": "user-info",
+    "path": "/user/info",
+    "component": "C:\\\\Users\\\\donge\\\\OneDrive\\\\바탕 화면\\\\개발\\\\admin_page\\\\admin\\\\pages\\\\user\\\\info.vue",
+    "chunkName": "pages/user/info"
   },
   {
     "name": "index",
     "path": "/",
-    "component": "C:\\\\Users\\\\82102\\\\Desktop\\\\동은\\\\포트폴리오\\\\관리자\\\\admin\\\\pages\\\\index.vue",
+    "component": "C:\\\\Users\\\\donge\\\\OneDrive\\\\바탕 화면\\\\개발\\\\admin_page\\\\admin\\\\pages\\\\index.vue",
     "chunkName": "pages/index"
   }
 ]
