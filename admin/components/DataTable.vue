@@ -1,5 +1,6 @@
 <template>
 	<v-card class="elevation-0">
+		<v-btn @click="filter()">필터테스트</v-btn>
 		<template v-if="filter">
 			<v-sheet v-for="(filter,i) in filters" :key="i">
 				<v-checkbox v-if="filter.type == 'checkbox'">
@@ -17,8 +18,9 @@
 		</v-card-title>
 		<v-data-table
 		:headers="tableHeader"
-		:items="tableData"
+		:items="items"
 		:search="search"
+
 		></v-data-table>
   	</v-card>
 </template>
@@ -31,8 +33,23 @@ export default {
 	},
 	data(){
 		return{
-			search:''
+			search:'',
+			items:[],
 		}
 	},
+	methods:{
+		filter(){
+			console.log('필터링시작')
+			let data = this.tableData;
+			let filterData
+			filterData = data.filter( data=>{
+				return data.status == '판매중'
+			})
+			this.items = filterData
+		}
+	},
+	mounted(){
+		this.items = this.tableData;
+	}
 }
 </script>
