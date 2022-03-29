@@ -1,6 +1,6 @@
 <template>
 	<v-card class="elevation-0">
-		<DataTable :tableHeader="headers" :tableData="data"/>
+		<DataTable :tableHeader="headers" :tableData="data" :filters="filters"/>
 	</v-card>
 </template>
 <script>
@@ -63,7 +63,25 @@ export default {
 				discountPrice:50,
 				status:'판매중'
 			},
-			]
+			],
+			filters:[{
+				type:'checkbox',
+				title:'상태',
+				values:[{
+					text:'판매중',
+					value:'판매중'
+				},{
+					text:'품절',
+					value:'품절'
+				},{
+					text:'비공개',
+					value:'비공개'
+				},{
+					text:'판매중지',
+					value:'판매중지'
+				},
+				]
+			}]
 		}
 	},
 	layout:'layout',

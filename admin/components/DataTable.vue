@@ -2,10 +2,21 @@
 	<v-card class="elevation-0">
 		<v-btn @click="filter()">필터테스트</v-btn>
 		<template v-if="filter">
-			<v-sheet v-for="(filter,i) in filters" :key="i">
-				<v-checkbox v-if="filter.type == 'checkbox'">
-				</v-checkbox>
-			</v-sheet>
+			<v-card v-for="(filter,i) in filters" :key="i" class="d-flex flex-nowrap">
+				<v-card-title>
+					{{filter.title}}
+				</v-card-title>
+				<v-row v-if="filter.type == 'checkbox'" class="flex-nowrap align-center justify-start">
+					<v-checkbox 
+						v-for="checkbox in filter.values" 
+						:key="checkbox.value"
+						:label="checkbox.text"
+						:value="checkbox.value"
+						hide-details
+					>
+					</v-checkbox>
+				</v-row>
+			</v-card>
 		</template>
 		<v-card-title>
 			<v-text-field
@@ -40,9 +51,9 @@ export default {
 	methods:{
 		filter(){
 			console.log('필터링시작')
-			let data = this.tableData;
+			let originData = this.tableData;
 			let filterData
-			filterData = data.filter( data=>{
+			filterData = originData.filter( data=>{
 				return data.status == '판매중'
 			})
 			this.items = filterData
@@ -53,3 +64,11 @@ export default {
 	}
 }
 </script>
+<style scoped>
+	.v-input--selection-controls{
+		margin: 0;
+	}
+	.v-input--checkbox{
+		max-width: 120px;
+	}
+</style>
