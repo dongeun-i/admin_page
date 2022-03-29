@@ -1,5 +1,5 @@
 <template>
-	<v-card>
+	<v-card class="elevation-0">
 		<DataTable :tableHeader="headers" :tableData="data"/>
 	</v-card>
 </template>

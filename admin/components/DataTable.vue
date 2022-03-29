@@ -1,5 +1,5 @@
 <template>
-	<v-card>
+	<v-card class="elevation-0">
 		<v-card-title>
 		<v-text-field
 			v-model="search"
