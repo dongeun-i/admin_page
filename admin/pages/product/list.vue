@@ -75,6 +75,7 @@ export default {
 			filters:[{
 				type:'checkbox',
 				title:'상태',
+				checked:['판매중',],
 				values:[{
 					text:'판매중',
 					value:'판매중'
@@ -92,6 +93,7 @@ export default {
 			},{
 				type:'date',
 				title:'기간',
+				active:6,
 				btns:[{
 					title:'오늘',
 					value:'0'
