@@ -6,12 +6,12 @@
 			</v-card-title>
 			<v-list>
 				<v-list-item v-for="(count,i) in section.counts" :key="i">
-					<v-list-title>
+					<v-list-item-title>
 						{{count.title}}
-					</v-list-title>
-					<v-list-text>
+					</v-list-item-title>
+					<v-list-item-text>
 						{{count.count}}
-					</v-list-text>
+					</v-list-item-text>
 				</v-list-item>
 			</v-list>
 		</v-card>

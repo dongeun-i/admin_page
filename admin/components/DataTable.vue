@@ -1,22 +1,34 @@
 <template>
 	<v-card class="elevation-0">
-		<v-btn @click="filter()">필터테스트</v-btn>
 		<template v-if="filter">
-			<v-card v-for="(filter,i) in filters" :key="i" class="d-flex flex-nowrap">
-				<v-card-title>
-					{{filter.title}}
-				</v-card-title>
-				<v-row v-if="filter.type == 'checkbox'" class="flex-nowrap align-center justify-start">
-					<v-checkbox 
-						v-for="checkbox in filter.values" 
-						:key="checkbox.value"
-						:label="checkbox.text"
-						:value="checkbox.value"
-						hide-details
-					>
-					</v-checkbox>
-				</v-row>
+			<v-card class="p-3 filter-container bg-gray">
+				<v-card v-for="(filter,i) in filters" :key="i" class="d-flex flex-nowrap elevation-0" >
+					<v-card-title class="col-1 filter-title bg-gray">
+						{{filter.title}}
+					</v-card-title>
+					<v-row v-if="filter.type == 'checkbox'" class="bg-gray flex-nowrap align-center justify-start">
+						<v-checkbox 
+							v-for="checkbox in filter.values" 
+							:key="checkbox.value"
+							:label="checkbox.text"
+							:value="checkbox.value"
+							hide-details
+						>
+							<template v-slot:label>
+								<label class="filter-text">{{checkbox.text}}</label>
+							</template>
+						</v-checkbox>
+					</v-row>
+					<v-row v-else-if="filter.type == 'date'" class="bg-gray flex-nowrap align-center justify-start"> 
+						<v-btn-toggle class="bg-gray" gray>
+							<v-btn class="filter-text " v-for="item in filter.btns" :key="item.title" :value="item.value">
+								{{item.title}}
+							</v-btn>
+						</v-btn-toggle>
+					</v-row>
+				</v-card>
 			</v-card>
+			
 		</template>
 		<v-card-title>
 			<v-text-field
@@ -32,7 +44,15 @@
 		:items="items"
 		:search="search"
 
-		></v-data-table>
+		>
+			<template v-slot:item.btn="{ item }">
+				<v-btn icon>
+					<v-icon small>
+						{{item.btnIcon}}
+					</v-icon>
+				</v-btn>
+			</template>
+		</v-data-table>
   	</v-card>
 </template>
 <script>
@@ -70,5 +90,11 @@ export default {
 	}
 	.v-input--checkbox{
 		max-width: 120px;
+	}
+	.filter-title,.filter-text{
+		font-size: 14px;
+	}
+	.bg-gray{
+		background-color: #eee;
 	}
 </style>
