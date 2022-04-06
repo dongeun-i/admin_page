@@ -19,7 +19,13 @@ export default {
     ],
     link: [
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
-    ]
+    ],
+    script:[
+      {src : 'https://code.jquery.com/jquery-latest.min.js'},
+      {src : '/js/webUtil.js'},
+      {src : '/js/geoUtil.js'},
+      {src : '/js/geoUtil.js'},
+    ],
   },
 
   // Global CSS: https://go.nuxtjs.dev/config-css
@@ -29,7 +35,7 @@ export default {
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: [
   ],
-
+ 
   // Auto import components: https://go.nuxtjs.dev/config-components
   components: true,
 

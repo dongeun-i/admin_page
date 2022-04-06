@@ -6,6 +6,7 @@
     "@nuxtjs/axios": "^5.13.6",
     "axios": "^0.25.0",
     "express": "^4.17.2",
-    "mysql": "^2.18.1"
+    "mysql": "^2.18.1",
+    "vuejs-datepicker": "^1.6.2"
   }
 }
