@@ -24,18 +24,15 @@
 
 <script>
 export default {
-    // async asyndata({$axios,param}){
-    //     try {
-    //         let responseData = await $axios.get('/api/user');
-    //         return{
-    //             resData:responseData
-    //         }
-    //     } catch (error) {
-    //         console.error(error)
-    //         return
-    //     }
-        
-    // },
+   async asyncData({ params, $http, error }) {
+    try {
+      const response = await axios.get(`/api/user`);
+      const user = response.data;
+      return { user }
+    } catch(e) {
+      error({ statusCode: 503, message: 'API 요청이 실패했습니다 다시 시도해 주세요' })
+    }
+  },
     name: 'IndexPage',
         data(){
             return{
@@ -54,6 +51,9 @@ export default {
                 alert('아이디 또는 비밀번호를 확인해주세요.');
             }
         }
+    },
+    created(){
+        console.log('크리')
     }
 }
 </script>

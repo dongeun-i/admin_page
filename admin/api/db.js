@@ -12,5 +12,5 @@ var connection = mysql.createConnection({
 // Connect
 
 connection.connect();
-
+console.log('연결했다');
 module.exports = connection;

@@ -117,6 +117,28 @@ export default {
 					value:'all'
 				},
 				]
+			},{
+				type:'select',
+				title:'카테고리',
+				values:[{
+					label:'선택',
+					value:null
+				},{
+					label:'상의',
+					value:'top',
+				},{
+					label:'하의',
+					value:'bottom'
+				},{
+					label:'신발',
+					value:'shoes'
+				},{
+					label:'액세서리',
+					value:'acc'
+				},{
+					label:'가방',
+					value:'bag'
+				}]
 			}]
 		}
 	},

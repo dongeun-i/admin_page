@@ -14,7 +14,7 @@
 							:label="checkbox.text"
 							:value="checkbox.value"
 							checked
-							hide-detailsd
+							hide-details
 						>
 							<template v-slot:label>
 								<label class="filter-text">{{checkbox.text}}</label>
@@ -52,6 +52,8 @@
 									v-on="on"
 									class="col-5"
 									hide-details
+									@change="checkDate('edt',beginDate)"
+									background-color="#fff"
 									></v-text-field>
 								</template>
 								<datepicker v-model="beginDate" :format="chageBeginDate" :inline="true" :language="languages[language]"></datepicker>
@@ -72,14 +74,25 @@
 									v-model="endDate"
 									v-on="on"
 									hide-details
+									background-color="#fff"
 									class="col-5"
+									@change="checkDate('edt',endDate)"
 									></v-text-field>
 								</template>
 								<datepicker v-model="endDate" :format="chageEndDate" :inline="true" :language="languages[language]"></datepicker>
 							</v-menu>
 						</v-col>
-						
-						
+					</v-row>
+					<v-row v-else-if="filter.type == 'select'" class="bg-gray d-flex align-center">
+						<v-select
+						:items="filter.values"
+						item-text="label"
+						item-value= "value"
+						:value="null"
+						hide-details
+						class="col-3"
+						>
+						</v-select>
 					</v-row>
 				</v-card>
 			</v-card>
@@ -152,8 +165,13 @@ export default {
 			})
 			this.items = filterData
 		},
-		test(v){
-			console.log('바뀜',v)
+		checkDate(type,date){
+			let bdt = this.beginDate?new Date(this.beginDate).getTime():null;
+			let edt = this.endDate?new Date(this.endDate).getTime():null;
+
+			console.log('bdt',bdt);
+			console.log('edt',edt);
+
 		},
 		format(date){
 			// console.log(date.toFormat('Y-M-D'),);
