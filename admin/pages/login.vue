@@ -24,15 +24,6 @@
 
 <script>
 export default {
-   async asyncData({ params, $http, error }) {
-    try {
-      const response = await axios.get(`/api/user`);
-      const user = response.data;
-      return { user }
-    } catch(e) {
-      error({ statusCode: 503, message: 'API 요청이 실패했습니다 다시 시도해 주세요' })
-    }
-  },
     name: 'IndexPage',
         data(){
             return{
@@ -41,20 +32,18 @@ export default {
             }
         },
     methods:{
-        login(){
+        async login(){
             let id = this.id
             let password = this.password
-            if(id == 'admin' && password == 123123){
-                alert('로그인 성공 !');
-                this.$router.push('/main');
-            }else{
-                alert('아이디 또는 비밀번호를 확인해주세요.');
-            }
+            this.$axios.$post('/api/login',{
+                user: {
+                    id: id,
+                    password:password
+                }
+            }).then(console.log('요청은했다.'))
         }
     },
-    created(){
-        console.log('크리')
-    }
+    
 }
 </script>
 <style scoped>
