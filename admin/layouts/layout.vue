@@ -4,10 +4,11 @@
 		<Drawer/>
 		<!-- headers -->
 		<v-app-bar dark class="d-flex justify-end align-center" max-height="65px">
-			<span>
-				이동은 님
+			<span class="mr-2">
+				{{userInfo.loginId}} 님
 			</span>
-			<v-btn text>
+			<v-btn rounded outlined height="auto" class="p-0" nuxt link to="/user/info">내정보</v-btn>
+			<v-btn text @click="logout">
 				로그아웃
 			</v-btn>
 		</v-app-bar>
@@ -24,6 +25,27 @@ export default {
 	components:{
 		Drawer,
 
+	},
+	data(){
+		return{
+			userInfo:null
+		}
+	},
+	created(){
+		let userInfo = JSON.parse(sessionStorage.getItem('userInfo'));
+		console.log(userInfo);
+		if(!userInfo){
+			alert('잘못된 접근입니다.');
+			this.$router.replace('/login');
+		}else{
+			this.userInfo = userInfo
+		}
+	},
+	methods:{
+		logout(){
+			sessionStorage.removeItem('userInfo');
+			this.$router.replace('/login');
+		}
 	}
 }
 </script>

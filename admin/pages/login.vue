@@ -35,12 +35,24 @@ export default {
         async login(){
             let id = this.id
             let password = this.password
-            this.$axios.$post('/api/login',{
-                user: {
-                    id: id,
-                    password:password
+            try {
+                let userData = await this.$axios.$post('/api/login',{
+                    user: {
+                        id: id,
+                        password:password
+                    }
+                })
+                console.log('userData=',userData);
+                if(userData.length == 1){
+                    window.sessionStorage.setItem('userInfo',JSON.stringify(userData[0]));
+                    this.$router.replace('/main');
+                }else{
+                    // callMessage 만들어서 채우기
+                    alert('아이디 또는 비밀번호를 확인해주세요.')
                 }
-            }).then(console.log('요청은했다.'))
+            } catch (error) {
+                console.error(error);
+            }
         }
     },
     

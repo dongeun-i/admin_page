@@ -9,9 +9,9 @@
 					<v-list-item-title>
 						{{count.title}}
 					</v-list-item-title>
-					<v-list-item-text>
+					<p class="m-0">
 						{{count.count}}
-					</v-list-item-text>
+					</p>
 				</v-list-item>
 			</v-list>
 		</v-card>
@@ -19,9 +19,9 @@
 			<v-card-title>
 				{{section.title}}
 			</v-card-title>
-			<v-card-text>
+			<p class="m-0">
 				{{section.text}}
-			</v-card-text>
+			</p>
 		</v-card>
 		
 	</v-card>
