@@ -27,7 +27,6 @@
 						<v-col>
 							<v-btn-toggle class="bg-gray" 
 								background-color=#eee 
-								@change="test"
 								v-model="filter.active"
 							>
 								<v-btn class="filter-text" v-for="item in filter.btns" :key="item.title">

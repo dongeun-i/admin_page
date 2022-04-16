@@ -10,6 +10,7 @@ const pool = mysql.createPool({
 
 const callData = async (qu) => {
   try {
+		console.log(qu);
 		const connection = await pool.getConnection(async conn => conn);
 		try {
 			const [rows] = await connection.query(qu);
