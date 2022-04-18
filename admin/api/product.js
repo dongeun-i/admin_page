@@ -6,19 +6,11 @@ import callData from './db'
 router.get('/list',async function(req,res,next){
 	let userId = req.header('userId');
 	let resdata = {};
-	{
-		// 상품리스트 가져오기
-		if(!userId) return
+	// 상품리스트 가져오기
+	if(userId){
 		let qs = `select P.* ,C.label from product as P left outer join category as C on C.id = P.categoryId where P.userId = ${userId}`
 		let dataSet = await callData(qs);
 		resdata.productListset = dataSet;
-	}
-	
-	{
-		// 카테고리 정보 가져오기
-		let qs = 'select C.* from category as C ';
-		let CategotydataSet = await callData(qs);
-		resdata.categoryListSet = CategotydataSet;
 	}
 	res.send(resdata);
 })

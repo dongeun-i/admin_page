@@ -22,6 +22,7 @@ app.use('/api/login',login);
 const product = require('./product');
 app.use('/api/product',product);
 
-
+const category = require('./category');
+app.use('/api/category',category);
 
 export default app
