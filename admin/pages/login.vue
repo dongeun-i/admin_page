@@ -15,6 +15,7 @@
                     v-model="password"
                     placeholder="PASSWORD"
                     type="password"
+                    @keydown="enter"
                 ></v-text-field>
             </v-form>
             <v-btn class="w-50" @click="login" light>로그인</v-btn>
@@ -52,6 +53,11 @@ export default {
                 }
             } catch (error) {
                 console.error(error);
+            }
+        },
+        enter(e){
+            if(e.keyCode == 13){
+                this.login();
             }
         }
     },
