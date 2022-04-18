@@ -5,14 +5,13 @@ import callData from './db'
 
 router.get('/list',async function(req,res,next){
 	let userId = req.header('userId');
-	let resdata = {};
 	// 상품리스트 가져오기
 	if(userId){
 		let qs = `select P.* ,C.label from product as P left outer join category as C on C.id = P.categoryId where P.userId = ${userId}`
 		let dataSet = await callData(qs);
-		resdata.productListset = dataSet;
+		res.send(dataSet);
 	}
-	res.send(resdata);
+	
 })
 
 // 상품 상세

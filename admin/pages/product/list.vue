@@ -148,15 +148,19 @@ export default {
 	},
 	async asyncData({$axios}){
 		let userInfo = JSON.parse(sessionStorage.getItem('userInfo'));
-		let responseData = await $axios.$get('/api/product/list',{
+		let responseData = {};
+		responseData['productListset'] = await $axios.$get('/api/product/list',{
 			headers:{
 				userId:userInfo.id
 			}
 		});
-		console.log('responseData',responseData);
+		responseData['categoryListset'] = await $axios.$get('/api/category/list');
 		return{
 			resdata : responseData
 		}
+	},
+	created(){
+		console.log('==============',this.resdata);
 	}
 }
 </script>
