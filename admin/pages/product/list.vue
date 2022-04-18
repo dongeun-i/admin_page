@@ -145,6 +145,18 @@ export default {
 	layout:'layout',
 	components:{
 		DataTable
+	},
+	async asyncData({$axios}){
+		let userInfo = JSON.parse(sessionStorage.getItem('userInfo'));
+		let responseData = await $axios.$get('/api/product/list',{
+			headers:{
+				userId:userInfo.id
+			}
+		});
+		console.log('responseData',responseData);
+		return{
+			resdata : responseData
+		}
 	}
 }
 </script>
