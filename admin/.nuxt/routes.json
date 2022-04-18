@@ -2,134 +2,134 @@
   {
     "name": "inspire",
     "path": "/inspire",
-    "component": "C:\\\\Users\\\\donge\\\\OneDrive\\\\바탕 화면\\\\개발\\\\admin_page\\\\admin\\\\pages\\\\inspire.vue",
+    "component": "C:\\\\Users\\\\82102\\\\Desktop\\\\동은\\\\포트폴리오\\\\관리자\\\\admin\\\\pages\\\\inspire.vue",
     "chunkName": "pages/inspire",
-    "_name": "_5db7d349"
+    "_name": "_2bedb0b4"
   },
   {
     "name": "login",
     "path": "/login",
-    "component": "C:\\\\Users\\\\donge\\\\OneDrive\\\\바탕 화면\\\\개발\\\\admin_page\\\\admin\\\\pages\\\\login.vue",
+    "component": "C:\\\\Users\\\\82102\\\\Desktop\\\\동은\\\\포트폴리오\\\\관리자\\\\admin\\\\pages\\\\login.vue",
     "chunkName": "pages/login",
-    "_name": "_763d3a18"
+    "_name": "_eedd137a"
   },
   {
     "name": "main",
     "path": "/main",
-    "component": "C:\\\\Users\\\\donge\\\\OneDrive\\\\바탕 화면\\\\개발\\\\admin_page\\\\admin\\\\pages\\\\main.vue",
+    "component": "C:\\\\Users\\\\82102\\\\Desktop\\\\동은\\\\포트폴리오\\\\관리자\\\\admin\\\\pages\\\\main.vue",
     "chunkName": "pages/main",
-    "_name": "_13ed5f4c"
+    "_name": "_517762cf"
   },
   {
     "name": "calc-list",
     "path": "/calc/list",
-    "component": "C:\\\\Users\\\\donge\\\\OneDrive\\\\바탕 화면\\\\개발\\\\admin_page\\\\admin\\\\pages\\\\calc\\\\list.vue",
+    "component": "C:\\\\Users\\\\82102\\\\Desktop\\\\동은\\\\포트폴리오\\\\관리자\\\\admin\\\\pages\\\\calc\\\\list.vue",
     "chunkName": "pages/calc/list",
-    "_name": "_7a0cd4d8"
+    "_name": "_9d69876e"
   },
   {
     "name": "coupon-list",
     "path": "/coupon/list",
-    "component": "C:\\\\Users\\\\donge\\\\OneDrive\\\\바탕 화면\\\\개발\\\\admin_page\\\\admin\\\\pages\\\\coupon\\\\list.vue",
+    "component": "C:\\\\Users\\\\82102\\\\Desktop\\\\동은\\\\포트폴리오\\\\관리자\\\\admin\\\\pages\\\\coupon\\\\list.vue",
     "chunkName": "pages/coupon/list",
-    "_name": "_790653e5"
+    "_name": "_1989215a"
   },
   {
     "name": "event-list",
     "path": "/event/list",
-    "component": "C:\\\\Users\\\\donge\\\\OneDrive\\\\바탕 화면\\\\개발\\\\admin_page\\\\admin\\\\pages\\\\event\\\\list.vue",
+    "component": "C:\\\\Users\\\\82102\\\\Desktop\\\\동은\\\\포트폴리오\\\\관리자\\\\admin\\\\pages\\\\event\\\\list.vue",
     "chunkName": "pages/event/list",
-    "_name": "_fffb5db2"
+    "_name": "_5be58112"
   },
   {
     "name": "exhibition-list",
     "path": "/exhibition/list",
-    "component": "C:\\\\Users\\\\donge\\\\OneDrive\\\\바탕 화면\\\\개발\\\\admin_page\\\\admin\\\\pages\\\\exhibition\\\\list.vue",
+    "component": "C:\\\\Users\\\\82102\\\\Desktop\\\\동은\\\\포트폴리오\\\\관리자\\\\admin\\\\pages\\\\exhibition\\\\list.vue",
     "chunkName": "pages/exhibition/list",
-    "_name": "_a1d53464"
+    "_name": "_e44b1e7a"
   },
   {
     "name": "faq-list",
     "path": "/faq/list",
-    "component": "C:\\\\Users\\\\donge\\\\OneDrive\\\\바탕 화면\\\\개발\\\\admin_page\\\\admin\\\\pages\\\\faq\\\\list.vue",
+    "component": "C:\\\\Users\\\\82102\\\\Desktop\\\\동은\\\\포트폴리오\\\\관리자\\\\admin\\\\pages\\\\faq\\\\list.vue",
     "chunkName": "pages/faq/list",
-    "_name": "_9b542f3a"
+    "_name": "_6aebd1e4"
   },
   {
     "name": "order-delivery",
     "path": "/order/delivery",
-    "component": "C:\\\\Users\\\\donge\\\\OneDrive\\\\바탕 화면\\\\개발\\\\admin_page\\\\admin\\\\pages\\\\order\\\\delivery.vue",
+    "component": "C:\\\\Users\\\\82102\\\\Desktop\\\\동은\\\\포트폴리오\\\\관리자\\\\admin\\\\pages\\\\order\\\\delivery.vue",
     "chunkName": "pages/order/delivery",
-    "_name": "_3c800ab1"
+    "_name": "_12234d1c"
   },
   {
     "name": "order-exchange",
     "path": "/order/exchange",
-    "component": "C:\\\\Users\\\\donge\\\\OneDrive\\\\바탕 화면\\\\개발\\\\admin_page\\\\admin\\\\pages\\\\order\\\\exchange.vue",
+    "component": "C:\\\\Users\\\\82102\\\\Desktop\\\\동은\\\\포트폴리오\\\\관리자\\\\admin\\\\pages\\\\order\\\\exchange.vue",
     "chunkName": "pages/order/exchange",
-    "_name": "_6911cd60"
+    "_name": "_3eb50fcb"
   },
   {
     "name": "order-list",
     "path": "/order/list",
-    "component": "C:\\\\Users\\\\donge\\\\OneDrive\\\\바탕 화면\\\\개발\\\\admin_page\\\\admin\\\\pages\\\\order\\\\list.vue",
+    "component": "C:\\\\Users\\\\82102\\\\Desktop\\\\동은\\\\포트폴리오\\\\관리자\\\\admin\\\\pages\\\\order\\\\list.vue",
     "chunkName": "pages/order/list",
-    "_name": "_1d9214db"
+    "_name": "_0d157674"
   },
   {
     "name": "order-return",
     "path": "/order/return",
-    "component": "C:\\\\Users\\\\donge\\\\OneDrive\\\\바탕 화면\\\\개발\\\\admin_page\\\\admin\\\\pages\\\\order\\\\return.vue",
+    "component": "C:\\\\Users\\\\82102\\\\Desktop\\\\동은\\\\포트폴리오\\\\관리자\\\\admin\\\\pages\\\\order\\\\return.vue",
     "chunkName": "pages/order/return",
-    "_name": "_7a47732d"
+    "_name": "_2bc35750"
   },
   {
     "name": "product-list",
     "path": "/product/list",
-    "component": "C:\\\\Users\\\\donge\\\\OneDrive\\\\바탕 화면\\\\개발\\\\admin_page\\\\admin\\\\pages\\\\product\\\\list.vue",
+    "component": "C:\\\\Users\\\\82102\\\\Desktop\\\\동은\\\\포트폴리오\\\\관리자\\\\admin\\\\pages\\\\product\\\\list.vue",
     "chunkName": "pages/product/list",
-    "_name": "_6057e908"
+    "_name": "_3faaeca7"
   },
   {
     "name": "rate-sales",
     "path": "/rate/sales",
-    "component": "C:\\\\Users\\\\donge\\\\OneDrive\\\\바탕 화면\\\\개발\\\\admin_page\\\\admin\\\\pages\\\\rate\\\\sales.vue",
+    "component": "C:\\\\Users\\\\82102\\\\Desktop\\\\동은\\\\포트폴리오\\\\관리자\\\\admin\\\\pages\\\\rate\\\\sales.vue",
     "chunkName": "pages/rate/sales",
-    "_name": "_aba66eca"
+    "_name": "_f3e00ef4"
   },
   {
     "name": "rate-visitation",
     "path": "/rate/visitation",
-    "component": "C:\\\\Users\\\\donge\\\\OneDrive\\\\바탕 화면\\\\개발\\\\admin_page\\\\admin\\\\pages\\\\rate\\\\visitation.vue",
+    "component": "C:\\\\Users\\\\82102\\\\Desktop\\\\동은\\\\포트폴리오\\\\관리자\\\\admin\\\\pages\\\\rate\\\\visitation.vue",
     "chunkName": "pages/rate/visitation",
-    "_name": "_10c2f18b"
+    "_name": "_20f00700"
   },
   {
     "name": "user-as",
     "path": "/user/as",
-    "component": "C:\\\\Users\\\\donge\\\\OneDrive\\\\바탕 화면\\\\개발\\\\admin_page\\\\admin\\\\pages\\\\user\\\\as.vue",
+    "component": "C:\\\\Users\\\\82102\\\\Desktop\\\\동은\\\\포트폴리오\\\\관리자\\\\admin\\\\pages\\\\user\\\\as.vue",
     "chunkName": "pages/user/as",
-    "_name": "_d59b3bc4"
+    "_name": "_e48f9bda"
   },
   {
     "name": "user-delivery",
     "path": "/user/delivery",
-    "component": "C:\\\\Users\\\\donge\\\\OneDrive\\\\바탕 화면\\\\개발\\\\admin_page\\\\admin\\\\pages\\\\user\\\\delivery.vue",
+    "component": "C:\\\\Users\\\\82102\\\\Desktop\\\\동은\\\\포트폴리오\\\\관리자\\\\admin\\\\pages\\\\user\\\\delivery.vue",
     "chunkName": "pages/user/delivery",
-    "_name": "_f92f9c40"
+    "_name": "_0e6d7615"
   },
   {
     "name": "user-info",
     "path": "/user/info",
-    "component": "C:\\\\Users\\\\donge\\\\OneDrive\\\\바탕 화면\\\\개발\\\\admin_page\\\\admin\\\\pages\\\\user\\\\info.vue",
+    "component": "C:\\\\Users\\\\82102\\\\Desktop\\\\동은\\\\포트폴리오\\\\관리자\\\\admin\\\\pages\\\\user\\\\info.vue",
     "chunkName": "pages/user/info",
-    "_name": "_b08d50cc"
+    "_name": "_d3ea0362"
   },
   {
     "name": "index",
     "path": "/",
-    "component": "C:\\\\Users\\\\donge\\\\OneDrive\\\\바탕 화면\\\\개발\\\\admin_page\\\\admin\\\\pages\\\\index.vue",
+    "component": "C:\\\\Users\\\\82102\\\\Desktop\\\\동은\\\\포트폴리오\\\\관리자\\\\admin\\\\pages\\\\index.vue",
     "chunkName": "pages/index",
-    "_name": "_a6d4d1fe"
+    "_name": "_822c59a8"
   }
 ]
