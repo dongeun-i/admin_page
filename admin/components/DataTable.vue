@@ -14,7 +14,7 @@
 							:label="checkbox.text"
 							:value="checkbox.value"
 							v-model="filter.checked"
-							@change="checkingStatus"
+							@change="checkingStatus(filter.target)"
 							hide-details
 						>
 							<template v-slot:label>
@@ -25,16 +25,20 @@
 
 					<!-- date picker -->
 					<v-row v-else-if="filter.type == 'date'" class="bg-gray flex-nowrap align-center justify-start">
+						<!-- date btns -->
 						<v-col>
 							<v-btn-toggle class="bg-gray" 
 								background-color=#eee 
-								v-model="filter.active"
+								v-model="dateBtns"
+								@change="changeDateBtns(filter.target)"
 							>
 								<v-btn class="filter-text" v-for="item in filter.btns" :key="item.title">
 									{{item.title}}
 								</v-btn>
 							</v-btn-toggle>
 						</v-col>
+
+						<!-- date picker -->
 						<v-col class="d-flex align-center">
 							<v-menu
 								offset-y
@@ -52,7 +56,7 @@
 									v-on="on"
 									class="col-5"
 									hide-details
-									@change="checkDate('edt',beginDate)"
+									@change="checkDate(filter.target,'bdt')"
 									background-color="#fff"
 									></v-text-field>
 								</template>
@@ -76,7 +80,7 @@
 									hide-details
 									background-color="#fff"
 									class="col-5"
-									@change="checkDate('edt',endDate)"
+									@change="checkDate(filter.target,'edt')"
 									></v-text-field>
 								</template>
 								<datepicker v-model="endDate" :format="chageEndDate" :inline="true" :language="languages[language]"></datepicker>
@@ -144,30 +148,66 @@ export default {
 			language: "ko",
 			languages: lang,
 			items:[],
+			dateBtns:null,
+			dateBtnsItem:null,
 			beginDate:null,
 			endDate:null,
 			isBeginDatePikcer:false,
 			isEndDatePikcer:false,
+			filterBase:{},
 			// format:"yyyy-MM-dd",
 		}
 	},
 	methods:{
-		filter(){
-			console.log('필터링시작')
-			let originData = this.tableData;
-			let filterData
-			filterData = originData.filter( data=>{
-				return data.status == '판매중'
-			})
-			this.items = filterData
-		},
-		checkDate(type,date){
+		checkDate(target,type){
+			this.dateBtns = null;
+			// 필터링 준비
 			let bdt = this.beginDate?new Date(this.beginDate).getTime():null;
 			let edt = this.endDate?new Date(this.endDate).getTime():null;
-
+			if(type == 'bdt' && this.endDate){
+				if(bdt > edt){
+					alert('잘못된 날짜입니다.');
+					return this.beginDate = null;
+				}  
+			}else if(type == 'edt' && this.beginDate){
+				if(edt < bdt){
+					alert('잘못된 날짜입니다.');
+					return this.endDate = null;
+				}
+			}
+			console.log('checkDate',target);
+			let filterItem = this.filterBase[target]={};
+			filterItem['bdt'] = bdt;
+			filterItem['edt'] = edt;
 			console.log('bdt',bdt);
 			console.log('edt',edt);
+			this.filter();
+		},
+		filter(){
+			let filterBase = this.filterBase;
+			console.log('filterBase',Object.entries(filterBase));
 
+		},
+		changeDateBtns(target){
+			// date picker 초기화 시켜주기 
+			this.beginDate = null;
+			this.endDate = null;
+
+			let dateBtns = this.dateBtns;
+			let dateBtnsItem = this.dateBtnsItem;
+			let now = new Date(new Date().setHours(0,0,0,0));
+			let value = dateBtnsItem[dateBtns].value;
+			let targetDate={bdt:null,edt:null};
+		
+			if(value){
+				let bdt = now.setDate(now.getDate() - Number(value));
+				targetDate.bdt = bdt;
+				targetDate.edt = now.getTime();
+			}else if(value == 'all') targetDate = null;
+
+			this.filterBase[target] = targetDate;
+			console.log('filterBase',this.filterBase[target]);
+			this.filter();
 		},
 		format(date){
 			// console.log(date.toFormat('Y-M-D'),);
@@ -182,17 +222,22 @@ export default {
 			let dateFormat = this.format(date);
 			this.endDate = dateFormat;
 		},
-		checkingStatus(v){
+		checkingStatus(target,v){
 			console.log(v);
-			let filterItem = this.tableData.filter(item=>{
-				return v.includes(item.status);
-			})
-			return this.items = filterItem;
-			
+			console.log('checkingStatus',target);
+			this.filterBase[target] = v; 
+			this.filter();
 		}
 	},
 	mounted(){
 		this.items = this.tableData;
+		this.filters.map(filter=>{
+			if(filter.type == 'date'){
+				this.dateBtns = filter.active;
+				this.dateBtnsItem = filter.btns;
+			}
+		})
+		
 	},
 	// computed: {
     //   dateRangeText () {

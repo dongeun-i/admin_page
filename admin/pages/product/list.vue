@@ -28,6 +28,7 @@ export default {
 				{
 				type:'checkbox',
 				title:'상태',
+				target:'status',
 				checked:['판매중','품절','비공개','판매중지'],
 				values:[{
 					text:'판매중',
@@ -46,6 +47,7 @@ export default {
 			},{
 				type:'date',
 				title:'기간',
+				target:'regdate',
 				active:6,
 				btns:[{
 					title:'오늘',
