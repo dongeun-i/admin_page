@@ -20,6 +20,7 @@ export default {
 				{ text: '할인가', value: 'discount' },
 				{ text: '상태', value: 'status' },
 				{ text: '카테고리', value : 'label'},
+				{ text: '등록일' , value:'regdate'},
 				{ text: '기능', value: 'btn'},
        	 	],
 			data:[],
@@ -97,7 +98,8 @@ export default {
 			p.btn = {
 				linkTo:`/product/${p.id}`,
 				btnText:'상세보기',
-			}
+			},
+			p.regdate =new Date(p.regdate).toFormat('Y-M-D');
 			this.data.push(p);
 		});
 		console.log(this.data)
