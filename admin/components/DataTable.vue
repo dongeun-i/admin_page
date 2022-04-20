@@ -186,6 +186,9 @@ export default {
 		filter(){
 			let filterBase = this.filterBase;
 			console.log('filterBase',Object.entries(filterBase));
+			this.tableData.filter(item=>{
+				let target = Object.keys(filterBase);
+			})
 
 		},
 		changeDateBtns(target){
@@ -198,7 +201,7 @@ export default {
 			let now = new Date(new Date().setHours(0,0,0,0));
 			let value = dateBtnsItem[dateBtns].value;
 			let targetDate={bdt:null,edt:null};
-		
+
 			if(value){
 				let bdt = now.setDate(now.getDate() - Number(value));
 				targetDate.bdt = bdt;
