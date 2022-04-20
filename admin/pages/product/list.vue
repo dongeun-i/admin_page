@@ -17,65 +17,17 @@ export default {
 				},
 				{ text: '상품명', value: 'name' },
 				{ text: '판매가', value: 'price' },
-				{ text: '할인가', value: 'discountPrice' },
+				{ text: '할인가', value: 'discount' },
 				{ text: '상태', value: 'status' },
-				{ text: '수정', value: 'btn'}
+				{ text: '카테고리', value : 'label'},
+				{ text: '기능', value: 'btn'},
        	 	],
-			data:[
-				{id:'1',
-				name:'1번상품',
-				price:100,
-				discountPrice:50,
-				status:'판매중',
-				btnIcon:'mdi-pen'
-			},{
-				id:'2',
-				name:'2번상품',
-				price:100,
-				discountPrice:50,
-				status:'품절',
-				btnIcon:'mdi-pen'
-			},{
-				id:'3',
-				name:'3번상품',
-				price:100,
-				discountPrice:50,
-				status:'판매중지',
-				btnIcon:'mdi-pen'
-			},{
-				id:'4',
-				name:'4번상품',
-				price:100,
-				discountPrice:50,
-				status:'비공개',
-				btnIcon:'mdi-pen'
-			},{
-				id:'5',
-				name:'5번상품',
-				price:100,
-				discountPrice:50,
-				status:'판매중',
-				btnIcon:'mdi-pen'
-			},{
-				id:'6',
-				name:'6번상품',
-				price:100,
-				discountPrice:50,
-				status:'판매중',
-				btnIcon:'mdi-pen'
-			},{
-				id:'7',
-				name:'7번상품',
-				price:100,
-				discountPrice:50,
-				status:'판매중',
-				btnIcon:'mdi-pen'
-			},
-			],
-			filters:[{
+			data:[],
+			filters:[
+				{
 				type:'checkbox',
 				title:'상태',
-				checked:['판매중',],
+				checked:['판매중','품절','비공개','판매중지'],
 				values:[{
 					text:'판매중',
 					value:'판매중'
@@ -117,28 +69,6 @@ export default {
 					value:'all'
 				},
 				]
-			},{
-				type:'select',
-				title:'카테고리',
-				values:[{
-					label:'선택',
-					value:null
-				},{
-					label:'상의',
-					value:'top',
-				},{
-					label:'하의',
-					value:'bottom'
-				},{
-					label:'신발',
-					value:'shoes'
-				},{
-					label:'액세서리',
-					value:'acc'
-				},{
-					label:'가방',
-					value:'bag'
-				}]
 			}]
 		}
 	},
@@ -160,7 +90,26 @@ export default {
 		}
 	},
 	created(){
-		console.log('==============',this.resdata);
+		// 테이블 데이터 반영
+		this.resdata.productListset.map(p=>{
+			p.discount = (p.price - p.discount).toComma();
+			p.price = p.price.toComma();
+			p.btn = {
+				linkTo:`/product/${p.id}`,
+				btnText:'상세보기',
+			}
+			this.data.push(p);
+		});
+		console.log(this.data)
+		// 필터영역부 카테고리 추가
+		// 기본선택값 넣어주기 
+		this.resdata.categoryListset.unshift({label:'선택',id:null});
+		let categoryFilter = {
+				type:'select',
+				title:'카테고리',
+				values:this.resdata.categoryListset
+		}
+		this.filters.push(categoryFilter);
 	}
 }
 </script>

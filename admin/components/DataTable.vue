@@ -13,7 +13,8 @@
 							:key="checkbox.value"
 							:label="checkbox.text"
 							:value="checkbox.value"
-							checked
+							v-model="filter.checked"
+							@change="checkingStatus"
 							hide-details
 						>
 							<template v-slot:label>
@@ -86,7 +87,7 @@
 						<v-select
 						:items="filter.values"
 						item-text="label"
-						item-value= "value"
+						item-value= "id"
 						:value="null"
 						hide-details
 						class="col-3"
@@ -95,7 +96,6 @@
 					</v-row>
 				</v-card>
 			</v-card>
-			
 		</template>
 
 
@@ -116,13 +116,10 @@
 		:headers="tableHeader"
 		:items="items"
 		:search="search"
-
 		>
 			<template v-slot:[`item.btn`]="{ item }">
-				<v-btn icon >
-					<v-icon small>
-						{{item.btnIcon}}
-					</v-icon>
+				<v-btn nuxt link :to="item.btn.linkTo">
+					{{item.btn.btnText}}
 				</v-btn>
 			</template>
 		</v-data-table>
@@ -184,6 +181,14 @@ export default {
 		chageEndDate(date){
 			let dateFormat = this.format(date);
 			this.endDate = dateFormat;
+		},
+		checkingStatus(v){
+			console.log(v);
+			let filterItem = this.tableData.filter(item=>{
+				return v.includes(item.status);
+			})
+			return this.items = filterItem;
+			
 		}
 	},
 	mounted(){
