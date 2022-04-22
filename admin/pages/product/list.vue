@@ -25,7 +25,7 @@ export default {
        	 	],
 			data:[],
 			filters:[
-				{
+			{
 				type:'checkbox',
 				title:'상태',
 				target:'status',
@@ -111,6 +111,8 @@ export default {
 		let categoryFilter = {
 				type:'select',
 				title:'카테고리',
+				target:'label',
+				choose:null,
 				values:this.resdata.categoryListset
 		}
 		this.filters.push(categoryFilter);

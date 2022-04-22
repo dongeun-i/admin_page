@@ -14,7 +14,7 @@
 							:label="checkbox.text"
 							:value="checkbox.value"
 							v-model="filter.checked"
-							@change="checkingStatus(filter.target)"
+							@change="checkingStatus(filter.checked,filter.target)"
 							hide-details
 						>
 							<template v-slot:label>
@@ -91,10 +91,11 @@
 						<v-select
 						:items="filter.values"
 						item-text="label"
-						item-value= "id"
-						:value="null"
+						item-value= "label"
+						v-model="filter.choose"
 						hide-details
 						class="col-3"
+						@change="changeSelect(filter.target,filter.choose,filter.values)"
 						>
 						</v-select>
 					</v-row>
@@ -155,10 +156,15 @@ export default {
 			isBeginDatePikcer:false,
 			isEndDatePikcer:false,
 			filterBase:{},
+			selctTarget:null
 			// format:"yyyy-MM-dd",
 		}
 	},
 	methods:{
+		changeSelect(target,value){
+			this.filterBase[target] = value;
+			this.filter();
+		},
 		checkDate(target,type){
 			this.dateBtns = null;
 			// 필터링 준비
@@ -185,11 +191,75 @@ export default {
 		},
 		filter(){
 			let filterBase = this.filterBase;
-			console.log('filterBase',Object.entries(filterBase));
-			this.tableData.filter(item=>{
-				let target = Object.keys(filterBase);
-			})
+			console.log(filterBase);
+			let filterData = [];
+			Object.keys(filterBase).map(target=>{
+				if(filterData.length==0){
+					filterData = this.tableData.filter(item=>{
+						if(target.includes('date')){
+							if(filterBase[target] == null) return item
+							let bdt = filterBase[target].bdt;
+							let edt = filterBase[target].edt;
 
+							if(bdt && edt){
+								console.log('1-1')
+								console.log('bdt = ',new Date(bdt).toFormat('Y-M-D'));
+								console.log('edt = ',new Date(edt).toFormat('Y-M-D'));
+								console.log('items DATE = ',new Date(item[target]).toFormat('Y-M-D'));
+								return bdt <= new Date(item[target]).setHours(0,0,0,0) && new Date(item[target]).setHours(0,0,0,0) <= edt
+							}else if(bdt){
+								console.log('1-2')
+								console.log('bdt = ',new Date(bdt).toFormat('Y-M-D'));
+								console.log('edt = ',new Date(edt).toFormat('Y-M-D'));
+								console.log('items DATE = ',new Date(item[target]).toFormat('Y-M-D'));
+								return bdt <= new Date(item[target]).setHours(0,0,0,0)
+							}else if(edt){
+								console.log('1-3')
+								console.log('bdt = ',new Date(bdt).toFormat('Y-M-D'));
+								console.log('edt = ',new Date(edt).toFormat('Y-M-D'));
+								console.log('items DATE = ',new Date(item[target]).toFormat('Y-M-D'));
+								return new Date(item[target]).setHours(0,0,0,0) <= edt
+							}
+						}else{
+							console.log(filterBase[target] , item[target])
+							return filterBase[target].includes(item[target]);
+						}
+					})
+				}else{
+					filterData = filterData.filter(item=>{
+						if(target.includes('date')){
+							if(filterBase[target] == null) return item
+							let bdt = filterBase[target].bdt;
+							let edt = filterBase[target].edt;
+							if(bdt && edt){
+								console.log('2-1')
+								console.log('bdt = ',new Date(bdt).toFormat('Y-M-D'));
+								console.log('edt = ',new Date(edt).toFormat('Y-M-D'));
+								console.log('items DATE = ',new Date(item[target]).toFormat('Y-M-D'));
+								return bdt <= new Date(item[target]).setHours(0,0,0,0) && new Date(item[target]).setHours(0,0,0,0) <= edt
+							}else if(bdt){
+								console.log('2-2')
+								console.log('bdt = ',new Date(bdt).toFormat('Y-M-D'));
+								console.log('edt = ',new Date(edt).toFormat('Y-M-D'));
+								console.log('items DATE = ',new Date(item[target]).toFormat('Y-M-D'));
+								return bdt <= new Date(item[target]).setHours(0,0,0,0)
+							}else if(edt){
+								console.log('2-3')
+								console.log('bdt = ',new Date(bdt).toFormat('Y-M-D'));
+								console.log('edt = ',new Date(edt).toFormat('Y-M-D'));
+								console.log('items DATE = ',new Date(item[target]).toFormat('Y-M-D'));
+								return new Date(item[target]).setHours(0,0,0,0) <= edt
+							}
+						}else{
+							console.log(filterBase[target] , item[target])
+							return filterBase[target].includes(item[target]);
+						}
+					})
+				}
+				
+			})
+			console.log('filterData=',filterData)
+			this.items = filterData;
 		},
 		changeDateBtns(target){
 			// date picker 초기화 시켜주기 
@@ -202,10 +272,12 @@ export default {
 			let value = dateBtnsItem[dateBtns].value;
 			let targetDate={bdt:null,edt:null};
 
-			if(value){
+			if(value && value !='all'){
 				let bdt = now.setDate(now.getDate() - Number(value));
 				targetDate.bdt = bdt;
-				targetDate.edt = now.getTime();
+
+				// 현재시간으로 설정 해주기 
+				targetDate.edt = new Date().setHours(0,0,0,0); 
 			}else if(value == 'all') targetDate = null;
 
 			this.filterBase[target] = targetDate;
@@ -225,9 +297,7 @@ export default {
 			let dateFormat = this.format(date);
 			this.endDate = dateFormat;
 		},
-		checkingStatus(target,v){
-			console.log(v);
-			console.log('checkingStatus',target);
+		checkingStatus(v,target){
 			this.filterBase[target] = v; 
 			this.filter();
 		}
@@ -240,6 +310,7 @@ export default {
 				this.dateBtnsItem = filter.btns;
 			}
 		})
+
 		
 	},
 	// computed: {
