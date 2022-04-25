@@ -24,7 +24,7 @@ export default {
       {src : 'https://code.jquery.com/jquery-latest.min.js'},
       {src : '/js/webUtil.js'},
       {src : '/js/geoUtil.js'},
-      {src : '/js/geoUtil.js'},
+      {src : '/js/korUtil.js'},
     ],
   },
 
