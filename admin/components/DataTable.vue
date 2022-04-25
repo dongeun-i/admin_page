@@ -123,7 +123,7 @@
 		:search="search"
 		>
 			<template v-slot:[`item.btn`]="{ item }">
-				<v-btn nuxt link :to="item.btn.linkTo">
+				<v-btn nuxt link :to="item.btn.linkTo" outlined>
 					{{item.btn.btnText}}
 				</v-btn>
 			</template>
