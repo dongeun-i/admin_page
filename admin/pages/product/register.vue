@@ -95,7 +95,16 @@ export default {
 		
 	},
 	methods:{
+		checkmodels(){
+			this.panels.map(p=>{
+				if(p.model =='선택' || p.model == null){
+					let message_target = KorUtil.fixPostPositions(`${p.title}을(를)`)
+					return alert(`${message_target} 작성해주세요`);
+				}
+			})
+		},
 		test(){
+			this.checkmodels();
 			console.log('변한것좀 확인하자',this.panels)
 		},
 	}
