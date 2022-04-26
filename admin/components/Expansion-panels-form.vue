@@ -38,6 +38,7 @@
 				<v-file-input
 				counter
 				show-size
+				@change="testImg"
 				truncate-length="50"
 				hide-details
 				v-model="panel.model"
@@ -76,6 +77,9 @@ export default {
 	methods:{
 		testCallData(){
 			console.log('자식에서 보내준다',this.panels)
+		},
+		testImg(v){
+			console.log(v);
 		}
 	}
 

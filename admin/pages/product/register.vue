@@ -2,7 +2,7 @@
 	<v-card class="col-12 elevation-0">
 		<v-sheet class="d-flex justify-space-between align-center">
 			<v-card-title>상품등록</v-card-title>
-			<v-btn outlined @click="test">제출</v-btn>
+			<v-btn outlined @click="postProductInfo">제출</v-btn>
 		</v-sheet>
 		<ExpansionPanels :panels="panels"/>
 	</v-card>
@@ -96,17 +96,52 @@ export default {
 	},
 	methods:{
 		checkmodels(){
+			let exit = false;
 			this.panels.map(p=>{
+				if(exit) return
 				if(p.model =='선택' || p.model == null){
 					let message_target = KorUtil.fixPostPositions(`${p.title}을(를)`)
+					exit = true;
 					return alert(`${message_target} 작성해주세요`);
 				}
 			})
+			return exit
 		},
-		test(){
-			this.checkmodels();
-			console.log('변한것좀 확인하자',this.panels)
+		async postProductInfo(){
+			if(!this.checkmodels()){
+				console.log('변한것좀 확인하자',this.panels);
+				let productInfo = this.makePayload(this.panels);
+				console.log(productInfo)
+				// const responseData = await this.$axios.$post('/api/product/register',{
+				// 	data:productInfo,
+				// 	header: {
+				// 		'Content-Type': 'multipart/form-data',
+				// 	},
+				// })
+				const responseData = await this.$axios({
+					method: 'post',
+					url: '/api/product/register',
+					data: productInfo,
+					headers: {
+						'Content-Type': 'multipart/form-data',
+					},
+				})
+				console.log(responseData);
+			}
 		},
+		makePayload(data){
+			const formData = new FormData()
+			data.map(d=>{
+				let target = d.target;
+				let value = d.model;
+				if(target == 'thumbnail'){
+					console.log(value.target);
+				}else{
+					formData.append(target,value);
+				}
+			})
+			return formData;
+		}
 	}
 
 }

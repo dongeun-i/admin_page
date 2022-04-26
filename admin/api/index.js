@@ -1,10 +1,13 @@
 const express = require("express");
 const app = express();
 const bodyParser = require('body-parser');
+const multer = require('multer');
+const form_data = multer();
 
 const dir = __dirname;
 const file = __filename;
 
+app.use(form_data.array());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(function(req, res, next) {

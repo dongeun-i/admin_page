@@ -1,6 +1,8 @@
 const { Router } = require('express');
 const { json } = require('express/lib/response');
 const router = Router();
+const multer = require('multer');
+const form_data = multer();
 import callData from './db'
 
 router.get('/list',async function(req,res,next){
@@ -21,6 +23,11 @@ router.get('/:id',async function(req,res,next){
 	let qs = `select P.*, C.id from product as P left outer join category as C on C.id = P.categoryId where P.id = ${productId}`
 	let dataSet = await callData(qs)
 	res.send(dataSet);
+})
+
+router.post('/register',async function(req,res,next){
+	console.log(req.body)
+	res.send(req.body);
 })
 
 
