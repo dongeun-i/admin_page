@@ -11,6 +11,5 @@ router.post('/',async function(req,res,next){
 	let dataSet = await callData (qu);
 	console.log('dataSet',dataSet);
 	res.send(dataSet);
-	next();
 })
 module.exports = router;

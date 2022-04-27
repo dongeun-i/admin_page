@@ -9,8 +9,10 @@
 </template>
 <script>
 import ExpansionPanels from '@/components/Expansion-panels-form.vue'
+import FileUploader from '@/mixins/FileUploader.js'
 export default {
 	layout:'layout',
+	mixins:[FileUploader],
 	components:{
 		ExpansionPanels
 	},
@@ -109,39 +111,29 @@ export default {
 		},
 		async postProductInfo(){
 			if(!this.checkmodels()){
-				console.log('변한것좀 확인하자',this.panels);
 				let productInfo = this.makePayload(this.panels);
 				console.log(productInfo)
-				// const responseData = await this.$axios.$post('/api/product/register',{
-				// 	data:productInfo,
-				// 	header: {
-				// 		'Content-Type': 'multipart/form-data',
-				// 	},
-				// })
-				const responseData = await this.$axios({
-					method: 'post',
-					url: '/api/product/register',
-					data: productInfo,
-					headers: {
-						'Content-Type': 'multipart/form-data',
-					},
+				const responseData = await this.$axios.$post('/api/product/register',{
+					productInfo:productInfo
 				})
-				console.log(responseData);
+				console.log(responseData)
 			}
 		},
 		makePayload(data){
-			const formData = new FormData()
-			data.map(d=>{
+			let payload = {}
+			data.map(async d=>{
 				let target = d.target;
 				let value = d.model;
-				if(target == 'thumbnail'){
-					console.log(value.target);
+				if(target !='thumbnail'){
+					payload[target] = value;
 				}else{
-					formData.append(target,value);
+					console.log('사진등록',target,value);
+					let result = await this.upLoadFile(value);
+					console.log(result);
 				}
 			})
-			return formData;
-		}
+			return payload;
+		},
 	}
 
 }

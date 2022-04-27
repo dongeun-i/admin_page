@@ -38,7 +38,6 @@
 				<v-file-input
 				counter
 				show-size
-				@change="testImg"
 				truncate-length="50"
 				hide-details
 				v-model="panel.model"
@@ -68,19 +67,7 @@ export default {
 			return new Array(this.panels.length).fill(0).map((n,i)=>n+i)
 		}
 	},
-	watch:{
-		panels:function(now,old){
-			console.log(now,'나우'),
-			console.log(old,'올드')
-		}
-	},
 	methods:{
-		testCallData(){
-			console.log('자식에서 보내준다',this.panels)
-		},
-		testImg(v){
-			console.log(v);
-		}
 	}
 
 }

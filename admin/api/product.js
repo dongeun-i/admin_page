@@ -1,8 +1,7 @@
 const { Router } = require('express');
 const { json } = require('express/lib/response');
 const router = Router();
-const multer = require('multer');
-const form_data = multer();
+
 import callData from './db'
 
 router.get('/list',async function(req,res,next){
@@ -26,8 +25,9 @@ router.get('/:id',async function(req,res,next){
 })
 
 router.post('/register',async function(req,res,next){
-	console.log(req.body)
-	res.send(req.body);
+	console.log(req.body.productInfo);
+	let productInfo = req.body.productInfo;
+	res.send(productInfo);
 })
 
 
