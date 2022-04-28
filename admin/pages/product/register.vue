@@ -34,7 +34,7 @@ export default {
 				layout:'select',
 				values:null,
 				model:'선택',
-				target:'categotyId',
+				target:'categoryId',
 			},{
 				title:'판매가',
 				layout:'input',
@@ -70,7 +70,7 @@ export default {
 				target:'thumbnail',
 				value:null
 			},{
-				target:'categotyId',
+				target:'categoryId',
 				value:null
 			},{
 				
@@ -112,24 +112,32 @@ export default {
 		async postProductInfo(){
 			if(!this.checkmodels()){
 				let productInfo = this.makePayload(this.panels);
-				console.log(productInfo)
+				let thumbnail = this.panels.find(p=>p.target=="thumbnail");
+console.log(thumbnail);
 				const responseData = await this.$axios.$post('/api/product/register',{
 					productInfo:productInfo
 				})
+				let insertId = responseData.insertId;
+				let newFileName = `product_${insertId}`
+				try {
+					this.upLoadFile(thumbnail.model,newFileName);
+				} catch (error) {
+					console.error(error);
+				}
 				console.log(responseData)
 			}
 		},
 		makePayload(data){
 			let payload = {}
-			data.map(async d=>{
+			// 등록자 정보 넣어주기
+			let userInfo = JSON.parse(sessionStorage.getItem('userInfo'));
+			payload['userId'] = userInfo.id;
+			payload['regdate'] = new Date().toFormat('Y-M-D H:M:S');
+ 			data.map(async d=>{
 				let target = d.target;
 				let value = d.model;
 				if(target !='thumbnail'){
 					payload[target] = value;
-				}else{
-					console.log('사진등록',target,value);
-					let result = await this.upLoadFile(value);
-					console.log(result);
 				}
 			})
 			return payload;

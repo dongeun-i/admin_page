@@ -2,6 +2,7 @@ const { Router } = require('express');
 const { json } = require('express/lib/response');
 const router = Router();
 
+import { DATE } from 'mysql/lib/protocol/constants/types';
 import callData from './db'
 
 router.get('/list',async function(req,res,next){
@@ -27,7 +28,12 @@ router.get('/:id',async function(req,res,next){
 router.post('/register',async function(req,res,next){
 	console.log(req.body.productInfo);
 	let productInfo = req.body.productInfo;
-	res.send(productInfo);
+	let table_column = Object.keys(productInfo).join(',');
+	let table_value = Object.values(productInfo).join("','");
+	let qs = `INSERT INTO product (${table_column}) VALUES ('${table_value}')` 
+	let insert =await callData(qs);
+
+	res.send(insert);
 })
 
 

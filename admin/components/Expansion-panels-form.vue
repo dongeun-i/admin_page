@@ -23,7 +23,7 @@
 				<v-select
 				:items="panel.values"
 				item-text="label"
-				item-value= "label"
+				item-value= "id"
 				v-model="panel.model"
 				hide-details
 				class="col-3"
