@@ -2,14 +2,13 @@ const FileUploader = {
 	methods:{
 		async upLoadFile(file,name){
 			let imgForm = new FormData();
-			console.log(name);
+			let fileName = name?name:null
 			imgForm.append('img',file);
-			if(name)imgForm.append('fileName',name);
 			const Img = await this.$axios({
 				method:'post',
 				url:'/api/upload',
+				fileName : fileName,
 				data:imgForm,
-				fileName:name,
 				headers: {
 				'Content-Type': 'multipart/form-data',
 				}

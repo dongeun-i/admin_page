@@ -113,7 +113,6 @@ export default {
 			if(!this.checkmodels()){
 				let productInfo = this.makePayload(this.panels);
 				let thumbnail = this.panels.find(p=>p.target=="thumbnail");
-console.log(thumbnail);
 				const responseData = await this.$axios.$post('/api/product/register',{
 					productInfo:productInfo
 				})
@@ -124,6 +123,7 @@ console.log(thumbnail);
 				} catch (error) {
 					console.error(error);
 				}
+				
 				console.log(responseData)
 			}
 		},
@@ -139,9 +139,9 @@ console.log(thumbnail);
 				if(target !='thumbnail'){
 					payload[target] = value;
 				}
-			})
+			 })	
 			return payload;
-		},
+			},
 	}
 
 }
