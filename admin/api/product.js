@@ -36,7 +36,8 @@ router.post('/register',function(req,res,next){
 		// 들어갔으면 이후 로직 
 		let insertId = result.insertId;
 		let newFileName = `/img/product_${insertId}`
-		let qs = `UPDATE admin.product SET 'thumbnail'=${newFileName} WHERE 'id'=${insertId}`
+		let qs = `UPDATE product as P SET P.thumbnail='${newFileName}' WHERE P.id=${insertId}`
+		query(qs);
 		res.send(result);
 	});
 })
