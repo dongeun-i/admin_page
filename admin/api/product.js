@@ -31,7 +31,7 @@ router.post('/register',function(req,res,next){
 	let productInfo = req.body.productInfo;
 	let table_column = Object.keys(productInfo).join(',');
 	let table_value = Object.values(productInfo).join("','");
-	let qs = `INSERT INTO product (${table_column}) VALUES ('${table_value}')` 
+	let qs = `INSERT INTO product (${table_column}) VALUES ('${table_value}')`
 	query(qs).then(result=>{
 		// 들어갔으면 이후 로직 
 		let insertId = result.insertId;
