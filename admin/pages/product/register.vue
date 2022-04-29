@@ -116,6 +116,7 @@ export default {
 				const responseData = await this.$axios.$post('/api/product/register',{
 					productInfo:productInfo
 				})
+				
 				console.log(responseData)
 			}
 		},
@@ -128,7 +129,7 @@ export default {
 					payload[target] = value;
 				}else{
 					console.log('사진등록',target,value);
-					let result = await this.upLoadFile(value);
+					let result = await this.upLoadFile(value,null);
 					console.log(result);
 				}
 			})
