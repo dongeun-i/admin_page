@@ -93,15 +93,12 @@ export default {
 			}
 		})
 	},
-	watch:{
-		
-	},
 	methods:{
 		checkmodels(){
 			let exit = false;
 			this.panels.map(p=>{
 				if(exit) return
-				if(p.model =='선택' || p.model == null){
+				if(p.model =='선택' || p.model == null || p.model==''){
 					let message_target = KorUtil.fixPostPositions(`${p.title}을(를)`)
 					exit = true;
 					return alert(`${message_target} 작성해주세요`);
@@ -110,12 +107,15 @@ export default {
 			return exit
 		},
 		async postProductInfo(){
+			// 검사를해서 빈데이터가없으면 통과
 			if(!this.checkmodels()){
 				let productInfo = this.makePayload(this.panels);
 				let thumbnail = this.panels.find(p=>p.target=="thumbnail");
+				// 상품등록 호출
 				const responseData = await this.$axios.$post('/api/product/register',{
 					productInfo:productInfo
 				})
+				// 등록 후 id값을
 				let insertId = responseData.insertId;
 				let newFileName = `product_${insertId}`
 				try {
@@ -125,7 +125,6 @@ export default {
 							this.$router.push('/product/list');
 						}
 					});
-					
 				} catch (error) {
 					console.error(error);
 				}
