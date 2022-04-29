@@ -24,7 +24,7 @@ router.get('/:id',async function(req,res,next){
 	let dataSet = await callData(qs)
 	res.send(dataSet);
 })
-
+//  상품 등록
 router.post('/register',async function(req,res,next){
 	console.log(req.body.productInfo);
 	let productInfo = req.body.productInfo;
