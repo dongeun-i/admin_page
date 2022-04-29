@@ -1,9 +1,9 @@
 const { Router } = require('express');
 const router = Router();
-import callData from './db'
+import query from './db'
 router.get('/', async function(req, res,next) {
 	let query = 'select * from admin'
-	let dataSet = await callData (query);
+	let dataSet = await query (query);
 	console.log(dataSet);
 	next();
 	

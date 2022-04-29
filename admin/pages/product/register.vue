@@ -139,7 +139,7 @@ export default {
 				if(target !='thumbnail'){
 					payload[target] = value;
 				}
-			 })	
+			})	
 			return payload;
 			},
 	}

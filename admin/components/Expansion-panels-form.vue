@@ -63,7 +63,6 @@ export default {
 	},
 	computed:{
 		expansionPanel(){
-			console.log('panels length = ',this.panels.length)
 			return new Array(this.panels.length).fill(0).map((n,i)=>n+i)
 		}
 	},
