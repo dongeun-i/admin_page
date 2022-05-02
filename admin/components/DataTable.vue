@@ -128,6 +128,16 @@
 					{{item.btn.btnText}}
 				</v-btn>
 			</template>
+			<template v-slot:[`item.thumbnail`]="{ item }">
+				<v-img
+					class="m-2"
+					max-width="100px"
+					max-height="100px"
+					:contain="true"
+					:src="item.thumbnail?item.thumbnail:'https://via.placeholder.com/100x100?text=SAMPLE%20IMG'"
+				>
+				</v-img>
+			</template>
 		</v-data-table>
   	</v-card>
 </template>
