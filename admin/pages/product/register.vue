@@ -95,21 +95,9 @@ export default {
 		})
 	},
 	methods:{
-		checkmodels(){
-			let exit = false;
-			this.panels.map(p=>{
-				if(exit) return
-				if(p.model =='선택' || p.model == null || p.model==''){
-					let message_target = KorUtil.fixPostPositions(`${p.title}을(를)`)
-					exit = true;
-					return alert(`${message_target} 작성해주세요`);
-				}
-			})
-			return exit
-		},
 		async postProductInfo(){
 			// 검사를해서 빈데이터가없으면 통과
-			if(!this.checkmodels()){
+			if(!this.checkmodels(this.panels)){
 				let productInfo = this.makePayload(this.panels);
 				let thumbnail = this.panels.find(p=>p.target=="thumbnail");
 				let type = thumbnail.model.type.replace(/image\//g,'.');
