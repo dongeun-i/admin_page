@@ -32,7 +32,8 @@
 								v-model="dateBtns"
 								@change="changeDateBtns(filter.target)"
 							>
-								<v-btn class="filter-text" v-for="item in filter.btns" :key="item.title">
+								<v-btn class="filter-text" v-for="item in filter.btns" :key="item.title"
+								max-height="36px">
 									{{item.title}}
 								</v-btn>
 							</v-btn-toggle>
