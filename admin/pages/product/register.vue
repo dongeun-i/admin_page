@@ -41,7 +41,7 @@ export default {
 				model:null,
 				target:'price'
 			},{
-				title:'할인가',
+				title:'할인금액',
 				layout:'input',
 				model:null,
 				target:'discount'	
@@ -111,10 +111,14 @@ export default {
 			if(!this.checkmodels()){
 				let productInfo = this.makePayload(this.panels);
 				let thumbnail = this.panels.find(p=>p.target=="thumbnail");
+				let type = thumbnail.model.type.replace(/image\//g,'.');
 				// 상품등록 호출
 				const responseData = await this.$axios.$post('/api/product/register',{
-					productInfo:productInfo
+					productInfo:productInfo,
+					thumbnailType:type
 				})
+				// 등록 실패했을 경우 끝 !
+				if(!responseData) return alert('상품등록이 실패하였습니다.');
 				// 등록 후 id값을
 				let insertId = responseData.insertId;
 				let newFileName = `product_${insertId}`
@@ -146,6 +150,5 @@ export default {
 			return payload;
 			},
 	}
-
 }
 </script>

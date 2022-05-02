@@ -1,7 +1,14 @@
 <template>
-	<div>
+	<v-card class="col-12 elevation-0">
+		<v-sheet class="d-flex justify-space-between align-center">
+			<v-card-title>상품상세</v-card-title>
+			<div>
+				<v-btn outlined @click="modifyProductInfo">수정하기</v-btn>
+				<v-btn outlined @click="deleteProductInfo">삭제하기</v-btn>
+			</div>
+		</v-sheet>
 		<ExpansionPanels :panels="panels"/>
-	</div>
+	</v-card>
 </template>
 <script>
 import ExpansionPanels from '@/components/Expansion-panels-form'
@@ -15,22 +22,83 @@ export default {
 		if(!productId)return
 		console.log('router확인',productId)
 		let productInfo = await $axios.$get(`/api/product/${productId}`);
+		let categoryInfo = await $axios.$get('/api/category/list');
 		return{
-			productInfo : productInfo
+			productInfo : productInfo,
+			categoryInfo : categoryInfo
 		}
 	},
 	data(){
 		return{
 			panels:[{
 				title:'상품명',
+				model:null,
 				layout:'input',
+				target:'name'
 			},{
-				title:"가격",
-				layout:'input'
+				title:"상품 이미지",
+				model:null,
+				layout:'img',
+				src:null,
+				target:'thumbnail'
 			},{
-				title:'체크박스',
-				layout:'checkbox'
-			}]
+				title:'카테고리',
+				layout:'select',
+				values:null,
+				model:'선택',
+				target:'categoryId',
+			},{
+				title:'판매가',
+				layout:'input',
+				model:null,
+				target:'price'
+			},{
+				title:'할인금액',
+				layout:'input',
+				model:null,
+				target:'discount'	
+			},{
+				title:'상태',
+				layout:'select',
+				model:'선택',
+				target:'status',
+				values:[{
+					label:'선택'
+				},{
+					label:'판매중'
+				},{
+					label:'품절'
+				},{
+					label:'비공개'
+				},{
+					label:'판매중지'
+				},]	
+			}
+			],
+		}
+	},
+	created(){
+		let category = this.categoryInfo
+		let productInfo = this.productInfo[0];
+		this.panels.map(p=>{
+			if(p.layout =='img'){
+				p.src = productInfo[p.target];
+			}else{
+				if(p.target == 'categoryId'){
+					p.values = category;
+				}
+				p.model = productInfo[p.target];
+			}
+		})
+		console.log(this.panels)	
+	},
+	methods:{
+		modifyProductInfo(){
+			let panels = this.panels;
+			console.log('수정요청들어왔다',panels);
+		},
+		deleteProductInfo(){
+			console.log('상품삭제 눌렀다')
 		}
 	}
 }

@@ -2,9 +2,9 @@
 	<v-card class="elevation-0">
 		
 		<DataTable :tableHeader="headers" :tableData="data" :filters="filters"/>
-		<v-card class="d-flex justify-end col-12 elevation-0" >
+		<!-- <v-card class="d-flex justify-end col-12 elevation-0" >
 			<v-btn outlined nuxt link to="/product/register">상품등록</v-btn>
-		</v-card>
+		</v-card> -->
 	</v-card>
 </template>
 <script>
@@ -19,6 +19,7 @@ export default {
 					filterable: false,
 					value: 'id',
 				},
+				{ text: '상품이미지', value: 'thumbnail'},
 				{ text: '상품명', value: 'name' },
 				{ text: '판매가', value: 'price' },
 				{ text: '할인가', value: 'discount' },
