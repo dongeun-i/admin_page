@@ -21,7 +21,7 @@ router.get('/list',async function(req,res,next){
 router.get('/:id',async function(req,res,next){
 	console.log(req.params.id);
 	let productId = req.params.id;
-	let qs = `select P.*, C.id from product as P left outer join category as C on C.id = P.categoryId where P.id = ${productId}`
+	let qs = `select P.*, C.id as categoryId from product as P left outer join category as C on C.id = P.categoryId where P.id = ${productId}`
 	let dataSet = await query(qs)
 	res.send(dataSet);
 })
@@ -42,6 +42,11 @@ router.post('/register',function(req,res,next){
 		res.send(result);
 	});
 })
-
+router.delete('/delete/:id',async function(req,res,next){
+	let productId = req.params.id
+	let qs = `delete from product as P where P.id =${productId}`
+	let result = await query(qs)
+	res.send(result)
+})
 
 module.exports = router;

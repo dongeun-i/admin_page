@@ -79,6 +79,7 @@ export default {
 	},
 	created(){
 		let category = this.categoryInfo
+		console.log(this.productInfo,'상품정보 확인해보자')
 		let productInfo = this.productInfo[0];
 		this.panels.map(p=>{
 			if(p.layout =='img'){
@@ -93,12 +94,27 @@ export default {
 		console.log(this.panels)	
 	},
 	methods:{
-		modifyProductInfo(){
+		async modifyProductInfo(){
 			let panels = this.panels;
 			console.log('수정요청들어왔다',panels);
 		},
-		deleteProductInfo(){
-			console.log('상품삭제 눌렀다')
+		async deleteProductInfo(){
+			console.log('상품삭제 눌렀다');
+			let message_target = KorUtil.fixPostPositions(`${this.productInfo[0].name}을(를)`)
+			let productId = this.productInfo[0].id;
+			console.log(productId);
+			if(confirm(`${message_target} 삭제하시겠습니까?`)){
+				try {
+					this.$axios.$delete(`/api/product/delete/${productId}`).then(result=>{
+						alert('삭제가 완료되었습니다.')
+						this.$router.replace('/product/list')
+					})
+				} catch (error) {
+					console.error(error)
+					alert('삭제에 실패하였습니다.')
+				}
+			}
+			
 		}
 	}
 }
