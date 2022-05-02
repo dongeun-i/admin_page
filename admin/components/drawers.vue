@@ -72,7 +72,14 @@ export default {
 			},{
 				icon:'mdi-hanger',
 				title:'상품 관리',
-				url:'/product/list'
+				subMenus:[{
+					title:'상품리스트',
+					url:'/product/list'
+				},{
+					title:'상품등록',
+					url:'/product/register'
+				}]
+				
 			},{
 				icon:'mdi-truck-fast',
 				title:'판매 관리',
