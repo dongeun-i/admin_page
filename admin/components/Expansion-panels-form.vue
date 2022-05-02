@@ -40,8 +40,16 @@
 				show-size
 				truncate-length="50"
 				hide-details
+				class="mb-4"
 				v-model="panel.model"
+				accept="image/*"
+				@change="changeImg(panel)"
 				></v-file-input>
+				<v-img 
+				max-width="200px" 
+				:src="panel.src"
+				:contain="true"
+				></v-img>
        		</v-expansion-panel-content>
 		</template>
         
@@ -70,7 +78,20 @@ export default {
 				return length
 			} 
         }
+
 	},
+	methods:{
+		changeImg(panel){
+			console.log('사진바뀌었고',panel)
+			let fileReader = new FileReader();
+			fileReader.readAsDataURL(panel.model);
+			fileReader.onload = function(e) {
+				let img= e.target.result;
+				return panel.src = img
+			}
+
+		}
+	}
 
 }
 </script>
