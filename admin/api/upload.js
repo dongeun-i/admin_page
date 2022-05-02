@@ -36,6 +36,9 @@ router.post('/',upload.single('img'),(req, res, next) => {
 	})
 	
 })
+router.put('/',(req,res)=>{
+	console.log('수정요청 확인했습니다.');
+})
 
 
 
