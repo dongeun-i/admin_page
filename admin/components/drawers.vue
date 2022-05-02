@@ -4,10 +4,15 @@
 		class="px-2"
 		dark
 	>
-		<v-list-item class="py-2">
-			<v-list-item-title class="text-h6 ">
+		<v-list-item class="py-2 px-1">
+			<v-list-item-title class="text-h6">
 				<nuxt-link to="/main">
-					ModuMoa
+					<v-img
+					class="logo"
+					:contain="true"
+                    src="/img/logo.png"
+              		  >
+                	</v-img>
 				</nuxt-link>
 			</v-list-item-title>
 		</v-list-item>
@@ -153,6 +158,12 @@ export default {
 	}
 	.v-application a{
 		text-decoration: none; color: #fff;
+	}
+	.logo{
+		filter: invert(1);
+	}
+	.v-image::v-deep .v-image__image{
+		width: 150px; height: 100%; top: 50%; left: 50%; transform: translateX(-50%) translateY(-50%);
 	}
 </style>
  

@@ -1,6 +1,12 @@
 <template>
     <v-app>
          <v-card light elevation-0 class="col-12 mw-100 mh-100 vh-100 d-flex align-center justify-center flex-column" color="#f1f4f6">
+            <v-card-title class="mb-4">
+                <v-img
+                    src="/img/logo.png"
+                >
+                </v-img>
+            </v-card-title> 
             <v-form class="w-50 d-flex mb-12 flex-column">
                 <v-text-field
                     outlined 
