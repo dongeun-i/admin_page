@@ -14,7 +14,19 @@ const Payload = {
 				}
 			})	
 			return payload;
-			},
+		},
+		checkmodels(data){
+			let exit = false;
+			data.map(p=>{
+				if(exit) return
+				if(p.model =='선택' || p.model == null || p.model==''){
+					let message_target = KorUtil.fixPostPositions(`${p.title}을(를)`)
+					exit = true;
+					return alert(`${message_target} 작성해주세요`);
+				}
+			})
+			return exit
+		},
 	}
 }
 
