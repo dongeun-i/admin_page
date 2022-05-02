@@ -10,9 +10,10 @@
 <script>
 import ExpansionPanels from '@/components/Expansion-panels-form.vue'
 import FileUploader from '@/mixins/FileUploader.js'
+import Payload from '@/mixins/Payload.js'
 export default {
 	layout:'layout',
-	mixins:[FileUploader],
+	mixins:[FileUploader,Payload],
 	components:{
 		ExpansionPanels
 	},
@@ -134,21 +135,6 @@ export default {
 				}
 			}
 		},
-		makePayload(data){
-			let payload = {}
-			// 등록자 정보 넣어주기
-			let userInfo = JSON.parse(sessionStorage.getItem('userInfo'));
-			payload['userId'] = userInfo.id;
-			payload['regdate'] = new Date().toFormat('Y-M-D H:M:S');
- 			data.map(async d=>{
-				let target = d.target;
-				let value = d.model;
-				if(target !='thumbnail'){
-					payload[target] = value;
-				}
-			})	
-			return payload;
-			},
 	}
 }
 </script>
