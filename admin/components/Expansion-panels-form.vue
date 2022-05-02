@@ -62,12 +62,15 @@ export default {
 		panels:Array,
 	},
 	computed:{
-		expansionPanel(){
-			return new Array(this.panels.length).fill(0).map((n,i)=>n+i)
-		}
+		expansionPanel:{
+			get(){
+				return new Array(this.panels.length).fill(0).map((n,i)=>n+i)
+			},
+			set(length){
+				return length
+			} 
+        }
 	},
-	methods:{
-	}
 
 }
 </script>
