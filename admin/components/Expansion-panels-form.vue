@@ -46,8 +46,9 @@
 				@change="changeImg(panel)"
 				></v-file-input>
 				<v-img 
-				max-width="200px" 
-				:src="panel.src"
+				max-width="200px"
+				max-height="200px" 
+				:src="panel.src?panel.src:'https://via.placeholder.com/200x200?text=SAMPLE%20IMG'"
 				:contain="true"
 				></v-img>
        		</v-expansion-panel-content>
