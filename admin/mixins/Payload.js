@@ -17,12 +17,19 @@ const Payload = {
 		},
 		checkmodels(data){
 			let exit = false;
+			
 			data.map(p=>{
 				if(exit) return
-				if(p.model =='선택' || p.model == null || p.model==''){
-					let message_target = KorUtil.fixPostPositions(`${p.title}을(를)`)
+				let message_target = KorUtil.fixPostPositions(`${p.title}을(를)`)
+
+				if(p.model =='선택' || p.model == null&&p.layout !='img' || p.model==''){
 					exit = true;
 					return alert(`${message_target} 작성해주세요`);
+				}else if(p.layout == 'img'){
+					if(p.src) return exit = true;
+					else if(!p.model){
+						return alert(`${message_target} 작성해주세요`);
+					}
 				}
 			})
 			return exit

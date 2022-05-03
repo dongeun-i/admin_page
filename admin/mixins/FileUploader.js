@@ -5,16 +5,16 @@ const FileUploader = {
 			let fileName = name?name:null
 			imgForm.append('img',file);
 			imgForm.append('newFileName',fileName);
-			const Img = await this.$axios({
+			const img = await this.$axios({
 				method:'post',
 				url:'/api/upload',
 				fileName : fileName,
 				data:imgForm,
 				headers: {
-				'Content-Type': 'multipart/form-data',
+					'Content-Type': 'multipart/form-data',
 				}
 			})
-			return Img
+			return img
 		},
 	}
 }

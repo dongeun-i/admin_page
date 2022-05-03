@@ -12,11 +12,14 @@
 </template>
 <script>
 import ExpansionPanels from '@/components/Expansion-panels-form'
+import FileUploader from '@/mixins/FileUploader.js'
+import Payload from '@/mixins/Payload.js'
 export default {
 	layout:'layout',
 	components:{
 		ExpansionPanels
 	},
+	mixins:[FileUploader,Payload],
 	async asyncData({$axios,params}){
 		let productId = params.id
 		if(!productId)return
@@ -75,6 +78,7 @@ export default {
 				},]	
 			}
 			],
+			Payload:{}
 		}
 	},
 	created(){
@@ -96,10 +100,32 @@ export default {
 	methods:{
 		async modifyProductInfo(){
 			let panels = this.panels;
+			let productId = this.productInfo[0].id;
 			console.log('수정요청들어왔다',panels);
+			
+			let productInfo = this.makePayload(panels);
+			let thumbnail = panels.find(p=>p.target=="thumbnail");
+			let imgType;
+			if(thumbnail.model){
+				imgType = thumbnail.model.type.replace(/image\//g,'.');
+				productInfo['thumbnail'] = `/img/product_${productId}${imgType}`
+			}
+
+			const responseData = await this.$axios.$put(`/api/product/${productId}`,{
+				productInfo:productInfo,
+			})
+			if(!responseData) return alert('상품수정이 실패하였습니다.');
+			try {
+				if(thumbnail.model){
+					this.upLoadFile(thumbnail.model,`product_${productId}`);
+				}
+			} catch (error) {
+				console.error(error);
+			}
+			alert('상품수정이 완료되었습니다.')
+
 		},
 		async deleteProductInfo(){
-			console.log('상품삭제 눌렀다');
 			let message_target = KorUtil.fixPostPositions(`${this.productInfo[0].name}을(를)`)
 			let productId = this.productInfo[0].id;
 			console.log(productId);

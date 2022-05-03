@@ -25,6 +25,21 @@ router.get('/:id',async function(req,res,next){
 	let dataSet = await query(qs)
 	res.send(dataSet);
 })
+// 상품 수정
+router.put('/:id',async function(req,res,next){
+	console.log(req.params.id);
+	let productId = req.params.id;
+	let productInfo = req.body.productInfo;
+	let qsBase = Object.entries(productInfo).map(arr=>{
+		let column = `P.${arr[0]}`
+		let value = arr[1];
+		return arr = `${column} = '${value}'`
+	})
+	console.log('qsBase=',qsBase);
+	let qs = `UPDATE product AS P SET ${qsBase.join(',')} WHERE P.id=${productId}`
+	let result = await query(qs)
+	res.send(result);
+})
 //  상품 등록
 router.post('/register',function(req,res,next){
 	console.log(req.body.productInfo);
