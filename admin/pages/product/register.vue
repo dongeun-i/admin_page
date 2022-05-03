@@ -97,7 +97,11 @@ export default {
 	methods:{
 		async postProductInfo(){
 			// 검사를해서 빈데이터가없으면 통과
-			if(!this.checkmodels(this.panels)){
+			console.log('체크해봐')
+			let panels = this.panels
+			let check = this.checkmodels(panels);
+			console.log(check)
+			if(!this.checkmodels(panels)){
 				let productInfo = this.makePayload(this.panels);
 				let thumbnail = this.panels.find(p=>p.target=="thumbnail");
 				let type = thumbnail.model.type.replace(/image\//g,'.');
@@ -120,6 +124,7 @@ export default {
 					});
 				} catch (error) {
 					console.error(error);
+					alert('상품등록이 실패하였습니다.')
 				}
 			}
 		},

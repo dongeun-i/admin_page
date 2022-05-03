@@ -58,9 +58,9 @@ router.post('/register',function(req,res,next){
 	});
 })
 router.delete('/delete/:id',async function(req,res,next){
-	let productId = req.params.id
-	let qs = `delete from product as P where P.id =${productId}`
-	let result = await query(qs)
+	let productId = req.params.id;
+	let qs = `delete from product as P where P.id =${productId}`;
+	let result = await query(qs);
 	res.send(result)
 })
 

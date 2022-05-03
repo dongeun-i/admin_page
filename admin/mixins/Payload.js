@@ -17,7 +17,6 @@ const Payload = {
 		},
 		checkmodels(data){
 			let exit = false;
-			
 			data.map(p=>{
 				if(exit) return
 				let message_target = KorUtil.fixPostPositions(`${p.title}을(를)`)
@@ -26,8 +25,9 @@ const Payload = {
 					exit = true;
 					return alert(`${message_target} 작성해주세요`);
 				}else if(p.layout == 'img'){
-					if(p.src) return exit = true;
+					if(p.src) return
 					else if(!p.model){
+						exit = true
 						return alert(`${message_target} 작성해주세요`);
 					}
 				}
