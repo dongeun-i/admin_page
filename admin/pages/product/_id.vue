@@ -100,8 +100,6 @@ export default {
 		async modifyProductInfo(){
 			let panels = this.panels;
 			let productId = this.productInfo[0].id;
-			console.log('수정요청들어왔다',panels);
-			
 			let productInfo = this.makePayload(panels);
 			let thumbnail = panels.find(p=>p.target=="thumbnail");
 			let imgType;
@@ -122,6 +120,7 @@ export default {
 				console.error(error);
 			}
 			alert('상품수정이 완료되었습니다.')
+			this.$router.replace('/product/list');
 
 		},
 		async deleteProductInfo(){

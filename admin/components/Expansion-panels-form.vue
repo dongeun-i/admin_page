@@ -48,7 +48,7 @@
 				<v-img 
 				max-width="200px"
 				max-height="200px" 
-				:src="panel.src?panel.src:'https://via.placeholder.com/200x200?text=SAMPLE%20IMG'"
+				:src="panel.src"
 				:contain="true"
 				></v-img>
        		</v-expansion-panel-content>

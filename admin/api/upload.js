@@ -42,9 +42,9 @@ router.delete('/',(req,res)=>{
 	fs.unlink(`static${filePath}`,(err)=>{
 		if(err){
 			console.error(err)
-			res.send('fail',err);
+			res.send(err);
 		}else{
-			res.status(200).send('삭제완료');
+			res.send('삭제완료');
 		}
 	})
 })
