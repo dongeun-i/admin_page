@@ -13,19 +13,6 @@ app.use(function(req, res, next) {
   next();
 });
 
-const multer = require('multer');
-const fs = require('fs');
-
-const storage = multer.diskStorage({
-  destination:  (req, file, cb) => {
-    cb(null,req.body.path)
-  },
-  filename:  (req, file, cb) => {
-    cb(null, Date.now() + '-' + file.originalname)// 파일 원본이름 저장
-  }
-})
-const singleUpload = multer({ storage: storage }).single('img'); // 미들웨어 생성
-
 const user = require('./user');
 app.use('/api/user',user);
 

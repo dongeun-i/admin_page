@@ -99,31 +99,35 @@ export default {
 			// 검사를해서 빈데이터가없으면 통과
 			let panels = this.panels
 			if(!this.checkmodels(panels)){
-				this.setPath('productImg');
+				// this.setPath('productImg');
 				let productInfo = this.makePayload(this.panels);
 				let thumbnail = this.panels.find(p=>p.target=="thumbnail");
 				let type = thumbnail.model.type.replace(/image\//g,'.');
 				// 상품등록 호출
-				const responseData = await this.$axios.$post('/api/product/register',{
-					productInfo:productInfo,
-					thumbnailType:type
+				const responseData = await this.$axios({
+					method:'post',
+					url:'/api/product/register',
+					data:productInfo,
+					headers: {
+						'Content-Type': 'multipart/form-data',
+					}
 				})
 				// 등록 실패했을 경우 끝 !
 				if(!responseData) return alert('상품등록이 실패하였습니다.');
 				// 등록 후 id값을
-				let insertId = responseData.insertId;
-				let newFileName = `product_${insertId}`
-				try {
-					this.upLoadFile(thumbnail.model,newFileName,).then(result=>{
-						if(result.status==201){
-							alert('상품등록이 완료되었습니다.')
-							this.$router.push('/product/list');
-						}
-					});
-				} catch (error) {
-					console.error(error);
-					alert('상품등록이 실패하였습니다.')
-				}
+				// let insertId = responseData.insertId;
+				// let newFileName = `product_${insertId}`
+				// try {
+				// 	this.upLoadFile(thumbnail.model,newFileName,).then(result=>{
+				// 		if(result.status==201){
+				// 			alert('상품등록이 완료되었습니다.')
+				// 			this.$router.push('/product/list');
+				// 		}
+				// 	});
+				// } catch (error) {
+				// 	console.error(error);
+				// 	alert('상품등록이 실패하였습니다.')
+				// }
 			}
 		},
 	}
