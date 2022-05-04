@@ -18,6 +18,7 @@ const storage = multer.diskStorage({
 })
 const upload = multer({ storage:storage }).fields([{name:'thumbnail'},{name:'detail'}])
 
+import { Console } from 'console';
 import query from './db'
 
 
