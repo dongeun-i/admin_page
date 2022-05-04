@@ -2,12 +2,26 @@ const { Router } = require('express');
 const { json } = require('express/lib/response');
 const router = Router();
 
-import singleUpload from './multer'
-import arrayUpload from './multer'
+const multer = require('multer');
+const fs = require('fs');
+
+// storage setting for file
+// storage default
+const storage = multer.diskStorage({
+  destination:  (req, file, cb) => {
+    console.log('multer req.body = ',req.body )
+    cb(null,'static/img/product')
+  },
+  filename:  (req, file, cb) => {
+    cb(null, Date.now() + '-' + file.originalname)// 파일 원본이름 저장
+  }
+})
+const upload = multer({ storage:storage }).fields([{name:'thumbnail'},{name:'detail'}])
+
 import query from './db'
 
+
 router.get('/list',async function(req,res,next){
-	console.log('여기가된다고 ?')
 	let userId = req.header('userId');
 	// 상품리스트 가져오기
 	if(userId){
@@ -17,24 +31,32 @@ router.get('/list',async function(req,res,next){
 	}
 	
 })
-router.post('/register',function(req,res,next){
-	console.log('등록시작');
-	// console.log(singleUpload,'*23#');
-	// let productInfo = req.body.productInfo;
-	// let imgType = req.body.thumbnailType;
-	// let table_column = Object.keys(productInfo).join(',');
-	// let table_value = Object.values(productInfo).join("','");
-	// let qs = `INSERT INTO product (${table_column}) VALUES ('${table_value}')`
-	// query(qs).then(result=>{
-	// 	// 들어갔으면 이후 로직 
-	// 	let insertId = result.insertId;
-	// 	let newFileName = `/img/product_${insertId}${imgType}`
-	// 	let qs = `UPDATE product as P SET P.thumbnail='${newFileName}' WHERE P.id=${insertId}`
-	// 	query(qs);
-	// 	res.send(result);
-	// });
-	console.log(req);
-	res.send('받았어')
+router.post('/register',async function(req,res,next){
+	upload(req,res,function(err){
+		if(err){
+			console.log(err)
+			res.send(err)
+		}else{
+			console.log(req.body);
+			console.log(req.files['thumbnail']);
+			let productInfo = req.body;
+			let table_column = Object.keys(productInfo).join(",");
+			let table_value = Object.values(productInfo).join("','");
+			let qs = `INSERT INTO product (${table_column}) VALUES ('${table_value}')`
+			let thumbnail = req.files['thumbnail'][0]
+			let thumbnail_type = thumbnail.mimetype.replace(/image\//g,'.')
+			query(qs).then(result=>{
+				// 	// 들어갔으면 이후 로직 
+					let insertId = result.insertId;
+					let newFileName = `/img/product/product_${insertId}${thumbnail_type}`
+					let qs = `UPDATE product as P SET P.thumbnail='${newFileName}' WHERE P.id=${insertId}`
+					query(qs);
+					res.send('Okay man')
+			});
+		}
+		
+	})
+
 })
 
 // 상품 상세

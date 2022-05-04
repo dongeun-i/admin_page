@@ -103,6 +103,9 @@ export default {
 				let productInfo = this.makePayload(this.panels);
 				let thumbnail = this.panels.find(p=>p.target=="thumbnail");
 				let type = thumbnail.model.type.replace(/image\//g,'.');
+				for (let key of productInfo.keys()) {
+				console.log(key, ":", productInfo.get(key));
+				}
 				// 상품등록 호출
 				const responseData = await this.$axios({
 					method:'post',

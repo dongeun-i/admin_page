@@ -5,14 +5,11 @@ const Payload = {
 			// 등록자 정보 넣어주기
 			let userInfo = JSON.parse(sessionStorage.getItem('userInfo'));
 			payload.append('userId',userInfo.id)
-			// payload['regdate'] = new Date().toFormat('Y-M-D H:M:S');
+			payload.append('regdate',new Date().toFormat('Y-M-D H:M:S'));
  			data.map(d=>{
 				let target = d.target;
 				let value = d.model;
 				payload.append(target,value)
-				// if(target !='thumbnail'){
-					
-				// }
 			})	
 			return payload;
 		},
