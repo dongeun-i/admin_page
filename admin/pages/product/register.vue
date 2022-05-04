@@ -97,11 +97,9 @@ export default {
 	methods:{
 		async postProductInfo(){
 			// 검사를해서 빈데이터가없으면 통과
-			console.log('체크해봐')
 			let panels = this.panels
-			let check = this.checkmodels(panels);
-			console.log(check)
 			if(!this.checkmodels(panels)){
+				this.setPath('productImg');
 				let productInfo = this.makePayload(this.panels);
 				let thumbnail = this.panels.find(p=>p.target=="thumbnail");
 				let type = thumbnail.model.type.replace(/image\//g,'.');
@@ -116,7 +114,7 @@ export default {
 				let insertId = responseData.insertId;
 				let newFileName = `product_${insertId}`
 				try {
-					this.upLoadFile(thumbnail.model,newFileName).then(result=>{
+					this.upLoadFile(thumbnail.model,newFileName,).then(result=>{
 						if(result.status==201){
 							alert('상품등록이 완료되었습니다.')
 							this.$router.push('/product/list');

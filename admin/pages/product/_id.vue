@@ -114,7 +114,7 @@ export default {
 			if(!responseData) return alert('상품수정이 실패하였습니다.');
 			try {
 				if(thumbnail.model){
-					this.upLoadFile(thumbnail.model,`product_${productId}`);
+					this.upLoadFile(thumbnail.model,`product_${productId}`,'productImg');
 				}
 			} catch (error) {
 				console.error(error);
@@ -143,7 +143,7 @@ export default {
 							const responseData = await this.$axios.$delete('/api/upload',{
 								data:{
 									filename:thumbnail.src
-								}
+								},
 							})
 							res(responseData)
 						} catch (error) {
