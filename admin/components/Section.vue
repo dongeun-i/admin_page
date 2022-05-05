@@ -1,5 +1,5 @@
 <template>
-	<v-card light class="p-2" elevation="0" :width="section.width+'%'" height="350px">
+	<v-card class="p-2 bg-gray" elevation="0" :width="section.width+'%'" height="350px">
 		<v-card v-if="section.layout == 1" height="100%">
 			<v-card-title>
 				{{section.title}}
@@ -35,3 +35,8 @@ export default {
 	}
 }
 </script>
+<style scoped>
+	.bg-gray{
+		background-color: #ccc ;
+	}
+</style>

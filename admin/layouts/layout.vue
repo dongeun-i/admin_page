@@ -13,7 +13,7 @@
 			</v-btn>
 		</v-app-bar>
 		<!-- content -->
-        <v-main>
+        <v-main class="bg-gray">
             <router-view>
             </router-view>
         </v-main>
@@ -49,3 +49,8 @@ export default {
 	}
 }
 </script>
+<style scoped>
+	.bg-gray{
+		background-color: #ccc ;
+	}
+</style>

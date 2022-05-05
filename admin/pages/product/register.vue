@@ -1,8 +1,8 @@
 <template>
-	<v-card class="col-12 elevation-0">
-		<v-sheet class="d-flex justify-space-between align-center">
-			<v-card-title>상품등록</v-card-title>
-			<v-btn outlined @click="postProductInfo">제출</v-btn>
+	<v-card class="col-12 elevation-0 bg-gray">
+		<v-sheet class="d-flex bg-gray justify-space-between align-center">
+			<v-card-title class="font-weight-bold">상품등록</v-card-title>
+			<v-btn @click="postProductInfo">제출</v-btn>
 		</v-sheet>
 		<ExpansionPanels :panels="panels"/>
 	</v-card>
@@ -123,3 +123,8 @@ export default {
 	}
 }
 </script>
+<style scoped>
+	.bg-gray{
+		background-color: #ccc ;
+	}
+</style>

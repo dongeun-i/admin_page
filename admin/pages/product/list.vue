@@ -1,6 +1,5 @@
 <template>
 	<v-card class="elevation-0">
-		
 		<DataTable :tableHeader="headers" :tableData="data" :filters="filters"/>
 		<!-- <v-card class="d-flex justify-end col-12 elevation-0" >
 			<v-btn outlined nuxt link to="/product/register">상품등록</v-btn>
