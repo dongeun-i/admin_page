@@ -117,20 +117,7 @@ export default {
 				})
 				// 등록 실패했을 경우 끝 !
 				if(!responseData) return alert('상품등록이 실패하였습니다.');
-				// 등록 후 id값을
-				// let insertId = responseData.insertId;
-				// let newFileName = `product_${insertId}`
-				// try {
-				// 	this.upLoadFile(thumbnail.model,newFileName,).then(result=>{
-				// 		if(result.status==201){
-				// 			alert('상품등록이 완료되었습니다.')
-				// 			this.$router.push('/product/list');
-				// 		}
-				// 	});
-				// } catch (error) {
-				// 	console.error(error);
-				// 	alert('상품등록이 실패하였습니다.')
-				// }
+		
 			}
 		},
 	}

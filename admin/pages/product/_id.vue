@@ -123,44 +123,27 @@ export default {
 			this.$router.replace('/product/list');
 
 		},
-		async deleteProductInfo(){
+		deleteProductInfo(){
 			let message_target = KorUtil.fixPostPositions(`${this.productInfo[0].name}을(를)`)
 			let productId = this.productInfo[0].id;
+			let thumbnail = this.panels.find(p=>p.target=="thumbnail");
 			console.log(productId);
 			if(confirm(`${message_target} 삭제하시겠습니까?`)){
-					const deleteProductInfo = new Promise(async(res,rej)=>{
-						try {
-							const responseData = await this.$axios.$delete(`/api/product/delete/${productId}`)
-							res(responseData);
-						} catch (error) {
-							rej(error)
+				try {
+					this.$axios.$delete(`/api/product/delete/${productId}`,{
+						data:{
+							filename:thumbnail.src
 						}
-						
-					})
-					const deleteProductImg = new Promise(async(res,rej)=>{
-						try {
-							let thumbnail = this.panels.find(p=>p.target=="thumbnail");
-							const responseData = await this.$axios.$delete('/api/upload',{
-								data:{
-									filename:thumbnail.src
-								},
-							})
-							res(responseData)
-						} catch (error) {
-							rej(error)
-						}
-					})
-
-					Promise.all([deleteProductInfo,deleteProductImg]).then(f=>{
-						console.log(f);
+					}).then(result=>{
+						console.log(result);
 						alert('삭제가 완료되었습니다.');
 						this.$router.replace('/product/list');
-					}).catch(error => {
-						console.log(error.message)
-						alert('삭제에 실패하였습니다.')
-						throw(error)
-					});
-
+					})
+				} catch (error) {
+					console.log(error.message)
+					alert('삭제에 실패하였습니다.')
+					throw(error)
+				}
 			}
 			
 		}

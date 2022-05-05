@@ -18,26 +18,6 @@ const storage = multer.diskStorage({
 })
 const upload = multer({ storage:storage }).fields([{name:'thumbnail'},{name:'detail'}])
 
-/**
- * @author dongeun
- * @param path {string} 파일 경로
- * @param old {string} 임시이름이 붙여진 파일
- * @param name {string} 새로운 이름의 파일이름
- * @description DB에 상품등록 이후 fs모듈을 통해서 임시이름으로 된 파일을 바꿔주는 함수 (static/img/product에 있는 이미지)
- * */ 
-const change_filename = function(path,old,name){
-	return new Promise((res,rej)=>{
-		let old_file=`${path}/${old}`;
-		let new_file=`${path}/${name}`;
-		fs.rename(old_file,new_file,(err)=>{
-			if(err){
-				rej(err);
-			}else{
-				res('File rename fin.');
-			}
-		})
-	})
-}
 router.get('/list',async function(req,res,next){
 	let userId = req.header('userId');
 	// 상품리스트 가져오기
@@ -82,7 +62,6 @@ router.post('/register',async function(req,res,next){
 	})
 
 })
-
 // 상품 상세
 router.get('/:id',async function(req,res,next){
 	console.log(req.params.id,'1');
@@ -109,9 +88,16 @@ router.put('/:id',async function(req,res,next){
 
 router.delete('/delete/:id',async function(req,res,next){
 	let productId = req.params.id;
-	let qs = `delete from product as P where P.id =${productId}`;
-	let result = await query(qs);
-	res.send(result)
+	let thumbnail = req.body.filename;
+	fs.unlink(`static${thumbnail}`,async err=>{
+		if(err){
+			res.end(err);
+		}else{
+			let qs = `delete from product as P where P.id =${productId}`;
+			let result = await query(qs);
+			res.send(result)
+		}
+	})
 })
 
 module.exports = router;
