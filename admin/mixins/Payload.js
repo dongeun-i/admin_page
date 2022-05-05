@@ -9,7 +9,9 @@ const Payload = {
  			data.map(d=>{
 				let target = d.target;
 				let value = d.model;
-				payload.append(target,value)
+				if(value){
+					payload.append(target,value)
+				}
 			})	
 			return payload;
 		},

@@ -41,7 +41,7 @@ router.post('/register',async function(req,res,next){
 			let table_value = Object.values(productInfo).join("','");
 			let qs = `INSERT INTO product (${table_column}) VALUES ('${table_value}')`
 			let thumbnail = req.files['thumbnail'][0];
-			let thumbnail_type = thumbnail.mimetype.replace(/image\//g,'.')
+			let thumbnail_type = thumbnail.mimetype.replace(/image\//g,'.');
 			query(qs).then(result=>{
 				// 	// 들어갔으면 이후 로직
 					let productId = result.insertId;
@@ -64,25 +64,45 @@ router.post('/register',async function(req,res,next){
 })
 // 상품 상세
 router.get('/:id',async function(req,res,next){
-	console.log(req.params.id,'1');
 	let productId = req.params.id;
 	let qs = `select P.*, C.id as categoryId from product as P left outer join category as C on C.id = P.categoryId where P.id = ${productId}`
 	let dataSet = await query(qs)
 	res.send(dataSet);
 })
 // 상품 수정
-router.put('/:id',async function(req,res,next){
-	console.log(req.params.id,'2');
-	let productId = req.params.id;
-	let productInfo = req.body.productInfo;
-	let qsBase = Object.entries(productInfo).map(arr=>{
-		let column = `P.${arr[0]}`
-		let value = arr[1];
-		return arr = `${column} = '${value}'`
+router.put('/:id',function(req,res,next){
+	upload(req,res,async (err)=>{
+		if(err){
+			console.log(err)
+			res.send(err)
+		}else{
+			let productId = req.params.id;
+			let thumbnail = req.files['thumbnail'];
+			let productInfo = req.body;
+			if(thumbnail){
+				thumbnail = thumbnail[0];
+				let thumbnail_type = thumbnail.mimetype.replace(/image\//g,'.')
+				fs.rename(`static/img/product/${thumbnail.filename}`,`static/img/product/product_${productId}${thumbnail_type}`,(err)=>{
+					if(err){
+						console.error(err)
+						res.send('Thumbnail Chanege fail')
+					}
+				})
+			}
+			let qsBase = Object.entries(productInfo).map(arr=>{
+				let column = `P.${arr[0]}`
+				let value = arr[1];
+				return arr = `${column} = '${value}'`
+			})
+			console.log('PUT METHODS productId = ',productId);
+			console.log('PUT METHODS productInfo = ',productInfo);
+			let qs = `UPDATE product AS P SET ${qsBase.join(',')} WHERE P.id=${productId}`
+			let result = await query(qs)
+			res.send(result);
+		}
 	})
-	let qs = `UPDATE product AS P SET ${qsBase.join(',')} WHERE P.id=${productId}`
-	let result = await query(qs)
-	res.send(result);
+
+	
 })
 //  상품 등록
 

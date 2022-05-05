@@ -99,25 +99,25 @@ export default {
 			// 검사를해서 빈데이터가없으면 통과
 			let panels = this.panels
 			if(!this.checkmodels(panels)){
-				// this.setPath('productImg');
 				let productInfo = this.makePayload(this.panels);
-				let thumbnail = this.panels.find(p=>p.target=="thumbnail");
-				let type = thumbnail.model.type.replace(/image\//g,'.');
-				for (let key of productInfo.keys()) {
-				console.log(key, ":", productInfo.get(key));
-				}
 				// 상품등록 호출
-				const responseData = await this.$axios({
-					method:'post',
-					url:'/api/product/register',
-					data:productInfo,
-					headers: {
-						'Content-Type': 'multipart/form-data',
+				try {
+					const responseData = await this.$axios({
+						method:'post',
+						url:'/api/product/register',
+						data:productInfo,
+						headers: {
+							'Content-Type': 'multipart/form-data',
+						}
+					})
+					if(responseData){
+						alert('상품등록이 완료되었습니다.')
+						return this.$router.push('/product/list');
 					}
-				})
-				// 등록 실패했을 경우 끝 !
-				if(!responseData) return alert('상품등록이 실패하였습니다.');
-		
+				} catch (error) {
+					// 등록 실패했을 경우 끝 !
+					return alert('상품등록이 실패하였습니다.');
+				}
 			}
 		},
 	}

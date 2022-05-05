@@ -97,30 +97,30 @@ export default {
 		console.log(this.panels)	
 	},
 	methods:{
-		async modifyProductInfo(){
-			let panels = this.panels;
+		modifyProductInfo(){
 			let productId = this.productInfo[0].id;
-			let productInfo = this.makePayload(panels);
-			let thumbnail = panels.find(p=>p.target=="thumbnail");
-			let imgType;
-			if(thumbnail.model){
-				imgType = thumbnail.model.type.replace(/image\//g,'.');
-				productInfo['thumbnail'] = `/img/product_${productId}${imgType}`
+			let productInfo = this.makePayload(this.panels);
+			console.log('productInfo',productInfo)
+			for (let key of productInfo.keys()) {
+				console.log(key, ":", productInfo.get(key));
 			}
-
-			const responseData = await this.$axios.$put(`/api/product/${productId}`,{
-				productInfo:productInfo,
-			})
-			if(!responseData) return alert('상품수정이 실패하였습니다.');
 			try {
-				if(thumbnail.model){
-					this.upLoadFile(thumbnail.model,`product_${productId}`,'productImg');
-				}
+				this.$axios({
+					method:'put',
+					url:`/api/product/${productId}`,
+					data:productInfo,
+					headers: {
+						'Content-Type': 'multipart/form-data',
+					}
+				}).then(result=>{
+					console.log(result);
+					alert('상품 수정이 완료되었습니다.')
+				})
 			} catch (error) {
 				console.error(error);
+				return alert('상품 수정에 실패하였습니다.')				
 			}
-			alert('상품수정이 완료되었습니다.')
-			this.$router.replace('/product/list');
+			// this.$router.replace('/product/list');
 
 		},
 		deleteProductInfo(){
