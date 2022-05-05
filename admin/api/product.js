@@ -73,7 +73,6 @@ router.get('/:id',async function(req,res,next){
 router.put('/:id',function(req,res,next){
 	upload(req,res,async (err)=>{
 		if(err){
-			console.log(err)
 			res.send(err)
 		}else{
 			let productId = req.params.id;
@@ -94,8 +93,6 @@ router.put('/:id',function(req,res,next){
 				let value = arr[1];
 				return arr = `${column} = '${value}'`
 			})
-			console.log('PUT METHODS productId = ',productId);
-			console.log('PUT METHODS productInfo = ',productInfo);
 			let qs = `UPDATE product AS P SET ${qsBase.join(',')} WHERE P.id=${productId}`
 			let result = await query(qs)
 			res.send(result);

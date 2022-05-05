@@ -98,40 +98,9 @@ export default {
 				}
 				]
 			},{
-				icon:'mdi-comment-question-outline',
-				title:'문의/리뷰관리',
-				subMenus:[{
-					title:'자주묻는 질문',
-					url:'/faq/list'
-				},{
-					title:'리뷰 리스트',
-					url:'/review/list'
-				},{
-					title:'문의 리스트',
-					url:'/qa/list'
-				}]
-			},{
-				icon:'mdi-sale',
-				title:'기획전',
-				url:'/exhibition/list',
-			},{
-				icon:'mdi-poll',
+				icon:'mdi-sale-outline',
 				title:'이벤트',
 				url:'event/list',
-			},{
-				icon:'mdi-ticket-percent',
-				title:'쿠폰',
-				url:'coupon/list',
-			},{
-				icon:'mdi-poll',
-				title:'통계',
-				subMenus:[{
-					title:'방문율',
-					url:'/rate/visitation'
-				},{
-					title:'판매율',
-					url:'/rate/sales'
-				}]
 			},{
 				icon:'mdi-calculator',
 				title:'정산 관리',
