@@ -12,14 +12,13 @@
 </template>
 <script>
 import ExpansionPanels from '@/components/Expansion-panels-form'
-import FileUploader from '@/mixins/FileUploader.js'
 import Payload from '@/mixins/Payload.js'
 export default {
 	layout:'layout',
 	components:{
 		ExpansionPanels
 	},
-	mixins:[FileUploader,Payload],
+	mixins:[Payload],
 	async asyncData({$axios,params}){
 		let productId = params.id
 		if(!productId)return

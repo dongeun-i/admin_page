@@ -7,6 +7,7 @@
         <v-expansion-panel-header class="border-bottom">
 			{{panel.title}}
 		</v-expansion-panel-header>
+
 		<!-- input -->
 		<template v-if="panel.layout == 'input'">
 			<v-expansion-panel-content :target="panel.target">
@@ -62,9 +63,6 @@ export default {
 	data(){
 		return{
 		}
-	},
-	created(){
-		console.log(this.panels);	
 	},
 	layout:'layout',
 	props:{

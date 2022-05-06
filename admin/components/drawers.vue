@@ -92,9 +92,6 @@ export default {
 				},{
 					title:'반품 관리',
 					url:'/order/return'
-				},{
-					title:'배송 관리',
-					url:'/order/delivery'
 				}
 				]
 			},{
