@@ -7,7 +7,7 @@ router.post('/',async function(req,res,next){
 		'id': req.body.user.id,
 		'password': req.body.user.password
 	};
-	let qu = `select U.loginId , U.nickname, U.name, U.id, U.regdate  from user as U where U.loginId = '${user.id}' and U.password = '${user.password}'`
+	let qu = `select U.loginId , U.storename, U.managername, U.id, U.regdate  from user as U where U.loginId = '${user.id}' and U.password = '${user.password}'`
 	let dataSet = await query (qu);
 	console.log('dataSet',dataSet);
 	res.send(dataSet);
