@@ -5,7 +5,7 @@
 		<!-- headers -->
 		<v-app-bar dark class="d-flex justify-end align-center" max-height="65px">
 			<span class="mr-2">
-				{{userInfo.loginId}} 님
+				{{userInfo.storename}} 님
 			</span>
 			<v-btn rounded outlined height="auto" class="p-0" nuxt link to="/user/info">내정보</v-btn>
 			<v-btn text @click="logout">
