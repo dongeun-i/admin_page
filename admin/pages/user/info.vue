@@ -35,20 +35,21 @@
 						:append-icon="verifyPasswordShow ? 'mdi-eye' : 'mdi-eye-off'"
 						:type="verifyPasswordShow ? 'text' : 'password'"
 						class="col-3"
-						@click:append="verifyPasswordShow = !verifyPasswordShow.show"
 						:rules="[passwordRules]"
+						@click:append="verifyPasswordShow = !verifyPasswordShow.show"
 					></v-text-field>
 				</v-sheet>
 				
 			</template>		
 		</ExpansionSection>
-		<ExpansionSection :sections="section2">	
+		<ExpansionSection :sections="section2">
 		</ExpansionSection>
 	</v-card>
 </template>
 <script>
 import ExpansionSection from '@/components/Expansion-panels-section'
 import Payload from '@/mixins/Payload.js'
+import { get } from 'http';
 
 export default {
 	layout:'layout',
@@ -67,13 +68,30 @@ export default {
 		return{
 			section1:[{
 				title:'로그인 정보',
-				model:null,
 				children:[{
 					layout:'text',
 					label:'아이디',
-					text:'admin'
+					target:'loginId',
+					value:null,
 				}],
-				target:'loginId'
+			}],
+			section2:[{
+				title:'사용자 정보',
+				children:[{
+					layout:'input',
+					label:'업체명',
+					value:null,
+					target:'storename',
+				},{
+					layout:'input',
+					label:'담당자성함',
+					value:null,
+					target:'managername'
+				},{
+					layout:'btn',
+					text:'클릭',
+					onclick:this.test
+				}]
 			}],
 			oldPassword:null,
 			newPassword:null,
@@ -84,6 +102,9 @@ export default {
 			passwordRules:v=>{
 				if(this.newPassword != v){
 					return "비밀번호가 일치하지 않습니다"
+				}else{
+					// Rules should return a string or boolean, received 'undefined' instead ERROR 방지
+					return ''
 				}
 			}
 		}
@@ -91,7 +112,28 @@ export default {
 	methods:{
 		modifyProductInfo(){
 			console.log('수정')
+		},
+		insertModel(child){
+			let userInfo = this.userInfo[0];
+			let arr = child.map(c=>{
+				let target = c.target;
+				if(target){
+					let value = userInfo[target];
+					c.value = value;
+					return c
+				}
+			})
+			console.log('완성형',arr);
+		},
+		test(){
+			alert('')
 		}
+	},
+	created(){
+		let userInfo = this.userInfo[0];
+		this.insertModel(this.section1[0].children);
+		this.insertModel(this.section2[0].children);
+
 	}
 }
 </script>
