@@ -1,6 +1,6 @@
 const Payload = {
 	methods:{
-		makePayload(data){
+		makeFormData(data){
 			let payload = new FormData();
 			// 등록자 정보 넣어주기
 			let userInfo = JSON.parse(sessionStorage.getItem('userInfo'));
@@ -14,6 +14,17 @@ const Payload = {
 				}
 			})	
 			return payload;
+		},
+		makePayload(data){
+			let payload = {};
+			data.map(d=>{
+				let target = d.target;
+				let value = d.value;
+				if(target){
+					payload[target] = value
+				}
+			})
+			return payload
 		},
 		checkmodels(data){
 			let exit = false;
