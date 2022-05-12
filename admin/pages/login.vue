@@ -40,6 +40,7 @@ export default {
         },
     methods:{
         async login(){
+            console.log(this.$store.userInfo);
             let id = this.id
             let password = this.password
             try {
@@ -51,7 +52,7 @@ export default {
                 })
                 console.log('userData=',userData);
                 if(userData.length == 1){
-                    window.sessionStorage.setItem('userInfo',JSON.stringify(userData[0]));
+                    this.$store.userInfo = userData[0];
                     this.$router.replace('/main');
                 }else{
                     // callMessage 만들어서 채우기

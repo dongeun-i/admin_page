@@ -98,7 +98,7 @@ export default {
 	methods:{
 		modifyProductInfo(){
 			let productId = this.productInfo[0].id;
-			let productInfo = this.makePayload(this.panels);
+			let productInfo = this.makeFormData(this.panels);
 			console.log('productInfo',productInfo)
 			for (let key of productInfo.keys()) {
 				console.log(key, ":", productInfo.get(key));

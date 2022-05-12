@@ -99,7 +99,7 @@ export default {
 			// 검사를해서 빈데이터가없으면 통과
 			let panels = this.panels
 			if(!this.checkmodels(panels)){
-				let productInfo = this.makePayload(this.panels);
+				let productInfo = this.makeFormData(this.panels);
 				// 상품등록 호출
 				try {
 					const responseData = await this.$axios({

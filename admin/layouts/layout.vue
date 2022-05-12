@@ -5,7 +5,7 @@
 		<!-- headers -->
 		<v-app-bar dark class="d-flex justify-end align-center" max-height="65px">
 			<span class="mr-2">
-				{{userInfo.storename}} 님
+				{{this.$store.userInfo.storename}} 님
 			</span>
 			<v-btn rounded outlined height="auto" class="p-0" nuxt link to="/user/info">내정보</v-btn>
 			<v-btn text @click="logout">
@@ -24,16 +24,14 @@ import Drawer from '@/components/drawers.vue';
 export default {
 	components:{
 		Drawer,
-
 	},
 	data(){
 		return{
-			userInfo:null
+			userInfo:this.$store.userInfo
 		}
 	},
 	created(){
-		let userInfo = JSON.parse(sessionStorage.getItem('userInfo'));
-		console.log(userInfo);
+		let userInfo =this.userInfo;
 		if(!userInfo){
 			alert('잘못된 접근입니다.');
 			this.$router.replace('/login');
@@ -43,10 +41,10 @@ export default {
 	},
 	methods:{
 		logout(){
-			sessionStorage.removeItem('userInfo');
+			this.$store.userInfo = null;
 			this.$router.replace('/login');
 		}
-	}
+	},
 }
 </script>
 <style scoped>

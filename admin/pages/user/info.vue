@@ -55,14 +55,12 @@
 <script>
 import ExpansionSection from '@/components/Expansion-panels-section'
 import Payload from '@/mixins/Payload.js'
-import { get } from 'http';
-
 export default {
 	layout:'layout',
 	mixins:[Payload],
 	components:{ExpansionSection},
-	async asyncData({$axios}){
-		let userId = JSON.parse(sessionStorage.getItem('userInfo')).id;
+	async asyncData({$axios,store}){
+		let userId = store.userInfo.id;
 		if(userId){
 			const userInfo = await $axios.$get(`/api/user/${userId}`)
 			return {
@@ -134,7 +132,7 @@ export default {
 					alert('비밀번호 변경에 실패하였습니다.');
 				}else{
 					alert('비밀번호 변경이 완료되었습니다. 다시 로그인해주세요.');
-					sessionStorage.removeItem('userInfo');
+					this.$store.userInfo = null;
 					this.$router.replace('/login');
 				}
 			})
@@ -152,10 +150,27 @@ export default {
 					return 
 				}
 			})
-			console.log('완성형',arr);
 		},
 		changeMannagerInfo(){
-			alert('담당자 정보 변경');
+			let payload = this.makePayload(this.section2[0].children);
+			if(payload.managername ==''||payload.managername == null) return alert('담당자성함을 입력해주세요.');
+			if(payload.storename==''||payload.storename == null) return alert('업체명을 입력해주세요.');
+			let userInfo = this.userInfo[0];
+			this.$axios.$put(`/api/user/${userInfo.id}`,{
+				userInfo:payload
+			}).then(result=>{
+				if(!result){
+					alert('사용자정보 변경에 실패하였습니다.');
+				}else{
+					alert('사용자정보 변경이 완료되었습니다.');
+					let loginInfo = this.$store.userInfo;
+					let target = Object.keys(payload);
+					target.map(k=>{
+						loginInfo[k]= payload[k];
+					})
+					console.log(this.$store.userInfo);
+				}
+			})
 		}
 	},
 	created(){
