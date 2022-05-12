@@ -2,7 +2,7 @@
 	<v-card class="bg-gray col-12 elevation-0" height="100%">
 		<v-sheet color="#ccc" class="d-flex justify-space-between align-center">
 			<v-card-title class="font-weight-bold">판매자 기본정보</v-card-title>
-			<v-btn @click="modifyProductInfo">수정하기</v-btn>
+			<!-- <v-btn @click="modifyProductInfo">수정하기</v-btn> -->
 		</v-sheet>
 		<ExpansionSection class="mb-5" :sections="section1">
 			<template>
@@ -14,7 +14,8 @@
 							:type="oldPasswordShow ? 'text' : 'password'"
 							class="col-3"
 							hide-details
-							@click:append="oldPasswordShow = !oldPasswordShow.show"
+							@keyup="checkValue('old')"
+							@click:append="oldPasswordShow = !oldPasswordShow"
 						></v-text-field>
 				</v-sheet>
 				<v-sheet class="d-flex align-center">
@@ -25,7 +26,8 @@
 							:type="newPasswordShow ? 'text' : 'password'"
 							class="col-3"
 							hide-details
-							@click:append="newPasswordShow = !newPasswordShow.show"
+							@keyup="checkValue('new')"
+							@click:append="newPasswordShow = !newPasswordShow"
 						></v-text-field>
 				</v-sheet>
 				<v-sheet class="d-flex align-center">
@@ -35,9 +37,13 @@
 						:append-icon="verifyPasswordShow ? 'mdi-eye' : 'mdi-eye-off'"
 						:type="verifyPasswordShow ? 'text' : 'password'"
 						class="col-3"
-						:rules="[passwordRules]"
-						@click:append="verifyPasswordShow = !verifyPasswordShow.show"
+						hide-details
+						@keyup="checkValue('verify')"
+						@click:append="verifyPasswordShow = !verifyPasswordShow"
 					></v-text-field>
+				</v-sheet>
+				<v-sheet class="d-flex align-center ">
+					<v-btn @click="changePassword" class="ml-auto">비밀번호 변경</v-btn>
 				</v-sheet>
 				
 			</template>		
@@ -89,8 +95,8 @@ export default {
 					target:'managername'
 				},{
 					layout:'btn',
-					text:'클릭',
-					onclick:this.test
+					text:'담당자 정보 변경',
+					onclick:this.changeMannagerInfo
 				}]
 			}],
 			oldPassword:null,
@@ -99,19 +105,40 @@ export default {
 			oldPasswordShow:false,
 			newPasswordShow:false,
 			verifyPasswordShow:false,
-			passwordRules:v=>{
-				if(this.newPassword != v){
-					return "비밀번호가 일치하지 않습니다"
-				}else{
-					// Rules should return a string or boolean, received 'undefined' instead ERROR 방지
-					return ''
-				}
-			}
 		}
 	},
 	methods:{
-		modifyProductInfo(){
-			console.log('수정')
+		checkValue(target){
+			switch(target){
+				case 'old': return this.oldPassword = this.oldPassword?this.oldPassword.replace(/ /g,''):null;
+				
+				case 'new': return this.newPassword = this.newPassword?this.newPassword.replace(/ /g,''):null;
+
+				case 'verify': this.verifyPassword = this.verifyPassword?this.verifyPassword.replace(/ /g,''):null;
+			}
+
+		},
+		changePassword(){
+			let userInfo = this.userInfo[0];
+			if(userInfo.password != this.oldPassword) return alert('비밀번호를 확인해주세요.');
+			if(this.newPassword==null||this.newPassword=='') return alert('새 비밀번호를 입력해주세요.');
+			if(this.verifyPassword==null||this.verifyPassword=='') return alert('비밀번호 확인을 입력해주세요.');
+			if(this.newPassword !=this.verifyPassword) return alert('새비밀번호를 확인해주세요.');
+			
+			this.$axios.$put(`/api/user/${userInfo.id}`,{
+				userInfo:{
+					password:this.newPassword
+				}
+			}).then(result=>{
+				if(!result){
+					alert('비밀번호 변경에 실패하였습니다.');
+				}else{
+					alert('비밀번호 변경이 완료되었습니다. 다시 로그인해주세요.');
+					sessionStorage.removeItem('userInfo');
+					this.$router.replace('/login');
+				}
+			})
+			
 		},
 		insertModel(child){
 			let userInfo = this.userInfo[0];
@@ -121,19 +148,19 @@ export default {
 					let value = userInfo[target];
 					c.value = value;
 					return c
+				}else{
+					return 
 				}
 			})
 			console.log('완성형',arr);
 		},
-		test(){
-			alert('')
+		changeMannagerInfo(){
+			alert('담당자 정보 변경');
 		}
 	},
 	created(){
-		let userInfo = this.userInfo[0];
 		this.insertModel(this.section1[0].children);
 		this.insertModel(this.section2[0].children);
-
 	}
 }
 </script>

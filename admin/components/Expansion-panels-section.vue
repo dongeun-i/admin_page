@@ -18,6 +18,7 @@
 						<label class="col-2">{{item.label}}</label>
 						<v-text-field
 						class="col-3"
+						hide-details
 						v-model="item.value">
 						</v-text-field>
 					</template>
@@ -45,7 +46,7 @@
 						</v-textarea>
 					</template>
 					<template v-else-if="item.layout =='btn'">
-						<v-btn @click="item.onclick">{{item.text}}</v-btn>
+						<v-btn @click="item.onclick" class="ml-auto">{{item.text}}</v-btn>
 					</template>
 				</v-sheet>
 
