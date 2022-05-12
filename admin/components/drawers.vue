@@ -59,16 +59,7 @@ export default {
 			menus:[{
 				icon:'mdi-account',
 				title:'판매자 정보',
-				subMenus:[{
-						title:'기본정보',
-						url:'/user/info'
-					},{
-						title:'배송/반품/교환 정보',
-						url:'/user/delivery'
-					},{
-						title:'A/S 및 특이사항',
-						url:'/user/as'
-					},]
+				url:'/user/info',
 			},{
 				icon:'mdi-hanger',
 				title:'상품 관리',

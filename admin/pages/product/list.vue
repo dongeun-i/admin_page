@@ -84,7 +84,7 @@ export default {
 		DataTable
 	},
 	async asyncData({$axios}){
-		let userInfo = JSON.parse(sessionStorage.getItem('userInfo'));
+		let userInfo = this.$store.userInfo;
 		let responseData = {};
 		responseData['productListset'] = await $axios.$get('/api/product/list',{
 			headers:{
