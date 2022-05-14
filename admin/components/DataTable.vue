@@ -167,13 +167,24 @@ export default {
 			isBeginDatePikcer:false,
 			isEndDatePikcer:false,
 			filterBase:{},
-			selctTarget:null
+			selctTarget:null,
+			activeBtn:'all',
 			// format:"yyyy-MM-dd",
 		}
 	},
 	methods:{
-		changeSelect(target,value){
-			this.filterBase[target] = value;
+		changeSelect(target,value,item){
+			if(value == '전체'||value == null){
+				let filterArr = [];
+				item.map(i=>{
+					if(i.id){
+						filterArr.push(i.label);
+					}
+				})
+				this.filterBase[target] = filterArr;
+			}else{
+				this.filterBase[target] = value;
+			}
 			this.filter();
 		},
 		checkDate(target,type){
@@ -277,7 +288,7 @@ export default {
 			this.beginDate = null;
 			this.endDate = null;
 
-			let dateBtns = this.dateBtns;
+			let dateBtns = this.activeBtn = this.dateBtns?this.dateBtns:this.activeBtn;
 			let dateBtnsItem = this.dateBtnsItem;
 			let now = new Date(new Date().setHours(0,0,0,0));
 			let value = dateBtnsItem[dateBtns].value;
