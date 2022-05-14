@@ -64,31 +64,26 @@ export default {
 				icon:'mdi-hanger',
 				title:'상품 관리',
 				subMenus:[{
-					title:'상품리스트',
+					title:'상품 리스트',
 					url:'/product/list'
 				},{
-					title:'상품등록',
+					title:'상품 등록',
 					url:'/product/register'
 				}]
-				
 			},{
 				icon:'mdi-truck-fast',
-				title:'판매 관리',
-				subMenus:[{
-					title:'주문 관리',
-					url:'/order/list'
-				},{
-					title:'교환 관리',
-					url:'/order/exchange'
-				},{
-					title:'반품 관리',
-					url:'/order/return'
-				}
-				]
+				title:'주문 관리',
+				url:'/order/list'
 			},{
 				icon:'mdi-sale-outline',
 				title:'이벤트',
-				url:'event/list',
+				subMenus:[{
+					title:'이벤트 리스트',
+					url:'event/list',
+				},{
+					title:'이벤트 등록',
+					url:'event/register',
+				}]
 			},{
 				icon:'mdi-calculator',
 				title:'정산 관리',
