@@ -18,7 +18,7 @@ export default {
 					filterable: false,
 					value: 'id',
 				},
-				{ text: '상품이미지', value: 'thumbnail'},
+				{ text: '상품이미지', value: 'thumbnail',filterable: false,},
 				{ text: '상품명', value: 'name' },
 				{ text: '판매가', value: 'price' },
 				{ text: '할인가', value: 'discount' },
@@ -83,8 +83,8 @@ export default {
 	components:{
 		DataTable
 	},
-	async asyncData({$axios}){
-		let userInfo = this.$store.userInfo;
+	async asyncData({$axios,store}){
+		let userInfo = store.userInfo;
 		let responseData = {};
 		responseData['productListset'] = await $axios.$get('/api/product/list',{
 			headers:{
@@ -112,13 +112,13 @@ export default {
 		console.log(this.data)
 		// 필터영역부 카테고리 추가
 		// 기본선택값 넣어주기 
-		this.resdata.categoryListset.unshift({label:'선택',id:null});
+		this.resdata.categoryListset.unshift({label:'전체',id:null});
 		let categoryFilter = {
-				type:'select',
-				title:'카테고리',
-				target:'label',
-				choose:null,
-				values:this.resdata.categoryListset
+			type:'select',
+			title:'카테고리',
+			target:'label',
+			choose:null,
+			values:this.resdata.categoryListset
 		}
 		this.filters.push(categoryFilter);
 	}
