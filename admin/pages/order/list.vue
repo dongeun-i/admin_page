@@ -1,53 +1,31 @@
 <template>
 	<v-card>
-
+		<DataTable :tableHeader="headers" :tableData="data" :filters="filters"/>
 	</v-card>
 </template>
 <script>
 import DataTable from '@/components/DataTable.vue'
-export default{
+export default {
+	components:{
+		DataTable
+	},
+	layout:'layout',
 	data(){
 		return{
 			headers:[
-				{
-					text: 'ID',
-					align: 'start',
-					filterable: false,
-					value: 'id',
-				},
-				{ text: '상품이미지', value: 'thumbnail'},
-				{ text: '상품명', value: 'name' },
-				{ text: '판매가', value: 'price' },
-				{ text: '할인가', value: 'discount' },
-				{ text: '상태', value: 'status' },
-				{ text: '카테고리', value : 'label'},
-				{ text: '등록일' , value:'regdate'},
+				{ text: '주문번호', value: 'orderCode'},
+				{ text: '상품이미지', value: 'thumbnail' ,filterable: false,},
+				{ text: '상품명', value: 'productName'},
+				{ text: '주문상태', value: 'status' },
+				{ text: '주문자 성함', value: 'recipientName'},
+				{ text: '주문일시', value: 'orderdate'},
 				{ text: '기능', value: 'btn'},
 			],
 			filters:[
 			{
-				type:'checkbox',
-				title:'상태',
-				target:'status',
-				checked:['판매중','품절','비공개','판매중지'],
-				values:[{
-					text:'판매중',
-					value:'판매중'
-				},{
-					text:'품절',
-					value:'품절'
-				},{
-					text:'비공개',
-					value:'비공개'
-				},{
-					text:'판매중지',
-					value:'판매중지'
-				},
-				]
-			},{
 				type:'date',
-				title:'기간',
-				target:'regdate',
+				title:'주문 기간',
+				target:'orderdate',
 				active:6,
 				btns:[{
 					title:'오늘',
@@ -77,19 +55,43 @@ export default{
 		}
 		
 	},
-	async asyncData({$axios}){
-		let userInfo = this.$store.userInfo;
-		let responseData = {};
-		responseData['productListset'] = await $axios.$get('/api/product/list',{
-			headers:{
-				userId:userInfo.id
-			}
-		});
-		responseData['categoryListset'] = await $axios.$get('/api/category/list');
-		return{
-			resdata : responseData
+	async asyncData({$axios,store}){
+		let userInfo = store.userInfo;
+		if(userInfo){
+			let responseData = {};
+			responseData['orderListset'] = await $axios.$get('/api/order/list',{
+				headers:{
+					userId:userInfo.id
+				}
+			});
+			responseData['orderStatus'] = await $axios.$get('/api/order/status');
+			return{
+				resdata : responseData
 
+			}
 		}
+		
 	},
+	created(){
+		// 테이블 데이터 반영하기
+		this.resdata.orderListset.map(o=>{
+			o.btn = {
+				linkTo:`/order/${o.orderCode}`,
+				btnText:'상세보기',
+			},
+			o.orderdate = new Date(o.orderdate).toFormat('Y-M-D H:M');
+			this.data.push(o);
+		})
+		this.resdata.orderStatus.unshift({label:'전체',id:null});
+		let orderStatusFilter = {
+			type:'select',
+			title:'주문상태',
+			target:'status',
+			choose:null,
+			values:this.resdata.orderStatus
+		}
+		this.filters.push(orderStatusFilter);
+	}
+
 }
 </script>
