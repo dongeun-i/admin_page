@@ -25,7 +25,7 @@ app.use('/api/product',product);
 const category = require('./category');
 app.use('/api/category',category);
 
-// const multer = require('./upload');
-// app.use('/api/upload',multer);
+const order = require('./order');
+app.use('/api/order',order);
 
 export default app
