@@ -1,4 +1,4 @@
 export const state = ()=>({
-	userInfo:null
+	userInfo:JSON.parse(sessionStorage.getItem('userInfo'))||null,
 })
 export default state;

@@ -53,6 +53,7 @@ export default {
                 console.log('userData=',userData);
                 if(userData.length == 1){
                     this.$store.userInfo = userData[0];
+                    sessionStorage.setItem('userInfo',JSON.stringify(userData[0]));
                     this.$router.replace('/main');
                 }else{
                     // callMessage 만들어서 채우기
