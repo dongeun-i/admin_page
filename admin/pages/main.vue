@@ -62,10 +62,10 @@ export default({
 					title:'반품 요청',
 					count:5
 				},{
-					title:'교환 ',
+					title:'교환 진행중 ',
 					count:1
 				},{
-					title:'배송완료',
+					title:'반품 진행중',
 					count:2
 				}],
 			},{
