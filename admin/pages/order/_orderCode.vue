@@ -3,7 +3,26 @@
 		<v-card-title>주문상세</v-card-title>
 		<ExpansionSection class="mb-5" :sections ="orderInfo"/>
 		<ExpansionSection class="mb-5" :sections ="deliveryInfo"/>
-		<ExpansionSection class="mb-5" :sections ="payInfo"/>
+		<ExpansionSection class="mb-5" :sections ="payInfo">
+			<template>
+				<v-sheet class="d-flex align-center">
+						<label class="col-2">총 상품 금액 (+)</label>
+						<p class="col-3 mb-0">{{price.toComma()}}</p>
+				</v-sheet>
+				<v-sheet class="d-flex align-center">
+						<label class="col-2">총 할인 금액 (-)</label>
+						<p class="col-3 mb-0">{{discount.toComma()}}</p>
+				</v-sheet>
+				<v-sheet class="d-flex align-center">
+						<label class="col-2">배송비 (+)</label>
+						<p class="col-3 mb-0">{{deliveryCost.toComma()}}</p>
+				</v-sheet>
+				<v-sheet class="d-flex align-center">
+						<label class="col-2">총 결제 금액</label>
+						<p class="col-3 mb-0">{{priceTotal.toComma()}}</p>
+				</v-sheet>
+			</template>
+		</ExpansionSection>
 		<ExpansionSection class="mb-5" :sections ="productInfo"/>
 	</v-card>
 </template>
@@ -26,7 +45,7 @@ export default {
 				},{
 					layout:'text',
 					label:'주문 일자',
-					target:'orderCode',
+					target:'orderdate',
 					value:null					
 				},{
 					layout:'text',
@@ -76,32 +95,52 @@ export default {
 			}],
 			payInfo:[{
 				title:'결제정보',
-				children:[{
-					layout:'text',
-					label:'상품 금액',
-					target:'price',
-					value:null		
-				},{
-					layout:'text',
-					label:'할인 금액',
-					target:'deliveryMemo',
-					value:null		
-				},{
-					layout:'text',
-					label:'배송비',
-					target:'deliveryCost',
-					value:null		
-
-				}]
 			}],
-			productInfo:[{
+			productInfo:[],
+			price:0,
+			deliveryCost:0,
+			discount:0,
+			priceTotal:0
+		}
+	},
+	async asyncData({$axios,params}){
+		let orderCode = params.orderCode;
+		const responseData = await $axios.$get(`/api/order/${orderCode}`);
+		return {
+			resdata : responseData
+		}
+	},
+	methods:{
+		insertModel(child){
+			let orderInfo = this.resdata[0];
+			child.map(c=>{
+			let target = c.target;
+			if(target){
+				let value = orderInfo[target];
+				c.value = value;
+				return c
+			}
+			})		
+			console.log(child);
+		},
+		/**
+		 * @author dongeun
+		 * @param data{Object} - resdata[i];
+		 * @description 상품정보만 담기위한 함수.
+		 * */ 
+		makeProductInfo(data){
+			let productInfoFormat={
 				title:'상품정보',
 				children:[{
+					layout:'img',
+					label:'상품이미지',
+					target:'thumbnail',
+					value:null		
+				},{
 					layout:'text',
 					label:'상품명',
 					target:'productName',
 					value:null		
-
 				},{
 					layout:'text',
 					label:'판매가',
@@ -109,19 +148,44 @@ export default {
 					value:null		
 				},{
 					layout:'text',
-					label:'상품이미지',
-					target:'thumbnail',
+					label:'수량',
+					target:'counter',
 					value:null		
 				}]
-			}]
+			}
+			productInfoFormat.children.map(c=>{
+				let target = c.target;
+				if(target){
+					let value = data[target];
+					console.log(typeof(value));
+					c.value = typeof(value)=='number'?value.toComma():value;
+					return c
+				}
+			})
+			return productInfoFormat;
 		}
 	},
-	async asyncData({$axios,params}){
-		let orderCode = params.orderCode;
-		const responseData = await $axios.$get(`/api/order/${orderCode}`);
-		return {
-			resdata : responseData 
-		}
+	created(){
+		this.resdata.map(row=>{
+			if(row.discount){
+				this.priceTotal -= row.discount;
+				this.discount += row.discount;
+			}
+			if(row.price){
+				this.priceTotal += row.price*row.counter;
+				this.price += row.price*row.counter;
+			}
+			if(row.deliveyCost){
+				this.priceTotal += row.deliveyCost;
+				this.deliveryCost += row.deliveyCost;
+			}
+			row.orderdate = new Date(row.orderdate).toFormat('Y-M-D H:M');
+			this.productInfo.push(this.makeProductInfo(row));
+		})
+		console.log(this.productInfo);
+		console.log(this.priceTotal)
+		this.insertModel(this.orderInfo[0].children);
+		this.insertModel(this.deliveryInfo[0].children);
 	}
 }
 </script>
