@@ -35,8 +35,9 @@ router.get('/status', async function(req,res,next){
 	let orderStatus = await query(qs);
 	res.send(orderStatus);
 })
-router.get('/:ordercode', async function(req, res,next) {
-	let orderCode = req.params.ordercode;
+router.get('/:orderCode', async function(req, res,next) {
+	let orderCode = req.params.orderCode;
+	console.log('orderCode',orderCode);
 	let qs =`select ${[
 		'O.orderCode',
 		'O.orderDate as orderdate',
@@ -66,16 +67,4 @@ router.get('/:ordercode', async function(req, res,next) {
 	res.send(dataSet);	
 });
 
-router.put('/:id', async function(req,res,next){
-	let userId = req.params.id;
-	let userInfo = req.body.userInfo;
-	let qsBase = Object.entries(userInfo).map(arr=>{
-		let column = `U.${arr[0]}`
-		let value = arr[1];
-		return arr = `${column} = '${value}'`
-	})
-	let qs = `UPDATE user as U SET ${qsBase.join(',')} WHERE U.id = ${userId}`
-	let result = await query(qs);
-	res.send(result);
-})
 module.exports = router;
