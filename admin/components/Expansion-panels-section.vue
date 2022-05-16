@@ -48,6 +48,14 @@
 					<template v-else-if="item.layout =='btn'">
 						<v-btn @click="item.onclick" class="ml-auto">{{item.text}}</v-btn>
 					</template>
+					<template v-else-if="item.layout =='img'">
+						<v-img 
+							max-width="200px"
+							max-height="200px" 
+							:src="item.value"
+							:contain="true"
+						></v-img>
+					</template>
 				</v-sheet>
 
 				<!-- 다른 추가하고 싶은것이 있을 경우 slot 활용 -->
