@@ -47,7 +47,7 @@ router.get('/:orderCode', async function(req, res,next) {
 		'O.recipientJuso',
 		'O.recipientDetailJuso',
 		'O.salerId',
-		'OS.label as status',
+		'OS.id as status',
 		'P.name as productName',
 		'P.price',
 		'P.discount',

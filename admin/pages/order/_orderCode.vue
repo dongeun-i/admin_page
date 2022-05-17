@@ -1,7 +1,23 @@
 <template>
 	<v-card class="bg-gray col-12 elevation-0">
 		<v-card-title>주문상세</v-card-title>
-		<ExpansionSection class="mb-5" :sections ="orderInfo"/>
+		<ExpansionSection class="mb-5" :sections ="orderInfo">
+			<template>
+				<v-sheet class="d-flex align-center">
+					<label class="col-2" for="">주문상태</label>
+					<v-select
+						:items="this.resdata.orderStatus"
+						item-text="label"
+						item-value= "id"
+						v-model="this.resdata.orderInfo[0].status"
+						hide-details
+						class="col-3"
+						>
+					</v-select>
+					<v-btn>변경하기</v-btn>
+				</v-sheet>
+			</template>
+		</ExpansionSection>
 		<ExpansionSection class="mb-5" :sections ="deliveryInfo"/>
 		<ExpansionSection class="mb-5" :sections ="payInfo">
 			<template>
@@ -57,12 +73,7 @@ export default {
 					label:'주문자 연락처',
 					target:'ordererTel',
 					value:null					
-				},{
-					layout:'text',
-					label:'주문상태',
-					target:'status',
-					value:null	
-				}
+				},
 			]}],
 			deliveryInfo:[{
 				title:'배송지정보',
@@ -105,14 +116,22 @@ export default {
 	},
 	async asyncData({$axios,params}){
 		let orderCode = params.orderCode;
-		const responseData = await $axios.$get(`/api/order/${orderCode}`);
+		const orderInfo = await $axios.$get(`/api/order/${orderCode}`);
+		const status = await $axios.$get('/api/order/status')
 		return {
-			resdata : responseData
+			resdata : {
+				orderInfo:orderInfo,
+				orderStatus : status
+			}
+
 		}
 	},
 	methods:{
+		changeStatus(){
+			console.log('ddd');
+		},
 		insertModel(child){
-			let orderInfo = this.resdata[0];
+			let orderInfo = this.resdata.orderInfo[0];
 			child.map(c=>{
 			let target = c.target;
 			if(target){
@@ -121,7 +140,6 @@ export default {
 				return c
 			}
 			})		
-			console.log(child);
 		},
 		/**
 		 * @author dongeun
@@ -157,6 +175,7 @@ export default {
 				let target = c.target;
 				if(target){
 					let value = data[target];
+
 					console.log(typeof(value));
 					c.value = typeof(value)=='number'?value.toComma():value;
 					return c
@@ -166,7 +185,7 @@ export default {
 		}
 	},
 	created(){
-		this.resdata.map(row=>{
+		this.resdata.orderInfo.map(row=>{
 			if(row.discount){
 				this.priceTotal -= row.discount;
 				this.discount += row.discount;

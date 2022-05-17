@@ -49,6 +49,7 @@
 						<v-btn @click="item.onclick" class="ml-auto">{{item.text}}</v-btn>
 					</template>
 					<template v-else-if="item.layout =='img'">
+						<label class="col-2">{{item.label}}</label>
 						<v-img 
 							max-width="200px"
 							max-height="200px" 
