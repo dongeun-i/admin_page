@@ -9,12 +9,12 @@
 						:items="this.resdata.orderStatus"
 						item-text="label"
 						item-value= "id"
-						v-model="this.resdata.orderInfo[0].status"
+						v-model="status"
 						hide-details
 						class="col-3"
 						>
 					</v-select>
-					<v-btn>변경하기</v-btn>
+					<v-btn @click="changeStatus">변경하기</v-btn>
 				</v-sheet>
 			</template>
 		</ExpansionSection>
@@ -111,7 +111,8 @@ export default {
 			price:0,
 			deliveryCost:0,
 			discount:0,
-			priceTotal:0
+			priceTotal:0,
+			status:null
 		}
 	},
 	async asyncData({$axios,params}){
@@ -128,7 +129,19 @@ export default {
 	},
 	methods:{
 		changeStatus(){
-			console.log('ddd');
+			let orderCode = this.resdata.orderInfo[0].orderCode;
+			this.$axios.$put(`/api/order/${orderCode}`,{
+				orderInfo:{
+					status:this.status
+				}
+			}).then(result=>{
+				if(!result){
+					alert('배송상태 변경에 실패하였습니다.');
+				}else{
+					alert('배송상태 변경이 완료되었습니다.');
+				}
+
+			})
 		},
 		insertModel(child){
 			let orderInfo = this.resdata.orderInfo[0];
@@ -198,14 +211,13 @@ export default {
 				this.priceTotal += row.deliveyCost;
 				this.deliveryCost += row.deliveyCost;
 			}
+			this.status = row.status;
 			row.orderdate = new Date(row.orderdate).toFormat('Y-M-D H:M');
 			this.productInfo.push(this.makeProductInfo(row));
 		})
-		console.log(this.productInfo);
-		console.log(this.priceTotal)
 		this.insertModel(this.orderInfo[0].children);
 		this.insertModel(this.deliveryInfo[0].children);
-	}
+	},
 }
 </script>
 <style scoped>
