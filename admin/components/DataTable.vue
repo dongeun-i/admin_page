@@ -61,7 +61,7 @@
 									background-color="#fff"
 									></v-text-field>
 								</template>
-								<datepicker v-model="beginDate" :format="chageBeginDate" :inline="true" :language="languages[language]"></datepicker>
+								<datepicker v-model="beginDate" :format="changeBeginDate" :inline="true" :language="languages[language]"></datepicker>
 							</v-menu>
 							~
 							<v-menu
@@ -84,7 +84,7 @@
 									@change="checkDate(filter.target,'edt')"
 									></v-text-field>
 								</template>
-								<datepicker v-model="endDate" :format="chageEndDate" :inline="true" :language="languages[language]"></datepicker>
+								<datepicker v-model="endDate" :format="changeEndDate" :inline="true" :language="languages[language]"></datepicker>
 							</v-menu>
 						</v-col>
 					</v-row>
@@ -311,11 +311,11 @@ export default {
 			if(!date) return
 			return date.toFormat('Y-M-D')
 		},
-		chageBeginDate(date){
+		changeBeginDate(date){
 			let dateFormat = this.format(date);
 			this.beginDate = dateFormat;
 		},
-		chageEndDate(date){
+		changeEndDate(date){
 			let dateFormat = this.format(date);
 			this.endDate = dateFormat;
 		},
