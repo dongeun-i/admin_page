@@ -66,5 +66,17 @@ router.get('/:orderCode', async function(req, res,next) {
 	let dataSet = await query (qs);
 	res.send(dataSet);	
 });
+router.put('/:orderCode',async function(req,res,next){
+	let orderCode = req.params.orderCode;
+	let orderInfo = req.body.orderInfo;
+	let qsBase = Object.entries(orderInfo).map(arr=>{
+		let column = `O.${arr[0]}`
+		let value = arr[1];
+		return arr = `${column} = '${value}'`
+	})
+	let qs = `UPDATE admin.order as O SET ${qsBase.join(',')} WHERE O.orderCode = ${orderCode}`
+	let result = await query(qs);
+	res.send(qs);
+});
 
 module.exports = router;
