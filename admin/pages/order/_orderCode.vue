@@ -23,19 +23,19 @@
 			<template>
 				<v-sheet class="d-flex align-center">
 						<label class="col-2">총 상품 금액 (+)</label>
-						<p class="col-3 mb-0">{{price.toComma()}}</p>
+						<p class="col-3 mb-0">{{price.toComma()}}원</p>
 				</v-sheet>
 				<v-sheet class="d-flex align-center">
 						<label class="col-2">총 할인 금액 (-)</label>
-						<p class="col-3 mb-0">{{discount.toComma()}}</p>
+						<p class="col-3 mb-0">{{discount.toComma()}}원</p>
 				</v-sheet>
 				<v-sheet class="d-flex align-center">
 						<label class="col-2">배송비 (+)</label>
-						<p class="col-3 mb-0">{{deliveryCost.toComma()}}</p>
+						<p class="col-3 mb-0">{{deliveryCost.toComma()}}원</p>
 				</v-sheet>
 				<v-sheet class="d-flex align-center">
 						<label class="col-2">총 결제 금액</label>
-						<p class="col-3 mb-0">{{priceTotal.toComma()}}</p>
+						<p class="col-3 mb-0">{{priceTotal.toComma()}}원</p>
 				</v-sheet>
 			</template>
 		</ExpansionSection>

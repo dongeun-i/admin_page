@@ -10,8 +10,11 @@ router.get('/',async function(req,res,next){
 		'P.price',
 		'P.deliveryCost',
 		'P.discount',
-		'OS.label'
-	].join(',')} from admin.order as O left outer join product as P on O.productId = P.id left outer join orderStatus as OS on OS.id = O.status where O.orderDate >= '${bdt}' and O.orderDate <= '${edt}'`
+		'OS.label as statusText',
+		'O.orderCode',
+		'P.name',
+		'O.counter',
+	].join(',')} from admin.order as O left outer join product as P on O.productId = P.id left outer join orderStatus as OS on OS.id = O.status where O.orderDate >= '${bdt}' and O.orderDate <= '${edt}' and O.status in (3,9)`
 	let dataSet = await query(qs);
 	res.send(dataSet);
 })

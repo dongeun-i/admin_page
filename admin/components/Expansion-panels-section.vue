@@ -3,8 +3,8 @@
 		v-model="expansionPanel"
 		multiple 
 	>
-		<v-expansion-panel v-for="(section,i) in sections" :key="i">
-			<v-expansion-panel-header class="border-bottom">
+		<v-expansion-panel class="mb-5" v-for="(section,i) in sections" :key="i">
+			<v-expansion-panel-header class="border-bottom font-weight-bold">
 				{{section.title}}
 			</v-expansion-panel-header>
 			<v-expansion-panel-content>
