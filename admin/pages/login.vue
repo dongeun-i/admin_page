@@ -1,9 +1,10 @@
 <template>
     <v-app>
-         <v-card light elevation-0 class="col-12 mw-100 mh-100 vh-100 d-flex align-center justify-center flex-column" color="#f1f4f6">
+         <v-card light elevation-0 class="col-12 mw-100 mh-100 vh-100 d-flex align-center justify-center flex-column" dark>
             <v-card-title class="mb-4">
                 <v-img
                     src="/img/logo.png"
+                    class="logo"
                 >
                 </v-img>
             </v-card-title> 
@@ -24,7 +25,7 @@
                     @keydown="enter"
                 ></v-text-field>
             </v-form>
-            <v-btn class="w-50" @click="login" light>로그인</v-btn>
+            <v-btn class="w-50 font-weight-bold" height="50" @click="login" light>로그인</v-btn>
         </v-card>
     </v-app>
 </template>
@@ -75,5 +76,8 @@ export default {
 <style scoped>
     .v-text-field ::v-deep fieldset{
         background-color: #fff;
-    } 
+    }
+    .logo{
+        filter: invert(1);
+    }
 </style>
