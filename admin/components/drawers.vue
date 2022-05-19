@@ -75,16 +75,6 @@ export default {
 				title:'주문 관리',
 				url:'/order/list'
 			},{
-				icon:'mdi-sale-outline',
-				title:'이벤트',
-				subMenus:[{
-					title:'이벤트 리스트',
-					url:'event/list',
-				},{
-					title:'이벤트 등록',
-					url:'event/register',
-				}]
-			},{
 				icon:'mdi-calculator',
 				title:'정산 관리',
 				url:'/calc/list',
