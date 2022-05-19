@@ -21,15 +21,15 @@
 						placeholder=" 날짜 선택"
 						v-bind="attrs"
 						v-on="on"
-						v-model="month"
+						v-model="date"
 						hide-details
 						background-color="#fff"
 						class="col-5"
 						></v-text-field>
 					</template>
-					<datepicker v-model="month" :minimumView="'month'" :maximumView="'month'" :inline="true" :language="languages[language]"></datepicker>
+					<datepicker v-model="date" :minimumView="'month'" :format="changeDate" :maximumView="'month'" :inline="true" :language="languages[language]"></datepicker>
 				</v-menu>
-				<v-btn>조회</v-btn>
+				<v-btn @click="getCalcData">조회</v-btn>
 			</v-sheet>
 			
 		</template>
@@ -43,10 +43,10 @@
 				>
 					<v-card>
 					<v-card-title class="subheading font-weight-bold">
-						{{month?new Date(month).getMonth()+1 +'월 정산대금':''}}
+						{{date?date +'월 정산대금':''}}
 					</v-card-title>
 
-					<v-divider></v-divider>
+					<v-divider class="m-0"></v-divider>
 
 					<v-list>
 						<v-list-item>
@@ -86,7 +86,7 @@ export default {
 				deliveryPrice: 0,
 				charge: 0,
 			}],
-			month:null,
+			date:null,
 			salesProductList:[],
 			language: "ko",
 			languages: lang,
@@ -95,6 +95,25 @@ export default {
 	components:{
 		Datepicker
 	},
+	methods:{
+		async getCalcData(){
+			let date = this.date;
+			let year = date.replace(/\-.*$/g,'');
+			let month = date.replace(/.*\-/,'');
+			let bdt = `${date}-1`;
+			let edt = new Date(year,month,0).toFormat('Y-M-D');
+			const response = await this.$axios.$get('/api/calc',{
+				headers:{
+					bdt:bdt,
+					edt:edt
+				}
+			})
+			console.log(response);
+		},
+		changeDate(date){
+			this.date = new Date(date).toFormat('Y-M');
+		},
+	}
 }
 </script>
 <style scoped>

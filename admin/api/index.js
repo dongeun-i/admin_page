@@ -2,9 +2,6 @@ const express = require("express");
 const app = express();
 const bodyParser = require('body-parser');
 
-const dir = __dirname;
-const file = __filename;
-
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(function(req, res, next) {
@@ -27,5 +24,8 @@ app.use('/api/category',category);
 
 const order = require('./order');
 app.use('/api/order',order);
+
+const calc = require('./calc');
+app.use('/api/calc',calc);
 
 export default app
