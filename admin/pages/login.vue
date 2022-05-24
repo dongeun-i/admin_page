@@ -208,7 +208,8 @@ export default {
                     storename:this.sign_storename,
                     managername:this.sign_managername,
                     managertel:this.sign_managertel
-                 }
+                }
+                payload['regdate']=new Date().toFormat('Y-M-D H:M:S');
                 let newUserData = await this.$axios.$post('/api/signUp',{
                     userdata: payload
                 })
@@ -225,7 +226,6 @@ export default {
                     alert('오류가 발생했습니다.');
                 }
             }
-
             }else{
                 alert('비밀번호가 다르게 입력되었습니다.')
             }

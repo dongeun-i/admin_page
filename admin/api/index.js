@@ -28,4 +28,7 @@ app.use('/api/order',order);
 const calc = require('./calc');
 app.use('/api/calc',calc);
 
+const signup = require('./signup');
+app.use('/api/signUp',signup);
+
 export default app
