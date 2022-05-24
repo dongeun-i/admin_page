@@ -14,18 +14,136 @@
                     placeholder="ID"
                     v-model="id"
                     type="text"
+                    hide-details
+                    class="mb-6"
                     light
                 ></v-text-field>
                 <v-text-field
                     outlined
                     light
+                    hide-details
                     v-model="password"
                     placeholder="PASSWORD"
                     type="password"
                     @keydown="enter"
                 ></v-text-field>
             </v-form>
-            <v-btn class="w-50 font-weight-bold" height="50" @click="login" light>로그인</v-btn>
+            <v-btn class="w-50 font-weight-bold mb-4" height="50" @click="login" light>로그인</v-btn>
+            <v-dialog
+            v-model="signUp"
+            width="60%"
+            :fullscreen="width<=600"
+            >
+            <template v-slot:activator="{ on, attrs }">
+                <v-btn
+                color="#fff"
+                text
+                v-bind="attrs"
+                v-on="on"
+                >
+                회원가입
+                </v-btn>
+            </template>
+
+            <v-card class="p-3 d-flex flex-wrap" height="80vh">
+                <v-card-title class="justify-center col-12 font-weight-bold">
+                    환영합니다
+                </v-card-title>
+                <v-card-text class="text-center col-12">ModuMoa를 통해 판매중인 상품을 모두모아서 관리하세요 !</v-card-text>
+                 <v-divider class="w-100 mt-0"></v-divider>
+                <v-sheet class="d-flex col-12 flex-wrap justify-center align-center">
+                    <label class="col-12 col-md-3 col-md-3">아이디</label>
+                    <v-text-field 
+                    v-model="sign_id" 
+                    class="col-12 col-md-6" 
+                    outlined 
+                    hide-details 
+                    dense 
+                    height="20px"
+                    >
+                    </v-text-field>
+                </v-sheet>
+                <v-sheet class="d-flex col-12 flex-wrap justify-center align-center">
+                    <label class="col-12 col-md-3">비밀번호</label>
+                    <v-text-field 
+                    v-model="sign_pw" 
+                    class="col-12 col-md-6" 
+                    outlined 
+                    hide-details 
+                    dense 
+                    height="20px"
+                    >
+                    </v-text-field>
+                </v-sheet>
+                <v-sheet class="d-flex col-12 flex-wrap justify-center align-center">
+                    <label class="col-12 col-md-3">비밀번호 확인</label>
+                    <v-text-field 
+                    v-model="sign_pw2" 
+                    class="col-12 col-md-6" 
+                    outlined 
+                    hide-details 
+                    dense 
+                    height="20px"
+                    >
+                    </v-text-field>
+                </v-sheet>
+                <v-sheet class="d-flex col-12 flex-wrap justify-center align-center">
+                    <label class="col-12 col-md-3">업체명</label>
+                    <v-text-field 
+                    v-model="sign_storename" 
+                    class="col-12 col-md-6" 
+                    outlined 
+                    hide-details 
+                    dense 
+                    height="20px"
+                    >
+                    </v-text-field>
+                </v-sheet>
+                <v-sheet class="d-flex col-12 flex-wrap justify-center align-center">
+                    <label class="col-12 col-md-3">담당자</label>
+                    <v-text-field 
+                    v-model="sign_managername" 
+                    class="col-12 col-md-6" 
+                    outlined 
+                    hide-details 
+                    dense 
+                    height="20px"
+                    >
+                    </v-text-field>
+                </v-sheet>
+                <v-sheet class="d-flex col-12 flex-wrap justify-center align-center">
+                    <label class="col-12 col-md-3">담당자 연락처</label>
+                    <v-text-field 
+                    v-model="sign_managertel" 
+                    class="col-12 col-md-6" 
+                    outlined 
+                    hide-details 
+                    dense 
+                    height="20px"
+                    >
+                    </v-text-field>
+                </v-sheet>
+                <v-divider class="w-100 d-block"></v-divider>
+                <v-card-actions class="col-12 align-self-end">
+                <v-spacer></v-spacer>
+                <v-btn
+                color="#aaa"
+                text
+                @click="signUp = false"
+                >
+                    취소
+                </v-btn>
+                <v-btn
+                    class="font-weight-bold"
+                    color="primary"
+                    text
+                    @click="signupForUser"
+                >
+                    가입하기
+                </v-btn>
+                </v-card-actions>
+            </v-card>
+            </v-dialog>
         </v-card>
     </v-app>
 </template>
@@ -37,6 +155,14 @@ export default {
             return{
                 id:null,
                 password:null,
+                signUp:false,
+                width:null,
+                sign_loginid:null,
+                sign_pw:null,
+                sign_pw2:null,
+                sign_storename:null,
+                sign_managername:null,
+                sign_managertel:null
             }
         },
     methods:{
@@ -68,8 +194,44 @@ export default {
             if(e.keyCode == 13){
                 this.login();
             }
+        },
+        handleResize() {
+            this.width = window.innerWidth;
+
+        },
+        async signupForUser(){
+            if(this.sign_pw == this.sign_pw2){
+                try {
+                    let payload = {
+                    loginId:this.sign_loginid,
+                    password:this.sign_pw,
+                    storename:this.sign_storename,
+                    managername:this.sign_managername,
+                    managertel:this.sign_managertel
+                 }
+                let newUserData = await this.$axios.$post('/api/signUp',{
+                    userdata: payload
+                })
+                if(newUserData){
+                    alert('회원가입이 완료되었습니다.');
+                    this.signUp = false;
+                }
+            } catch (error) {
+                console.error(error);
+                alert('오류가 발생했습니다.');
+            }
+
+            }else{
+                alert('비밀번호가 다르게 입력되었습니다.')
+            }
+            
         }
     },
+    mounted(){
+        window.addEventListener('resize', this.handleResize);
+        this.handleResize();
+    },
+    
     
 }
 </script>
