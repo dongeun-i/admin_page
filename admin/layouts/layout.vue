@@ -1,9 +1,10 @@
 <template>
     <v-app>
 		<!-- menus -->
-		<Drawer/>
+		<Drawer :drawer="drawer"/>
 		<!-- headers -->
 		<v-app-bar dark class="d-flex justify-end align-center" max-height="65px">
+			<v-btn class="justfity-self-start" @click="drawer=!drawer">toggle</v-btn>
 			<span class="mr-2">
 				{{this.$store.userInfo.storename}} 님
 			</span>
@@ -27,7 +28,8 @@ export default {
 	},
 	data(){
 		return{
-			userInfo:this.$store.userInfo
+			userInfo:this.$store.userInfo,
+			drawer:true
 		}
 	},
 	created(){

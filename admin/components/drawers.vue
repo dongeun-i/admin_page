@@ -3,6 +3,7 @@
 		app
 		class="px-2"
 		dark
+		v-model="drawer"
 	>
 		<v-list-item class="py-2 px-1">
 			<v-list-item-title class="text-h6">
@@ -78,8 +79,11 @@ export default {
 				icon:'mdi-calculator',
 				title:'정산 관리',
 				url:'/calc/list',
-			}]
+			}],
 		}
+	},
+	props:{
+		drawer:Boolean
 	}
 }
 </script>
