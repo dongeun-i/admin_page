@@ -54,7 +54,7 @@
                 <v-sheet class="d-flex col-12 flex-wrap justify-center align-center">
                     <label class="col-12 col-md-3 col-md-3">아이디</label>
                     <v-text-field 
-                    v-model="sign_id" 
+                    v-model="sign_loginId" 
                     class="col-12 col-md-6" 
                     outlined 
                     hide-details 
@@ -157,7 +157,7 @@ export default {
                 password:null,
                 signUp:false,
                 width:null,
-                sign_loginid:null,
+                sign_loginId:null,
                 sign_pw:null,
                 sign_pw2:null,
                 sign_storename:null,
@@ -203,7 +203,7 @@ export default {
             if(this.sign_pw == this.sign_pw2){
                 try {
                     let payload = {
-                    loginId:this.sign_loginid,
+                    loginId:this.sign_loginId,
                     password:this.sign_pw,
                     storename:this.sign_storename,
                     managername:this.sign_managername,
@@ -213,12 +213,17 @@ export default {
                     userdata: payload
                 })
                 if(newUserData){
+                    console.log(newUserData)
                     alert('회원가입이 완료되었습니다.');
                     this.signUp = false;
                 }
-            } catch (error) {
-                console.error(error);
-                alert('오류가 발생했습니다.');
+            } catch (err) {
+                let status = err.response.status
+                if(status == 409){
+                    alert('중복된 아이디 입니다.')
+                }else{
+                    alert('오류가 발생했습니다.');
+                }
             }
 
             }else{
