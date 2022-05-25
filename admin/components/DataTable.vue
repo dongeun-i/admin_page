@@ -2,45 +2,44 @@
 	<v-card class="elevation-0">
 		<template v-if="filter">
 			<v-card class="p-3 filter-container bg-gray">
-				<v-card v-for="(filter,i) in filters" :key="i" class="d-flex flex-nowrap elevation-0" >
-					<v-card-title class="col-1 filter-title bg-gray">
+				<v-card v-for="(filter,i) in filters" :key="i" class="d-flex flex-sm-nowrap elevation-0 w-100" height="auto" >
+					<v-card-title class="d-none d-sm-flex col-sm-2 col-md-1 filter-title bg-gray">
 						{{filter.title}}
 					</v-card-title>
 					<!-- checkbox -->
-					<v-row v-if="filter.type == 'checkbox'" class="bg-gray flex-nowrap align-center justify-start">
+					<v-sheet v-if="filter.type == 'checkbox'" class="col-md-11 col-12 bg-gray d-flex flex-nowrap align-center justify-start">
 						<v-checkbox 
-							v-for="checkbox in filter.values" 
+							v-for="checkbox in filter.values"
 							:key="checkbox.value"
 							:label="checkbox.text"
 							:value="checkbox.value"
 							v-model="filter.checked"
 							@change="checkingStatus(filter.checked,filter.target)"
 							hide-details
+							class="mr-2"
 						>
 							<template v-slot:label>
 								<label class="filter-text">{{checkbox.text}}</label>
 							</template>
 						</v-checkbox>
-					</v-row>
-
+					</v-sheet>
 					<!-- date picker -->
-					<v-row v-else-if="filter.type == 'date'" class="bg-gray flex-nowrap align-center justify-start">
+					<v-sheet v-else-if="filter.type == 'date'" class="col-md-11 col-12 bg-gray d-flex flex-sm-nowrap align-center justify-start">
 						<!-- date btns -->
-						<v-col>
-							<v-btn-toggle class="bg-gray" 
+							<v-btn-toggle 
+								class="bg-gray d-none d-md-flex mr-6" 
 								background-color=#eee 
 								v-model="dateBtns"
 								@change="changeDateBtns(filter.target)"
 							>
 								<v-btn class="filter-text" v-for="item in filter.btns" :key="item.title"
-								max-height="36px">
+								max-height="36px" max-width="16%">
 									{{item.title}}
 								</v-btn>
 							</v-btn-toggle>
-						</v-col>
 
 						<!-- date picker -->
-						<v-col class="d-flex align-center">
+						<v-sheet class="d-flex align-center bg-gray col-12 col-sm-6 p-0">
 							<v-menu
 								offset-y
 								:close-on-content-click="false"
@@ -55,7 +54,7 @@
 									v-bind="attrs"
 									v-model="beginDate"
 									v-on="on"
-									class="col-5"
+									class="w-50 pt-0 mt-0"
 									hide-details
 									@change="checkDate(filter.target,'bdt')"
 									background-color="#fff"
@@ -63,7 +62,7 @@
 								</template>
 								<datepicker v-model="beginDate" :format="changeBeginDate" :inline="true" :language="languages[language]"></datepicker>
 							</v-menu>
-							~
+							<p class="mb-0 mx-2">~</p>
 							<v-menu
 								offset-y
 								:close-on-content-click="false"
@@ -80,26 +79,27 @@
 									v-on="on"
 									hide-details
 									background-color="#fff"
-									class="col-5"
+									class="w-50 pt-0 mt-0"
 									@change="checkDate(filter.target,'edt')"
 									></v-text-field>
 								</template>
 								<datepicker v-model="endDate" :format="changeEndDate" :inline="true" :language="languages[language]"></datepicker>
 							</v-menu>
-						</v-col>
-					</v-row>
-					<v-row v-else-if="filter.type == 'select'" class="bg-gray d-flex align-center">
+						</v-sheet>
+					</v-sheet>
+					<v-sheet v-else-if="filter.type == 'select'" class="col-12 col-md-11 bg-gray d-flex align-center">
 						<v-select
 						:items="filter.values"
 						item-text="label"
 						item-value= "label"
+						placeholder="카테고리 선택"
 						v-model="filter.choose"
 						hide-details
-						class="col-3"
+						class="col-md-3 col-12"
 						@change="changeSelect(filter.target,filter.choose,filter.values)"
 						>
 						</v-select>
-					</v-row>
+					</v-sheet>
 				</v-card>
 			</v-card>
 		</template>
@@ -110,16 +110,17 @@
 			<v-text-field
 				v-model="search"
 				append-icon="mdi-magnify"
-				label="검색"
+				label="상풍명 검색"
 				single-line
 				hide-details
-				class="col-6 ml-auto"
+				class="col-md-6 col-12 ml-auto"
 			></v-text-field>
 		</v-card-title>
 
 		<!-- data table 영역 -->
 		<v-data-table
 		:headers="tableHeader"
+		disable-sort
 		:items="items"
 		:search="search"
 		>
@@ -332,7 +333,7 @@ export default {
 				this.dateBtnsItem = filter.btns;
 			}
 		})
-
+		console.log(this.pageWidth)
 		
 	},
 	// computed: {
@@ -350,7 +351,7 @@ export default {
 		max-width: 120px;
 	}
 	.filter-title,.filter-text{
-		font-size: 14px;
+		font-size: 14px; white-space: nowrap; 	
 	}
 	.bg-gray{
 		background-color: #eee ;

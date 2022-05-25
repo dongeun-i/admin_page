@@ -1,16 +1,16 @@
 <template>
-	<v-card class="p-2 bg-gray" elevation="0" :width="section.width+'%'" height="350px">
+	<v-card class="bg-gray col-12 col-md-4" elevation="0" :width="section.width+'%'" height="350px">
 		<v-card v-if="section.layout == 1" height="100%">
 			<v-card-title>
 				{{section.title}}
 			</v-card-title>
 			<v-list>
-				<v-list-item v-for="(count,i) in section.counts" :key="i">
-					<v-list-item-title>
+				<v-list-item v-for="(count,i) in section.counts" :key="i" class="d-flex justify-space-between">
+					<v-list-item-title class="col-10">
 						{{count.title}}
 					</v-list-item-title>
-					<p class="m-0">
-						{{count.count}}
+					<p class="m-0 ">
+						{{count.count}} 개
 					</p>
 				</v-list-item>
 			</v-list>
@@ -23,7 +23,6 @@
 				{{section.text}}
 			</p>
 		</v-card>
-		
 	</v-card>
 </template>
 <script>
