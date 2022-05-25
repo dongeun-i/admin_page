@@ -3,7 +3,7 @@
 		app
 		class="px-2"
 		dark
-		v-model="drawer"
+		v-model="isActive"
 	>
 		<v-list-item class="py-2 px-1">
 			<v-list-item-title class="text-h6">
@@ -57,6 +57,7 @@
 export default {
 	data(){
 		return{
+			isActive:null,
 			menus:[{
 				icon:'mdi-account',
 				title:'판매자 정보',
@@ -84,6 +85,20 @@ export default {
 	},
 	props:{
 		drawer:Boolean
+	},
+	created(){
+		this.isActive = this.drawer
+	},
+	methods:{
+		changeDrawerActive(){
+			this.isActive=!this.isActive
+		}
+	},
+	watch:{
+		drawer:function(value){
+			console.log('감시카메라on');
+			console.log(value)
+		}
 	}
 }
 </script>

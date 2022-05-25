@@ -1,10 +1,13 @@
 <template>
     <v-app>
 		<!-- menus -->
-		<Drawer :drawer="drawer"/>
+		<Drawer :drawer="drawer" ref="Drawer"/>
 		<!-- headers -->
-		<v-app-bar dark class="d-flex justify-end align-center" max-height="65px">
-			<v-btn class="justfity-self-start" @click="drawer=!drawer">toggle</v-btn>
+		<v-app-bar width="100%" dark class=" align-center" max-height="65px">
+			<v-btn icon class="justify-self-start" @click="setdrawer">
+				<v-icon>mdi-menu</v-icon>
+			</v-btn>
+			<v-spacer></v-spacer>
 			<span class="mr-2">
 				{{this.$store.userInfo.storename}} 님
 			</span>
@@ -29,7 +32,8 @@ export default {
 	data(){
 		return{
 			userInfo:this.$store.userInfo,
-			drawer:true
+			drawer:null,
+			pageWidth:null,
 		}
 	},
 	created(){
@@ -40,13 +44,27 @@ export default {
 		}else{
 			this.userInfo = userInfo
 		}
+		window.addEventListener('resize', this.resize);
+        this.resize();
+		if(this.pageWidth<=1264){
+				return this.drawer = false
+			}else{
+				return this.drawer = true
+			}
 	},
 	methods:{
 		logout(){
 			this.$store.userInfo = null;
 			this.$router.replace('/login');
-		}
+		},
+		resize() {
+            this.pageWidth = window.innerWidth;
+        },
+		setdrawer(){
+			this.$refs.Drawer.changeDrawerActive()
+		},
 	},
+
 }
 </script>
 <style scoped>

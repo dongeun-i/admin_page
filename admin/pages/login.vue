@@ -197,7 +197,6 @@ export default {
         },
         handleResize() {
             this.width = window.innerWidth;
-
         },
         async signupForUser(){
             if(this.sign_pw == this.sign_pw2){
