@@ -3,6 +3,33 @@ const router = Router();
 
 import query from './db'
 
+
+// 주문 상태별 갯수
+router.get('/count', async function(req,res,next){
+	let userId = req.header('userId');
+	let orderStatusCount = await query(`
+	select 
+	count(case when O.status = 10 then 1 end) as '결재대기',
+	count(case when O.status = 1 then 1 end) as '배송준비중',
+	count(case when O.status = 2 then 1 end) as '배송중',
+	count(case when O.status = 3 then 1 end) as '배송완료' 
+	from admin.order as O where O.salerId=${userId}
+	`)
+
+	let claimStatusCount = await query(`
+	select 
+	count(case when O.status = 7 then 1 end) as '교환요청',
+	count(case when O.status = 8 then 1 end) as '교환진행중',
+	count(case when O.status = 4 then 1 end) as '반품요청',
+	count(case when O.status = 5 then 1 end) as '반품진행중'
+	from admin.order as O where O.salerId=${userId}
+	`)
+	res.send({
+		orderStatusCount:orderStatusCount,
+		claimStatusCount:claimStatusCount
+	})
+})
+// 주문리스트
 router.get('/list', async function(req, res,next) {
 	let userId = req.header('userId');
 	let qs =`select ${[
@@ -30,11 +57,14 @@ router.get('/list', async function(req, res,next) {
 	res.send(dataSet)	
 });
 
+// 주문상태
 router.get('/status', async function(req,res,next){
 	let qs = 'select * from orderStatus';
 	let orderStatus = await query(qs);
 	res.send(orderStatus);
 })
+
+// 주문상세
 router.get('/:orderCode', async function(req, res,next) {
 	let orderCode = req.params.orderCode;
 	console.log('orderCode',orderCode);
@@ -66,6 +96,8 @@ router.get('/:orderCode', async function(req, res,next) {
 	let dataSet = await query (qs);
 	res.send(dataSet);	
 });
+
+// 주문 상태 수정
 router.put('/:orderCode',async function(req,res,next){
 	let orderCode = req.params.orderCode;
 	let orderInfo = req.body.orderInfo;
@@ -78,5 +110,7 @@ router.put('/:orderCode',async function(req,res,next){
 	let result = await query(qs);
 	res.send(qs);
 });
+
+
 
 module.exports = router;

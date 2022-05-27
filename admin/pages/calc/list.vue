@@ -32,28 +32,28 @@
 				<v-divider class="m-0"></v-divider>
 				<v-list>
 					<v-list-item>
-						<label class="col-2">총 매출액 : </label>
+						<label class="col-4 col-sm-2">총 매출액 : </label>
 						<p class="col-3 mb-0">{{ sales.toComma() }} 원</p>
 					</v-list-item>
 					<v-list-item>
-						<label class="col-2">총 매출액 : </label>
+						<label class="col-4 col-sm-2">총 매출액 : </label>
 						<p class="col-3 mb-0"> {{ productPrice.toComma() }} 원</p>
 					</v-list-item>
 					<v-list-item>
-						<label class="col-2">총 할인 금액 : </label>
+						<label class="col-4 col-sm-2">총 할인 금액 : </label>
 						<p class="col-3 mb-0">{{ discount.toComma() }} 원</p>
 					</v-list-item>
 					<v-list-item>
-						<label class="col-2">배송비 합계 : </label>
+						<label class="col-4 col-sm-2">배송비 합계 : </label>
 						<p class="col-3 mb-0">{{ deliveryPrice.toComma() }} 원</p>
 					</v-list-item>
 					<v-list-item>
-						<label class="col-2">수수료 합계 : </label>
+						<label class="col-4 col-sm-2">수수료 합계 : </label>
 						<p class="col-3 mb-0">{{ charge.toComma() }} 원</p>
 					</v-list-item>
 					<v-divider class="m-0"></v-divider>
 					<v-list-item class="d-flex justify-space-between">
-						<label class="col-2 font-weight-bold">총계</label>
+						<label class="col-4 col-sm-2 font-weight-bold">총계</label>
 						<p class="mb-0 text-right col-10 font-weight-bold">{{ (sales - charge).toComma() }} 원</p>
 					</v-list-item>
 				</v-list>

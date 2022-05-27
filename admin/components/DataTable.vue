@@ -334,6 +334,7 @@ export default {
 			}
 		})
 		console.log(this.pageWidth)
+		console.log(Object.entries(this.items))
 		
 	},
 	// computed: {

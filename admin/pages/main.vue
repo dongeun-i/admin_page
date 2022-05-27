@@ -12,74 +12,99 @@ export default({
 	},
 	data(){
 		return{
-			sections:[{
-				layout:1,
-				width:30,
-				title:'상품',
-				counts:[{
-					title:'판매중 상품',
-					count:3,
-				},{
-					title:'품절 상품',
-					count:5
-				},{
-					title:'비공개 상품',
-					count:1
-				},{
-					title:'판매중지 상품',
-					count:2
-				}],
-			},{
-				layout:null,
-				width:70,
-				title:null,
-				text:'상품들'
-			},{
-				layout:1,
-				width:30,
-				title:'주문',
-				counts:[{
-					title:'결제대기',
-					count:3,
-				},{
-					title:'배송 준비',
-					count:5
-				},{
-					title:'배송중',
-					count:1
-				},{
-					title:'배송완료',
-					count:2
-				}],
-			},{
-				layout:1,
-				width:30,
-				title:'교환 및 반품',
-				counts:[{
-					title:'교환 요청',
-					count:3,
-				},{
-					title:'반품 요청',
-					count:5
-				},{
-					title:'교환 진행중 ',
-					count:1
-				},{
-					title:'반품 진행중',
-					count:2
-				}],
-			},{
-				layout:null,
-				width:40,
-				title:'진행중인 이벤트',
-				text:'배너들'
-			}],
-			// waitingForPaymentCount:3,// 결제 대기 수 
-			// newOrderCount:5, // 신규 주문 수
-			// readyToShip: 2, // 배송준비중 수 
-			// shippingCount:3, // 배송중 수
-			// deliveryComplete : 3, // 배송완료 수
+			sections:[],
+
 		}
+	},
+	async asyncData({$axios,store}){
+		let userInfo = store.userInfo;
+		if(userInfo){
+			let responseData = {};
+			responseData['productStatusCount'] = await $axios.$get('/api/product/count',{
+				headers:{
+					userId:userInfo.id
+				}
+			});
+			responseData['orderCount'] = await $axios.$get('/api/order/count',{
+				headers:{
+					userId:userInfo.id
+				}
+			});
+			responseData['producdtListset'] = await $axios.$get('/api/product/list',{
+				headers:{
+					userId:userInfo.id
+				}
+			});
+			return{
+				resdata : responseData
+			}
+		}
+		
+	},
+	methods:{
+		makeSection(type,data,title,target){
+			let section
+			switch(type){
+				case 1 :
+					section = {
+						layout:1,
+						title:title,
+						counts:[],
+					}
+					Object.entries(data).map(([k,v])=>{
+						let countFormat = {
+							title:null,
+							count:null
+						}
+						countFormat.title = k;
+						countFormat.count = v;
+						section.counts.push(countFormat);
+					})
+				break
+
+				case 2 :
+					section = {
+						layout:2,
+						title:title,
+						banners:[]
+					}
+					data.map(d=>{
+						let bannerFormat = {
+							title:null,
+							src:null,
+							linkTo:null
+						}
+						bannerFormat.title = d.name;
+						bannerFormat.src = d.thumbnail;
+						bannerFormat.linkTo = `/${target}/${d.id}`
+						section.banners.push(bannerFormat)
+					})
+				break
+
+				default : 
+					section = {
+						layout:null,
+						title:title,
+						text:data
+					}
+
+				break
+				
+			}
+			return section
+		}
+	},
+	created(){
+		console.log(this.resdata)
+		let productList = this.resdata.producdtListset;
+		let productStatusCount = this.resdata.productStatusCount[0];
+		let orderStatusCount = this.resdata.orderCount.orderStatusCount[0];
+		let claimStatusCount = this.resdata.orderCount.claimStatusCount[0];
+
+		this.sections.push(this.makeSection(1,productStatusCount,'상품 전시상태 요약'));
+		this.sections.push(this.makeSection(2,productList,'등록 상품','product'));
+		this.sections.push(this.makeSection(1,orderStatusCount,'주문 요약'));
+		this.sections.push(this.makeSection(1,claimStatusCount,'교환/반품 요약'));
 	}
 })
 </script>

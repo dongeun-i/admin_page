@@ -27,7 +27,7 @@
 				item-value= "id"
 				v-model="panel.model"
 				hide-details
-				class="col-3"
+				class="col-sm-3 col-6"
 				>
 				</v-select>
         	</v-expansion-panel-content>

@@ -10,34 +10,34 @@
 			<v-expansion-panel-content>
 				<v-sheet v-for="(item,j) in section.children" :key="j" class="d-flex align-center">
 					<template v-if="item.layout == 'text'">
-						<label class="col-2">{{item.label}}</label>
-						<p class="col-3 mb-0">{{item.value}}</p>
+						<label class="col-4 col-sm-2">{{item.label}}</label>
+						<p class="col-8 col-sm-3 mb-0">{{item.value}}</p>
 					</template>
 
 					<template v-else-if="item.layout == 'input'">
-						<label class="col-2">{{item.label}}</label>
+						<label class="col-4 col-sm-2">{{item.label}}</label>
 						<v-text-field
-						class="col-3"
+						class="col-8 col-sm-3"
 						hide-details
 						v-model="item.value">
 						</v-text-field>
 					</template>
 
 					<template v-else-if="item.layout == 'select'">
-						<label class="col-2">{{item.label}}</label>
+						<label class="col-4 col-sm-2">{{item.label}}</label>
 						<v-select
 							:items="item.values"
 							item-text="label"
 							item-value= "id"
 							v-model="item.value"
 							hide-details
-							class="col-3"
+							class="col-8 col-sm-3"
 							>
 						</v-select>
 					</template>
 
 					<template v-else-if="item.layout == 'textarea'">
-						<label class="col-2">{{item.label}}</label>
+						<label class="col-4 col-sm-2">{{item.label}}</label>
 						<v-textarea
 						outlined
 						v-model="item.value"
@@ -49,7 +49,7 @@
 						<v-btn @click="item.onclick" class="ml-auto">{{item.text}}</v-btn>
 					</template>
 					<template v-else-if="item.layout =='img'">
-						<label class="col-2">{{item.label}}</label>
+						<label class="col-4 col-sm-2">{{item.label}}</label>
 						<v-img 
 							max-width="200px"
 							max-height="200px" 

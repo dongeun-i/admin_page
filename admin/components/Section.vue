@@ -15,14 +15,30 @@
 				</v-list-item>
 			</v-list>
 		</v-card>
-		<v-card v-else height="100%">
-			<v-card-title>
-				{{section.title}}
-			</v-card-title>
-			<p class="m-0">
-				{{section.text}}
-			</p>
-		</v-card>
+		<v-carousel
+		v-else-if="section.layout == 2"
+		height="100%"
+		hide-delimiters
+		cycle
+		>
+			<v-carousel-item
+			nuxt
+			link
+			:to="banner.linkTo"
+			v-for="(banner, i) in section.banners"
+			:key="i"
+			>
+			<v-sheet color="#fff" height="100%">
+				<v-img
+					height="100%"
+					aspect-ratio="1"
+					contain
+					:src="banner.src"
+				>
+				</v-img>
+			</v-sheet>
+			</v-carousel-item>
+		</v-carousel>
 	</v-card>
 </template>
 <script>

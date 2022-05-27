@@ -7,36 +7,36 @@
 		<ExpansionSection class="mb-5" :sections="section1">
 			<template>
 				<v-sheet class="d-flex align-center">
-					<label class="col-2">기존 비밀번호</label>
+					<label class="col-4 col-sm-2">기존 비밀번호</label>
 					<v-text-field
 							v-model="oldPassword"
 							:append-icon="oldPasswordShow ? 'mdi-eye' : 'mdi-eye-off'"
 							:type="oldPasswordShow ? 'text' : 'password'"
-							class="col-3"
+							class="col-8 col-sm-3 mb-0"
 							hide-details
 							@keyup="checkValue('old')"
 							@click:append="oldPasswordShow = !oldPasswordShow"
 						></v-text-field>
 				</v-sheet>
 				<v-sheet class="d-flex align-center">
-					<label class="col-2">새 비밀번호</label>
+					<label class="col-4 col-sm-2">새 비밀번호</label>
 					<v-text-field
 							v-model="newPassword"
 							:append-icon="newPasswordShow ? 'mdi-eye' : 'mdi-eye-off'"
 							:type="newPasswordShow ? 'text' : 'password'"
-							class="col-3"
+							class="col-8 col-sm-3 mb-0"
 							hide-details
 							@keyup="checkValue('new')"
 							@click:append="newPasswordShow = !newPasswordShow"
 						></v-text-field>
 				</v-sheet>
 				<v-sheet class="d-flex align-center">
-					<label class="col-2">비밀번호 확인</label>
+					<label class="col-4 col-sm-2">비밀번호 확인</label>
 					<v-text-field
 						v-model="verifyPassword"
 						:append-icon="verifyPasswordShow ? 'mdi-eye' : 'mdi-eye-off'"
 						:type="verifyPasswordShow ? 'text' : 'password'"
-						class="col-3"
+						class="col-8 col-sm-3 mb-0"
 						hide-details
 						@keyup="checkValue('verify')"
 						@click:append="verifyPasswordShow = !verifyPasswordShow"

@@ -18,6 +18,21 @@ const storage = multer.diskStorage({
 })
 const upload = multer({ storage:storage }).fields([{name:'thumbnail'},{name:'detail'}])
 
+// 상품 상태별 갯수
+router.get('/count',async function(req,res,next){
+	let userId = req.header('userId');
+	let qs = 
+	`SELECT COUNT(case when P.status='판매중' then 1 END) AS '판매중',
+	COUNT(case when P.status='품절' then 1 END) AS '품절', 
+	COUNT(case when P.status='비공개' then 1 END) AS '비공개',
+	COUNT(case when P.status='판매중지' then 1 END) AS '판매중지'
+   	FROM 
+	product AS P 
+	WHERE P.userId=${userId}`
+	let dataSet = await query(qs);
+	res.send(dataSet);
+})
+// 상품리스트
 router.get('/list',async function(req,res,next){
 	let userId = req.header('userId');
 	// 상품리스트 가져오기
@@ -28,6 +43,7 @@ router.get('/list',async function(req,res,next){
 	}
 	
 })
+// 상품등록
 router.post('/register',async function(req,res,next){
 	upload(req,res,function(err){
 		if(err){
@@ -101,8 +117,8 @@ router.put('/:id',function(req,res,next){
 
 	
 })
-//  상품 등록
 
+// 상품 삭제
 router.delete('/delete/:id',async function(req,res,next){
 	let productId = req.params.id;
 	let thumbnail = req.body.filename;
