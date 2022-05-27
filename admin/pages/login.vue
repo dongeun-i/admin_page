@@ -66,7 +66,10 @@
                 <v-sheet class="d-flex col-12 flex-wrap justify-center align-center">
                     <label class="col-12 col-md-3">비밀번호</label>
                     <v-text-field 
-                    v-model="sign_pw" 
+                    v-model="sign_pw"
+                    @click:append="sign_pw_show = !sign_pw_show"
+                    :append-icon="sign_pw_show ? 'mdi-eye' : 'mdi-eye-off'"
+                    :type="sign_pw_show ? 'text' : 'password'" 
                     class="col-12 col-md-6" 
                     outlined 
                     hide-details 
@@ -79,6 +82,9 @@
                     <label class="col-12 col-md-3">비밀번호 확인</label>
                     <v-text-field 
                     v-model="sign_pw2" 
+                    @click:append="sign_pw2_show = !sign_pw2_show"
+                    :append-icon="sign_pw2_show ? 'mdi-eye' : 'mdi-eye-off'"
+                    :type="sign_pw2_show ? 'text' : 'password'"
                     class="col-12 col-md-6" 
                     outlined 
                     hide-details 
@@ -162,7 +168,9 @@ export default {
                 sign_pw2:null,
                 sign_storename:null,
                 sign_managername:null,
-                sign_managertel:null
+                sign_managertel:null,
+                sign_pw_show:false,
+                sign_pw2_show:false
             }
         },
     methods:{
