@@ -30,11 +30,7 @@ export default({
 					userId:userInfo.id
 				}
 			});
-			responseData['producdtListset'] = await $axios.$get('/api/product/list',{
-				headers:{
-					userId:userInfo.id
-				}
-			});
+			
 			return{
 				resdata : responseData
 			}
@@ -102,7 +98,7 @@ export default({
 		let claimStatusCount = this.resdata.orderCount.claimStatusCount[0];
 
 		this.sections.push(this.makeSection(1,productStatusCount,'상품 전시상태 요약'));
-		this.sections.push(this.makeSection(2,productList,'등록 상품','product'));
+		// this.sections.push(this.makeSection(2,productList,'등록 상품','product'));
 		this.sections.push(this.makeSection(1,orderStatusCount,'주문 요약'));
 		this.sections.push(this.makeSection(1,claimStatusCount,'교환/반품 요약'));
 	}
